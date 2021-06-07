@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 00:39:29 by root             ###   ########.fr       */
+/*   Updated: 2021/06/08 00:51:56 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,18 @@ t_param	*ft_init(int n)
 	return (p);
 }
 
-
+t_param	*ft_extract_split(t_param *p, t_stack *node, char **split, int i)
+{
+	while (split[i])
+	{
+		node = ft_add_nbr(ft_stoi(p, split, split[i], i));
+		ft_add_back(&(p->a_head), node);
+		if (!node)
+			ft_exit_lst_tabfree(p, split, i);	
+		i++;
+	}
+	return (p);
+}
 
 t_param	*ft_init_stack(char **args, int size)
 {
@@ -49,34 +60,17 @@ t_param	*ft_init_stack(char **args, int size)
 	t_stack	*node;
 	char	**split;
 	int		i;
-	int		j;
 
 	node = NULL;
 	split = ft_split_errchk(args[1], ' ');
 	p = ft_init(ft_atoi(split[0]));
 	node = p->a_head;
-	j = 1;
-	while (split[j])
-	{
-		node = ft_add_nbr(ft_stoi(p, split, split[j], j));
-		ft_add_back(&(p->a_head), node);
-		if (!node)
-			ft_exit_lst_tabfree(p, split, j);	
-		j++;
-	}
+	p = ft_extract_split(p, node, split, 1);
 	i = 2;
 	while (size--)
 	{
 		split = ft_split_errchk(args[i], ' ');
-		j = 0;
-		while (split[j])
-		{
-			node = ft_add_nbr(ft_stoi(p, split, split[j], j));
-			ft_add_back(&(p->a_head), node);
-			if (!node)
-				ft_exit_lst_tabfree(p, split, j);	
-			j++;
-		}
+		p = ft_extract_split(p, node, split, 0);
 		i++;
 	}
 	free(split);
