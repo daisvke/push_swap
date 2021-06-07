@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 19:00:33 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/07 04:09:17 by root             ###   ########.fr       */
+/*   Updated: 2021/06/07 14:10:40 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_split_iter(char **split, char *s, char c)
 {
 	int		i;
-	char	*start;
+	char	*first;
 
 	i = 0;
 	while (*s)
@@ -25,14 +25,14 @@ void	ft_split_iter(char **split, char *s, char c)
 		if (!*s)
 			break ;
 
-		start = s;
+		first = s;
 		while (*s != c && *s)
 		{
 			if (!ft_isdigit(*s))
 				ft_exit_tabfree(split, i);
 			s++;
 		}
-		split[i] = ft_strsdup(start, s - start);
+		split[i] = ft_strsdup(first, s - first);
 		if (!split[i])
 			ft_exit_tabfree(split, i);
 		i++;
@@ -40,7 +40,7 @@ void	ft_split_iter(char **split, char *s, char c)
 	split[i] = 0;
 }
 
-char	**ft_split_errcheck(char const *s, char c)
+char	**ft_split_errchk(char const *s, char c)
 {
 	char	**split;
 
