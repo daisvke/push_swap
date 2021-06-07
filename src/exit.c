@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 01:50:44 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/07 14:27:40 by root             ###   ########.fr       */
+/*   Updated: 2021/06/08 00:37:56 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,32 @@ void	ft_exit_tabfree(char **str, int i)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_clear_stack(t_stack *lst)
+void	ft_clear_stack(t_stack *node)
 {
 	t_stack	*next;
 
-	if (!lst)
+	if (!node)
 		return ;
-	while (lst)
+	while (node)
 	{
-		next = lst->next;
-		free(lst);
-		lst = next;
+		next = node->next;
+		free(node);
+		node = next;
 	}
-	lst = NULL;
+	node = NULL;
 }
 
 void	ft_exit_lst_tabfree(t_param *p, char **split, int size)
 {
 	ft_tabfree(split, size);
-	ft_clear_stack(p->a_first);
+	ft_clear_stack(p->a_head);
 	ft_putstr("Error\n");
 	exit(EXIT_FAILURE);
 }
 
+void	ft_exit_clearstack(t_param *p)
+{
+	ft_clear_stack(p->a_head);
+	ft_putstr("Error\n");
+	exit(EXIT_FAILURE);
+}

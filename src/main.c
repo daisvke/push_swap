@@ -6,23 +6,23 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/07 15:16:58 by root             ###   ########.fr       */
+/*   Updated: 2021/06/08 00:39:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	printlst(t_param *p)
+void	printnode(t_param *p)
 {
-	t_stack	*elem;
+	t_stack	*node;
 
 	if (!p)
 		printf("EMPTY\n");
-	elem = p->a_first;
-	while (elem)
+	node = p->a_head;
+	while (node)
 	{
-		printf("%d -> ", elem->data);
-		elem = elem->next;
+		printf("%d -> ", node->data);
+		node = node->next;
 	}
 	printf("NULL\n");
 }
@@ -30,52 +30,38 @@ void	printlst(t_param *p)
 t_param	*ft_init(int n)
 {
 	t_param	*p;
-	t_stack	*elem;
-	t_stack	*next;
+	t_stack	*node;
 
 	p = malloc(sizeof(*p));
-	elem = malloc(sizeof(*elem));
-	next = malloc(sizeof(*next));
-	if (!p || !elem)
+	node = malloc(sizeof(*node));
+	if (!p || !node)
 		ft_exit_failure();
-	elem->data = n;
-	p->a_first = elem;
-	p->a_first->next = next;
+	node->data = n;
+	p->a_head = node;
 	return (p);
 }
 
-t_stack	*ft_add_nbr(int data)
-{
-	t_stack	*new;
 
-	new = malloc(sizeof(*new));
-	if (!new)
-		return (NULL);
-	new->data = data;
-	new->next = NULL;
-	return (new);
-}
 
-void	ft_init_stack(char **args, int size)
+t_param	*ft_init_stack(char **args, int size)
 {
 	t_param	*p;
-	t_stack	*elem;
+	t_stack	*node;
 	char	**split;
 	int		i;
 	int		j;
 
-	elem = NULL;
+	node = NULL;
 	split = ft_split_errchk(args[1], ' ');
 	p = ft_init(ft_atoi(split[0]));
-	p->a_first->next = elem;
-
-	j = 2;
+	node = p->a_head;
+	j = 1;
 	while (split[j])
 	{
-		elem = ft_add_nbr(ft_atoi(split[j]));
-		if (!elem)
+		node = ft_add_nbr(ft_stoi(p, split, split[j], j));
+		ft_add_back(&(p->a_head), node);
+		if (!node)
 			ft_exit_lst_tabfree(p, split, j);	
-		elem = elem->next;
 		j++;
 	}
 	i = 2;
@@ -85,22 +71,31 @@ void	ft_init_stack(char **args, int size)
 		j = 0;
 		while (split[j])
 		{
-			elem = ft_add_nbr(ft_atoi(split[j]));
-			if (!elem)
+			node = ft_add_nbr(ft_stoi(p, split, split[j], j));
+			ft_add_back(&(p->a_head), node);
+			if (!node)
 				ft_exit_lst_tabfree(p, split, j);	
-			elem = elem->next;
 			j++;
 		}
 		i++;
 	}
-	printlst(p);
+	free(split);
+	split = NULL;
+	printnode(p);
+	return (p);
+}
+
+void	ft_check_input_err(t_param *p)
+{
+	if (ft_stacksize(p->a_head) < 2)
+		ft_exit_clearstack(p);
 }
 
 int	main(int argc, char *argv[])
 {
 	if (argc < 2)
 		ft_exit_failure();
-	ft_init_stack(argv, argc - 1);
-//	printf("first: %d\n", p.a_first->data);
+	ft_check_input_err(ft_init_stack(argv, argc - 1));
+//	printf("head: %d\n", p.a_head->data);
 	return (EXIT_SUCCESS);
 }
