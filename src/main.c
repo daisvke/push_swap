@@ -1,42 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
+/*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
 /*   Updated: 2021/06/07 02:01:03 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../push_swap.h"
 
-# include <stdlib.h>
-# include "../libft/libft.h"
-
-# define ERROR 1
-# define SUCCESS 0
-
-typedef struct s_stack
+void	ft_init_stack(char **args, s_stack *a, s_param *p, int size)
 {
-	struct s_stack	*nxt;
-	int				n;
-}					t_stack;
+	t_stack	elem;
+	char	**joined;
+	int		i;
 
-typedef struct s_param
+	i = 1;
+	while (size--)
+	{
+		joined = ft_split_errcheck(arg[i], ' ');
+		j = 0;
+		while (joined[j])
+		{
+			elem = ft_lstnew(arg[i]);
+			if (!elem)
+				
+			elem = elem->nxt;
+			j++;
+		}
+		i++;
+	}
+
+}
+
+int	ft_check_arg()
 {
-	int				size;
-	struct s_stack	a_start;
-	struct s_stack	a_end;
-	struct s_stack	b_start;
-	struct s_stack	b_end;
-}					t_param;
+	if (argc == 2)
+}
 
-void	ft_exit_failure(void);
-void	ft_exit_lst_tabfree(t_param *p, char **split, int size);
-void	ft_exit_tabfree(char **str, int i);
-char	**ft_split_errcheck(char const *s, char c);
+int	main(int argc, char *argv[])
+{
+	t_stack	a;
+	t_stack	b;
+	t_param	p;
 
-#endif
+	if (ft_init_stacks(argv, &a, &p, argc) == ERROR)
+	{
+		ft_putstr("Error\n");
+		exit(EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}

@@ -1,42 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
+/*   Created: 2021/06/07 01:50:44 by dtanigaw          #+#    #+#             */
 /*   Updated: 2021/06/07 02:01:03 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../push_swap.h"
 
-# include <stdlib.h>
-# include "../libft/libft.h"
-
-# define ERROR 1
-# define SUCCESS 0
-
-typedef struct s_stack
+void	ft_exit_failure(void)
 {
-	struct s_stack	*nxt;
-	int				n;
-}					t_stack;
+	ft_putstr("Error\n");
+	exit(EXIT_FAILURE);
+}
 
-typedef struct s_param
+void	ft_exit_tabfree(char **str, int i)
 {
-	int				size;
-	struct s_stack	a_start;
-	struct s_stack	a_end;
-	struct s_stack	b_start;
-	struct s_stack	b_end;
-}					t_param;
+	ft_tabfree(str, i);
+	ft_putstr("Error\n");
+	exit(EXIT_FAILURE);
+}
 
-void	ft_exit_failure(void);
-void	ft_exit_lst_tabfree(t_param *p, char **split, int size);
-void	ft_exit_tabfree(char **str, int i);
-char	**ft_split_errcheck(char const *s, char c);
+void	ft_clear_stack(t_list **lst)
+{
+	t_list	*nxt;
 
-#endif
+	if (!*lst || !del)
+		return ;
+	while (*lst)
+	{
+		nxt = (*lst)->next;
+		free(*lst);
+		*lst = nxt;
+	}
+	*lst = NULL;
+}
+
+void	ft_exit_lst_tabfree(t_param *p, char **split, int size)
+{
+	ft_tabfree(split, size);
+	ft_clear_stack(p->a_start);
+}
+
