@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 21:11:14 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/09 00:39:10 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_printnode(t_param *p)
 {
 	t_stack	*node;
 
+	printf("=========\n");
 	if (!p)
 		printf("EMPTY\n");
 	node = p->a_head;
@@ -33,7 +34,8 @@ void	ft_printnode(t_param *p)
 		printf("%d -> ", node->data);
 		node = node->next;
 	}
-	printf("NULL\n\n");
+	printf("NULL\n");
+	printf("=========\n\n");
 }
 
 t_param	*ft_init(int n)
@@ -50,11 +52,27 @@ t_param	*ft_init(int n)
 	return (p);
 }
 
+bool	ft_twice(t_stack *node, int n)
+{
+	while (node)
+	{
+		if (node->data == n)
+			return (true);
+		node = node->next;
+	}
+	return (false);
+}
+
 t_param	*ft_extract_split(t_param *p, t_stack *node, char **split, int i)
 {
+	int	n;
+
 	while (split[i])
 	{
-		node = ft_add_nbr(ft_stoi(p, split, split[i], i));
+		n = ft_stoi(p, split, split[i], i);
+		if (ft_twice(p->a_head, n))
+			ft_exit_lst_tabfree(p, split, i);
+		node = ft_add_nbr(n);
 		ft_add_back(p->a_head, node);
 		if (!node)
 			ft_exit_lst_tabfree(p, split, i);	
@@ -91,18 +109,22 @@ t_param	*ft_init_stack(char **args, int size)
 int	ft_disordered(t_param *p, t_stack *node, int start, int end)
 {
 	int	size;
-
+	int	st_tmp;
+	
+	if (!node)
+		return (0);
+	st_tmp = start;
 	size = end - start - 1;
 	while (node->next && start--)
 		node = node->next;
 	while (node->next && size--)
 	{
-		if (p->b_head || node->data > node->next->data)
-			return (1);
+		if (node->data > node->next->data)
+			return (ft_stacksize(p->a_head) - st_tmp - size);
 		node = node->next;
 	}
 	if (p->b_head)
-		return (1);
+		return (-1);
 	return (0);
 }
 
@@ -110,17 +132,16 @@ void	ft_redirect(t_param *p, int size)
 {
 	while (ft_disordered(p, p->a_head, 0, ft_stacksize(p->a_head)))
 	{
+		printf("disord: %d\n", ft_disordered(p, p->a_head, 0, ft_stacksize(p->a_head)));
 		if (p->a_head->data > p->a_head->next->data \
-			&& ft_disordered(p, p->a_head, 1, ft_stacksize(p->a_head)))
-			ft_sa(p, p->a_head, p->a_head->next, true);
-		else if (p->a_head->data > p->a_head->next->data \
-			&& !ft_disordered(p, p->a_head, 1, ft_stacksize(p->a_head)))
+			&& !ft_disordered(p, p->a_head, 1, ft_stacksize(p->a_head)) \
+			&& ft_stacksize(p->a_head) > 3)
 			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
-		else if (!ft_disordered(p, p->a_head, 0, ft_stacksize(p->a_head) - 1))
-		{
-			printf(">>>>>>>>\n");
+		else if (!ft_disordered(p, p->a_head, 0, ft_stacksize(p->a_head) - 1)
+			&& ft_stacksize(p->a_head) > 3)
 			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-		}
+		else if (p->a_head->data > p->a_head->next->data)
+			ft_sa(p, p->a_head, p->a_head->next, true);
 	}
 }
 
