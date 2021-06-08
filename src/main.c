@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 20:08:42 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/08 21:11:14 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,14 @@ t_param	*ft_init_stack(char **args, int size)
 	return (p);
 }
 
-int	ft_disordered(t_param *p, t_stack *node)
+int	ft_disordered(t_param *p, t_stack *node, int start, int end)
 {
-	while (node->next)
+	int	size;
+
+	size = end - start - 1;
+	while (node->next && start--)
+		node = node->next;
+	while (node->next && size--)
 	{
 		if (p->b_head || node->data > node->next->data)
 			return (1);
@@ -103,10 +108,19 @@ int	ft_disordered(t_param *p, t_stack *node)
 
 void	ft_redirect(t_param *p, int size)
 {
-	while (ft_disordered(p, p->a_head))
+	while (ft_disordered(p, p->a_head, 0, ft_stacksize(p->a_head)))
 	{
-		if (p->a_head->data > p->a_head->next->data)
+		if (p->a_head->data > p->a_head->next->data \
+			&& ft_disordered(p, p->a_head, 1, ft_stacksize(p->a_head)))
 			ft_sa(p, p->a_head, p->a_head->next, true);
+		else if (p->a_head->data > p->a_head->next->data \
+			&& !ft_disordered(p, p->a_head, 1, ft_stacksize(p->a_head)))
+			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
+		else if (!ft_disordered(p, p->a_head, 0, ft_stacksize(p->a_head) - 1))
+		{
+			printf(">>>>>>>>\n");
+			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+		}
 	}
 }
 
