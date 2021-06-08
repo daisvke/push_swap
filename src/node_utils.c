@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 14:54:56 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/08 18:15:31 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ t_stack	*ft_lastnode(t_stack *node)
 	return (node);
 }
 
-t_stack	*ft_xbef_lastnode(t_param *p, t_stack *node, int i)
+t_stack	*ft_xbef_lastnode(t_param *p, int size, t_stack *node, int i)
 {
-	int	size;
-
-	size = p->size - i - 1;
+	size = size - i - 1;
 	if (size == 0 || i == 0)
 		return (node);
 	if (node && i)

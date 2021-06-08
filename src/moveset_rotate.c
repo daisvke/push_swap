@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:27:51 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 16:29:20 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/08 18:03:20 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_rb(t_param *p, t_stack *head, t_stack *tail, bool w)
 		p->b_head = tmp;
 	}
 	if (w)
-		write(1, "ra\n", 3);
+		write(1, "rb\n", 3);
 }
 
 void	ft_rr(t_param *p, t_stack *ah, t_stack *at, t_stack *bh, t_stack *bt)

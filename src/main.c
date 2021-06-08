@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 16:19:35 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/08 18:15:31 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,17 @@ int	main(int argc, char *argv[])
 	p = ft_init_stack(argv, argc - 1);
 	if (ft_stacksize(p->a_head) < 2)
 		ft_exit_clearstack(p);
-	p->size = ft_stacksize(p->a_head);	
-
 
 	t_stack *b = malloc(sizeof(*b));
 	p->b_head = b;
 	b->data = 34;
 	t_stack *elem = malloc(sizeof(*b));
 	b->next = elem;
-	b->next->data = 54;
+	elem->data = 54;
+	t_stack *next = malloc(sizeof(*b));
+	elem->next = next;
+	next->data = 400;
+	next->next = NULL;
 	ft_printnode(p);
 
 //	ft_pa(p, p->a_head, p->b_head, true);
@@ -114,13 +116,26 @@ int	main(int argc, char *argv[])
 //	ft_pb(p, p->a_head, p->b_head, true);
 //	ft_printnode(p);
 
-	ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
-	ft_printnode(p);
+//	ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
+//	ft_printnode(p);
+
+//	ft_rb(p, p->b_head, ft_lastnode(p->b_head), true);
+//	ft_printnode(p);
 
 	ft_ss(p, p->a_head, p->a_head->next, p->b_head, p->b_head->next);
 	ft_printnode(p);
 
 	ft_rr(p, p->a_head, ft_lastnode(p->a_head), p->b_head, \
+		ft_lastnode(p->b_head));
+	ft_printnode(p);
+
+	ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+	ft_printnode(p);
+
+	ft_rrb(p, p->b_head, ft_lastnode(p->b_head), true);
+	ft_printnode(p);
+
+	ft_rrr(p, p->a_head, ft_lastnode(p->a_head), p->b_head, \
 		ft_lastnode(p->b_head));
 	ft_printnode(p);
 	return (EXIT_SUCCESS);
