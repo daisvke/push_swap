@@ -6,25 +6,34 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 00:51:56 by root             ###   ########.fr       */
+/*   Updated: 2021/06/08 16:19:35 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	printnode(t_param *p)
+void	ft_printnode(t_param *p)
 {
 	t_stack	*node;
 
 	if (!p)
 		printf("EMPTY\n");
 	node = p->a_head;
+	printf("a stack:\n");
 	while (node)
 	{
 		printf("%d -> ", node->data);
 		node = node->next;
 	}
-	printf("NULL\n");
+	printf("NULL\n\n");
+	printf("b stack:\n");
+	node = p->b_head;
+	while (node)
+	{
+		printf("%d -> ", node->data);
+		node = node->next;
+	}
+	printf("NULL\n\n");
 }
 
 t_param	*ft_init(int n)
@@ -75,21 +84,44 @@ t_param	*ft_init_stack(char **args, int size)
 	}
 	free(split);
 	split = NULL;
-	printnode(p);
+	p->b_head = NULL;
 	return (p);
-}
-
-void	ft_check_input_err(t_param *p)
-{
-	if (ft_stacksize(p->a_head) < 2)
-		ft_exit_clearstack(p);
 }
 
 int	main(int argc, char *argv[])
 {
+	t_param	*p;
+
 	if (argc < 2)
 		ft_exit_failure();
-	ft_check_input_err(ft_init_stack(argv, argc - 1));
-//	printf("head: %d\n", p.a_head->data);
+	p = ft_init_stack(argv, argc - 1);
+	if (ft_stacksize(p->a_head) < 2)
+		ft_exit_clearstack(p);
+	p->size = ft_stacksize(p->a_head);	
+
+
+	t_stack *b = malloc(sizeof(*b));
+	p->b_head = b;
+	b->data = 34;
+	t_stack *elem = malloc(sizeof(*b));
+	b->next = elem;
+	b->next->data = 54;
+	ft_printnode(p);
+
+//	ft_pa(p, p->a_head, p->b_head, true);
+//	ft_printnode(p);
+
+//	ft_pb(p, p->a_head, p->b_head, true);
+//	ft_printnode(p);
+
+	ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
+	ft_printnode(p);
+
+	ft_ss(p, p->a_head, p->a_head->next, p->b_head, p->b_head->next);
+	ft_printnode(p);
+
+	ft_rr(p, p->a_head, ft_lastnode(p->a_head), p->b_head, \
+		ft_lastnode(p->b_head));
+	ft_printnode(p);
 	return (EXIT_SUCCESS);
 }
