@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 18:15:31 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/08 18:31:47 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,28 @@ t_stack	*ft_xbef_lastnode(t_param *p, int size, t_stack *node, int i)
 	return (node);
 }
 
-void	ft_add_front(t_stack **head, t_stack *new)
+void	ft_add_front(t_stack *head, t_stack *new)
 {
 	t_stack	*node;
 
-	if (*head && new)
+	if (head && new)
 	{
-		new->next = *head;
-		*head = new;
+		new->next = head;
+		head = new;
 	}
 }
 
-void	ft_add_back(t_stack **head, t_stack *new)
+void	ft_add_back(t_stack *head, t_stack *new)
 {
 	t_stack	*node;
 
 	if (!head || !new)
 		return ;
-	if (!*head)
-		*head = new;
+	if (!head)
+		head = new;
 	else
 	{
-		node = ft_lastnode(*head);
+		node = ft_lastnode(head);
 		node->next = new;
 	}
 }

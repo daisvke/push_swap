@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 18:15:31 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/08 18:37:23 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_param	*ft_extract_split(t_param *p, t_stack *node, char **split, int i)
 	while (split[i])
 	{
 		node = ft_add_nbr(ft_stoi(p, split, split[i], i));
-		ft_add_back(&(p->a_head), node);
+		ft_add_back(p->a_head, node);
 		if (!node)
 			ft_exit_lst_tabfree(p, split, i);	
 		i++;
@@ -88,6 +88,10 @@ t_param	*ft_init_stack(char **args, int size)
 	return (p);
 }
 
+void	ft_redirect(t_param *p)
+{
+}
+
 int	main(int argc, char *argv[])
 {
 	t_param	*p;
@@ -97,7 +101,9 @@ int	main(int argc, char *argv[])
 	p = ft_init_stack(argv, argc - 1);
 	if (ft_stacksize(p->a_head) < 2)
 		ft_exit_clearstack(p);
-
+	ft_redirect(p);
+	
+	/*
 	t_stack *b = malloc(sizeof(*b));
 	p->b_head = b;
 	b->data = 34;
@@ -110,11 +116,11 @@ int	main(int argc, char *argv[])
 	next->next = NULL;
 	ft_printnode(p);
 
-//	ft_pa(p, p->a_head, p->b_head, true);
-//	ft_printnode(p);
+	ft_pa(p, p->a_head, p->b_head, true);
+	ft_printnode(p);
 
-//	ft_pb(p, p->a_head, p->b_head, true);
-//	ft_printnode(p);
+	ft_pb(p, p->a_head, p->b_head, true);
+	ft_printnode(p);
 
 //	ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 //	ft_printnode(p);
@@ -136,7 +142,7 @@ int	main(int argc, char *argv[])
 	ft_printnode(p);
 
 	ft_rrr(p, p->a_head, ft_lastnode(p->a_head), p->b_head, \
-		ft_lastnode(p->b_head));
+		ft_lastnode(p->b_head));*/
 	ft_printnode(p);
 	return (EXIT_SUCCESS);
 }

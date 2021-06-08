@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 18:15:31 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/08 18:35:53 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include <stdbool.h>
 
 # include "libft/libft.h"
-
-# define ERROR 1
-# define SUCCESS 0
 
 typedef struct s_stack
 {
@@ -49,8 +46,8 @@ void	ft_sa(t_param *p, t_stack *node1, t_stack *node2, bool w);
 void	ft_sb(t_param *p, t_stack *node1, t_stack *node2, bool w);
 void	ft_ss(t_param *p, t_stack *a1, t_stack *a2, t_stack *b1, t_stack *b2);
 
-void	ft_add_back(t_stack **anode, t_stack *new);
-void	ft_add_front(t_stack **head, t_stack *new);
+void	ft_add_back(t_stack *head, t_stack *new);
+void	ft_add_front(t_stack *head, t_stack *new);
 t_stack	*ft_add_nbr(int data);
 void	ft_exit_clearstack(t_param *p);
 void	ft_exit_failure(void);
