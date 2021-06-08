@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 18:37:23 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/08 20:08:42 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,26 @@ t_param	*ft_init_stack(char **args, int size)
 	return (p);
 }
 
-void	ft_redirect(t_param *p)
+int	ft_disordered(t_param *p, t_stack *node)
 {
+	while (node->next)
+	{
+		if (p->b_head || node->data > node->next->data)
+			return (1);
+		node = node->next;
+	}
+	if (p->b_head)
+		return (1);
+	return (0);
+}
+
+void	ft_redirect(t_param *p, int size)
+{
+	while (ft_disordered(p, p->a_head))
+	{
+		if (p->a_head->data > p->a_head->next->data)
+			ft_sa(p, p->a_head, p->a_head->next, true);
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -101,7 +119,10 @@ int	main(int argc, char *argv[])
 	p = ft_init_stack(argv, argc - 1);
 	if (ft_stacksize(p->a_head) < 2)
 		ft_exit_clearstack(p);
-	ft_redirect(p);
+
+	ft_printnode(p);
+
+	ft_redirect(p, ft_stacksize(p->a_head));
 	
 	/*
 	t_stack *b = malloc(sizeof(*b));
