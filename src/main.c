@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/09 04:20:49 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/09 15:35:00 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,26 +107,24 @@ t_param	*ft_init_stack(char **args, int size)
 	return (p);
 }
 
-int	ft_disordered(t_param *p, t_stack *node, int start, int end)
+void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 {
-	int	size;
-	int	st_tmp;
-	
-	if (!node)
-		return (0);
-	st_tmp = start;
-	size = end - start - 1;
-	while (node->next && start--)
-		node = node->next;
-	while (node->next && size--)
-	{
-		if (node->data > node->next->data)
-			return (p->size - st_tmp - size - 1);
-		node = node->next;
-	}
-	if (p->b_head)
-		return (-1);
-	return (0);
+	if (ft_isdesc(p, p->a_head, 0, ft_stacksize(p->a_head)))
+		ft_reverse(p);
+	else if (ft_ishighest(p->a_head, p->a_head->next->data) \
+		&& ft_islowest(p->a_head, p->a_head->data))
+		ft_sa(p, p->a_head, p->a_head->next, true);
+	else if (
+		ft_isasc(p, p->a_head, 0, ft_stacksize(p->a_head) - 1)
+		&& ft_islowest(p->a_head, ft_lastnode(p->a_head)->data) \
+		
+		|| ((!ft_isasc(p, p->a_head, 0, \
+		ft_stacksize(p->a_head) - 1) \
+		&& ft_lastnode(p->a_head)->data < p->a_head->data)) \
+		|| (ft_islowest_xbef_lastnode(p, 0)) \
+		|| (!ft_isasc_between(p) && ft_ishighest(p->a_head, p->a_head->data) \
+		&& ft_islowest_xbef_lastnode(p, 1)))
+		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
 }
 
 void	ft_redirect(t_param *p, int size)
@@ -141,17 +139,9 @@ void	ft_redirect(t_param *p, int size)
 		printf("pos: %d\n", pos);
 		if (!pos)
 			break ;
-		if (p->a_head->data > p->a_head->next->data \
-			&& (p->a_head->data < ft_lastnode(p->a_head)->data \
-			|| !(p->a_head->next->next)))
-			ft_sa(p, p->a_head, p->a_head->next, true);
-		else if (p->a_head->data > p->a_head->next->data \
-			&& (!ft_disordered(p, p->a_head, 1, p->size) \
-			|| ft_ishighest(p->a_head, p->a_head->data)))
-			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
-		else if (!ft_disordered(p, p->a_head, 0, p->size - 1) \
-			&& ft_lastnode(p->a_head)->data < p->a_head->data)
-			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+		ft_sort_default_alg(p, pos, tmp);
+		if (ft_disordered(p, p->a_head, 0, p->size))
+			ft_sort_short_list(p, pos, tmp);
 /*		else if (ft_lastnode(p->a_head)->data
 			< ft_xbef_lastnode(p, p->size, p->a_head, 1)->data)
 		{
@@ -159,14 +149,6 @@ void	ft_redirect(t_param *p, int size)
 			ft_sa(p, p->a_head, p->a_head->next, true);
 			ft_pa(p, p->a_head, p->b_head, true);
 		}*/
-		else if (pos > p->size / 2)
-		{
-			tmp = pos - 1;
-			while (tmp--)
-				ft_pb(p, p->a_head, p->b_head, true);
-		}
-		else if (pos == -1)
-			ft_pa(p, p->a_head, p->b_head, true);
 			
 
 	}
