@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/09 15:35:00 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/09 21:50:49 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 		|| (!ft_isasc_between(p) && ft_ishighest(p->a_head, p->a_head->data) \
 		&& ft_islowest_xbef_lastnode(p, 1)))
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+		//rra until lowest->top
 }
 
 void	ft_redirect(t_param *p, int size)
