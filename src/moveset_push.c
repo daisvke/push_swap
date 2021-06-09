@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:27:15 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 18:27:53 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/09 01:48:56 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_pb(t_param *p, t_stack *a, t_stack *b, bool w)
 
 	if (a)
 	{
+
 		tmp = a->next;
 		ft_add_front(b, a);
 		p->a_head = tmp;

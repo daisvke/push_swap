@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 21:11:41 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/09 01:50:32 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_add_front(t_stack *head, t_stack *new)
 {
 	t_stack	*node;
 
-	if (head && new)
+	if (new)
 	{
 		new->next = head;
 		head = new;

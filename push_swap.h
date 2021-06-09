@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 18:35:53 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/09 03:05:58 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_stack
 
 typedef struct s_param
 {
+	int		size;
 	t_stack	*a_head;
 	t_stack	*b_head;
 }			t_param;
