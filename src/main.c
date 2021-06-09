@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/09 03:07:30 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/09 04:20:49 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	ft_disordered(t_param *p, t_stack *node, int start, int end)
 	while (node->next && size--)
 	{
 		if (node->data > node->next->data)
-			return (p->size - st_tmp - size);
+			return (p->size - st_tmp - size - 1);
 		node = node->next;
 	}
 	if (p->b_head)
@@ -132,30 +132,43 @@ int	ft_disordered(t_param *p, t_stack *node, int start, int end)
 void	ft_redirect(t_param *p, int size)
 {
 	int	pos;
-//	int sizes= 8;
+	int	tmp;
+	int sizes= 8;
 	pos = 1;
-	while (pos)
+	while (pos && sizes--)
 	{
 		pos = ft_disordered(p, p->a_head, 0, p->size);
+		printf("pos: %d\n", pos);
 		if (!pos)
 			break ;
-		printf("disord: %d\n", ft_disordered(p, p->a_head, 0, p->size));
 		if (p->a_head->data > p->a_head->next->data \
-			&& !ft_disordered(p, p->a_head, 1, p->size))
+			&& (p->a_head->data < ft_lastnode(p->a_head)->data \
+			|| !(p->a_head->next->next)))
+			ft_sa(p, p->a_head, p->a_head->next, true);
+		else if (p->a_head->data > p->a_head->next->data \
+			&& (!ft_disordered(p, p->a_head, 1, p->size) \
+			|| ft_ishighest(p->a_head, p->a_head->data)))
 			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 		else if (!ft_disordered(p, p->a_head, 0, p->size - 1) \
 			&& ft_lastnode(p->a_head)->data < p->a_head->data)
 			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-		else if (p->a_head->data > p->a_head->next->data)
-			ft_sa(p, p->a_head, p->a_head->next, true);
-		else if (ft_lastnode(p->a_head)->data
+/*		else if (ft_lastnode(p->a_head)->data
 			< ft_xbef_lastnode(p, p->size, p->a_head, 1)->data)
 		{
 			ft_pb(p, p->a_head, p->b_head, true);
 			ft_sa(p, p->a_head, p->a_head->next, true);
 			ft_pa(p, p->a_head, p->b_head, true);
+		}*/
+		else if (pos > p->size / 2)
+		{
+			tmp = pos - 1;
+			while (tmp--)
+				ft_pb(p, p->a_head, p->b_head, true);
 		}
-//		else if (pos > p->size)
+		else if (pos == -1)
+			ft_pa(p, p->a_head, p->b_head, true);
+			
+
 	}
 }
 

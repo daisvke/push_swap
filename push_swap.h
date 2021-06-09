@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/09 03:05:58 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/09 04:18:29 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_exit_clearstack(t_param *p);
 void	ft_exit_failure(void);
 void	ft_exit_lst_tabfree(t_param *p, char **split, int size);
 void	ft_exit_tabfree(char **str, int i);
+bool	ft_ishighest(t_stack *node, int n);
 char	**ft_split_errchk(char const *s, char c);
 t_stack	*ft_lastnode(t_stack *node);
 int		ft_stacksize(t_stack *node);

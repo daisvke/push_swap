@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 00:39:29 by root             ###   ########.fr       */
+/*   Updated: 2021/06/09 04:22:26 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,15 @@ int	ft_stoi(t_param *p, char **split, char *str, int j)
 	if (res > 2147483647)
 		ft_exit_lst_tabfree(p, split, j);
 	return (res * sign);
+}
+
+bool	ft_ishighest(t_stack *node, int n)
+{
+	while (node)
+	{
+		if (node->data > n)
+			return (false);
+		node = node->next;
+	}
+	return (true);
 }
