@@ -85,6 +85,31 @@ bool	ft_islowest(t_stack *node, int n)
 	return (true);
 }
 
+bool	ft_islowest_expt(t_stack *node, int n, int *t)
+{
+	int	i;
+	bool	unfound;
+
+	while (node)
+	{
+		i = 0:
+		unfound = true;
+		if (node->data < n)
+			while(t[i])
+			{
+				if (node->data == t[i])
+					unfound = false;
+					break ;
+				i++;
+			
+			}
+		if (unfound = true)
+			return (false);
+		node = node->next;
+	}
+	return (true);
+}
+
 bool	ft_ishighest(t_stack *node, int n)
 {
 	while (node)

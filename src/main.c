@@ -149,7 +149,8 @@ void	ft_redirect(t_param *p, int size)
 			ft_sa(p, p->a_head, p->a_head->next, true);
 			ft_pa(p, p->a_head, p->b_head, true);
 		}*/
-			
+	if (disordered())
+		ft_sort_long_list(p, pos, tmp);
 
 	}
 }
