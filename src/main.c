@@ -137,7 +137,8 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 	else if (pos > p->size / 2
 		|| (ft_islowest(p->a_head, p->a_head->data)
 		&& ft_ishighest(p->a_head, ft_lastnode(p->a_head)->data)
-		&& ft_stacksize(p->a_head) > 3))
+		&& ft_stacksize(p->a_head) > 3)
+		|| ft_isdesc_between(p))
 	{
 		tmp = pos - 1;
 		if (tmp < 0)
@@ -192,7 +193,7 @@ int	main(int argc, char *argv[])
 	if (p->size < 2)
 		ft_exit_clearstack(p);
 
-//	ft_printnode(p);
+	ft_printnode(p);
 
 	ft_redirect(p, p->size);
 	
@@ -216,7 +217,7 @@ int	main(int argc, char *argv[])
 	ft_printnode(p);
 
 //	ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
-//	ft_printnode(p);
+	ft_printnode(p);
 
 //	ft_rb(p, p->b_head, ft_lastnode(p->b_head), true);
 //	ft_printnode(p);
@@ -236,6 +237,6 @@ int	main(int argc, char *argv[])
 
 	ft_rrr(p, p->a_head, ft_lastnode(p->a_head), p->b_head, \
 		ft_lastnode(p->b_head));*/
-//	ft_printnode(p);
+	ft_printnode(p);
 	return (EXIT_SUCCESS);
 }
