@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/10 05:28:28 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/10 14:52:31 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	ft_redirect(t_param *p, int size)
 	while ((pos || p->b_head) &&  sizes--)
 	{
 		pos = ft_disordered(p, p->a_head, 0, p->size);
-		printf("pos: %d\n", pos);
+	//	printf("pos: %d\n", pos);
 		if (!pos && !p->b_head)
 			break ;
 		ft_sort_default_alg(p, pos, tmp);
@@ -192,7 +192,7 @@ int	main(int argc, char *argv[])
 	if (p->size < 2)
 		ft_exit_clearstack(p);
 
-	ft_printnode(p);
+//	ft_printnode(p);
 
 	ft_redirect(p, p->size);
 	
@@ -236,6 +236,6 @@ int	main(int argc, char *argv[])
 
 	ft_rrr(p, p->a_head, ft_lastnode(p->a_head), p->b_head, \
 		ft_lastnode(p->b_head));*/
-	ft_printnode(p);
+//	ft_printnode(p);
 	return (EXIT_SUCCESS);
 }

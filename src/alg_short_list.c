@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/10 05:28:42 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/10 05:42:33 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ void	ft_sort_short_list(t_param *p, int pos, int tmp)
 		|| (!ft_isasc_between(p) && ft_ishighest(p->a_head, p->a_head->data) \
 		&& ft_islowest_xbef_lastnode(p, 1)))
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-	else if (pos > p->size / 2
-		|| (ft_islowest(p->a_head, p->a_head->data)
-		&& ft_ishighest(p->a_head, ft_lastnode(p->a_head)->data)
-		&& ft_stacksize(p->a_head) > 3))
+	else if (((p->b_head && p->b_head->next) || !p->b_head) \
+		&& (pos > p->size / 2 \
+		|| (ft_islowest(p->a_head, p->a_head->data) \
+		&& ft_ishighest(p->a_head, ft_lastnode(p->a_head)->data) \
+		&& ft_stacksize(p->a_head) > 3)))
 	{
 		tmp = pos - 1;
 		if (tmp < 0)
@@ -66,7 +67,7 @@ void	ft_sort_short_list(t_param *p, int pos, int tmp)
 		while (tmp--)
 			ft_pb(p, p->a_head, p->b_head, true);
 	}
-	else if (pos == -1)
+	else if (p->b_head)
 		ft_pa(p, p->a_head, p->b_head, true);
 }
 
