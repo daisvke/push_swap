@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/09 01:50:32 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/10 02:53:48 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_stack	*ft_xbef_lastnode(t_param *p, int size, t_stack *node, int i)
 {
 	size = size - i - 1;
 	if (size == 0 || i == 0)
-		return (node);
+		return (ft_lastnode(p->a_head));
 	if (node && i)
 		while (node->next && size--)
 			node = node->next;

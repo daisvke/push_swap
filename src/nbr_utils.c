@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/09 15:37:50 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/10 05:25:13 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	ft_disordered(t_param *p, t_stack *node, int start, int end)
 			return (p->size - st_tmp - size - 1);
 		node = node->next;
 	}
-	if (p->b_head)
-		return (-1);
 	return (0);
 }
 
@@ -87,24 +85,27 @@ bool	ft_islowest(t_stack *node, int n)
 
 bool	ft_islowest_expt(t_stack *node, int n, int *t)
 {
-	int	i;
+	int		i;
 	bool	unfound;
 
 	while (node)
 	{
-		i = 0:
 		unfound = true;
 		if (node->data < n)
+		{
+			i = 0;
 			while(t[i])
 			{
 				if (node->data == t[i])
+				{
 					unfound = false;
 					break ;
+				}
 				i++;
-			
 			}
-		if (unfound = true)
-			return (false);
+			if (unfound == true)
+				return (false);
+		}
 		node = node->next;
 	}
 	return (true);
@@ -119,6 +120,26 @@ bool	ft_ishighest(t_stack *node, int n)
 		node = node->next;
 	}
 	return (true);
+}
+
+bool	ft_ishighest_inrange(t_param *p, int start, int end)
+{
+	t_stack	*node;
+	int		size;
+	int		st_tmp;
+
+	node = p->a_head;
+	st_tmp = start;
+	size = end - start;
+	while (node && start--)
+		node = node->next;
+	while (node && size--)
+	{
+		if (ft_ishighest(p->a_head, node->data))
+			return (true);
+		node = node->next;
+	}
+	return (false);
 }
 
 int	ft_stoi(t_param *p, char **split, char *str, int j)
