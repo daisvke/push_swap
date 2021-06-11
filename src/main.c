@@ -119,7 +119,7 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 		|| ft_isasc(p, p->a_head, 1, ft_stacksize(p->a_head)))
 		ft_sa(p, p->a_head, p->a_head->next, true);
 		else if ((!ft_isasc(p, p->a_head, 1, ft_stacksize(p->a_head)) \
-		&& ) \
+&& !ft_islowest_xbef_lastnode(p, 1) && !ft_isasc(p, p->a_head, ft_stacksize(p->a_head) - 1, ft_stacksize(p->a_head) )) \
 		|| (ft_ishighest(p->a_head, p->a_head->data) \
 		&& ft_isasc(p, p->a_head, 1, ft_stacksize(p->a_head) - 1)) \
 		|| (ft_ishighest(p->a_head, p->a_head->data)

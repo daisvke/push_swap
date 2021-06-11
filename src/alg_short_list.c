@@ -53,7 +53,7 @@ void	ft_five_dig_middle_highlow(t_param *p)
 
 void	ft_sort_short_list(t_param *p, int pos, int tmp)
 {
-	if (p->size == 5)
+	if (ft_stacksize(p->a_head) == 5)
 		ft_five_dig_middle_highlow(p);
 	else if (p->a_head->data > p->a_head->next->data)
 	{
