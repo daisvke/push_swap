@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/10 05:25:13 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/11 13:17:55 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@ void	ft_sb(t_param *p, t_stack *node1, t_stack *node2, bool w);
 void	ft_ss(t_param *p, t_stack *a1, t_stack *a2, t_stack *b1, t_stack *b2);
 
 /*
+** node_utils
+*/
+void	ft_add_back(t_stack *head, t_stack *new);
+void	ft_add_front(t_stack *head, t_stack *new);
+t_stack	*ft_lastnode(t_stack *node);
+int		ft_stacksize(t_stack *node);
+t_stack	*ft_xbef_lastnode(t_param *p, int size, t_stack *node, int i);
+t_stack	*ft_xnode(t_stack *node, int x);
+
+/*
 ** nbr_utils
 */
 bool	ft_isasc(t_param *p, t_stack *node, int start, int end);
@@ -64,23 +74,21 @@ int		ft_stoi(t_param *p, char **split, char *str, int j);
 int		ft_disordered(t_param *p, t_stack *node, int start, int end);
 bool	ft_isasc_between(t_param *p);
 bool	ft_isdesc_between(t_param *p);
-bool	ft_islowest_xbef_lastnode(t_param *p, int i);
+bool	ft_islowest_xbef_lastnode(t_param *p, int x);
 int		*ft_lowest_nodes(t_param *p);
 void	ft_sort_long_list(t_param *p, int *t);
 void	ft_sort_short_list(t_param *p, int pos, int tmp);
 
-
-void	ft_add_back(t_stack *head, t_stack *new);
-void	ft_add_front(t_stack *head, t_stack *new);
-t_stack	*ft_add_nbr(int data);
+/*
+** exit
+*/
 void	ft_exit_clearstack(t_param *p);
 void	ft_exit_failure(void);
 void	ft_exit_lst_tabfree(t_param *p, char **split, int size);
 void	ft_exit_tabfree(char **str, int i);
-char	**ft_split_errchk(char const *s, char c);
-t_stack	*ft_lastnode(t_stack *node);
-void	ft_reverse(t_param *p);
-int		ft_stacksize(t_stack *node);
-t_stack	*ft_xbef_lastnode(t_param *p, int size, t_stack *node, int i);
 
+char	**ft_split_errchk(char const *s, char c);
+void	ft_reverse(t_param *p);
+
+t_stack	*ft_add_nbr(int data);
 #endif

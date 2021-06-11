@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/10 05:42:33 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/11 14:02:59 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,28 @@ void	ft_reverse(t_param *p)
 		ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 }
 
+void	ft_five_dig_middle_highlow(t_param *p)
+{
+	if (ft_isdesc(p, p->a_head, 0, 1) && ft_isasc(p, p->a_head, 3, 4))
+	{
+			printf("xnode: %d", ft_xnode(p->a_head, 2)->data);
+		if (ft_ishighest(p->a_head, ft_xnode(p->a_head, 2)->data))
+		{
+			ft_sa(p, p->a_head, p->a_head->next, true);
+			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+		}
+/*		else if (ft_islowest(p->a_head, ft_xnode(p->a_head, 2)->data))
+		{
+		}*/
+	}
+}
+
 void	ft_sort_short_list(t_param *p, int pos, int tmp)
 {
-	if (p->a_head->data > p->a_head->next->data)
+	if (p->size == 5)
+		ft_five_dig_middle_highlow(p);
+	else if (p->a_head->data > p->a_head->next->data)
 	{
 		if (p->a_head->data < ft_lastnode(p->a_head)->data \
 		|| !(p->a_head->next->next))
