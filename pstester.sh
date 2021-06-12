@@ -6,32 +6,39 @@
 
 
 # Arrays of tested numbers
-twoDig=("1 2" "2 1")
+two=("1 2" "2 1")
 
-threeDig=("1 3 2" "2 1 3" "2 3 1" "3 1 2" "3 2 1")
+three=("1 3 2" "2 1 3" "2 3 1" "3 1 2" "3 2 1")
 
-fourDig=(
+four=(
 	"1 2 4 3" "1 3 2 4" "1 3 4 2" "1 4 2 3" "1 4 3 2"
 	"2 1 3 4" "2 1 4 3" "2 3 1 4" "2 4 1 3" "2 4 3 1" 
-	"3 1 2 4"  "3 2 4 1" "3 2 1 4" "3 4 1 2" "3 4 2 1"
+	"3 1 2 4" "3 2 4 1" "3 2 1 4" "3 4 1 2" "3 4 2 1"
 	"4 1 3 2" "4 2 1 3" "4 2 3 1" "4 3 1 2" "4 3 2 1"
 	)
 
-fiveDig=(
-	"1 2 3 5 4" "1 2 4 3 5" "1 2 4 5 3" "1 2 5 4 3" "1 3 4 5 2" "1 3 5 4 2" "1 4 5 2 3"
-	"2 1 3 4 5" "2 3 4 1 5" "2 3 4 5 1" "2 3 5 1 4" "2 4 5 1 3" "2 5 4 3 1"
-	"3 2 1 4 5" "3 2 4 5 1" "3 2 5 4 1" "3 4 5 1 2" "3 4 5 2 1" "3 5 2 1 4"
-	"4 2 3 5 1" "4 3 2 1 5" "4 3 5 1 2" "4 3 5 2 1" "4 5 2 3 1" "4 5 3 2 1"
-	"5 1 2 3 4" "5 2 3 4 1" "5 3 1 2 4" "5 3 4 2 1" "5 4 2 3 1" "5 4 3 2 1"
+five=(
+	"1 2 3 5 4" "1 2 4 3 5" "1 2 4 5 3" "1 2 5 3 4" "1 2 5 4 3" 
+	"1 3 4 2 5" "1 3 4 5 2" "1 3 5 2 4" "1 3 5 4 2" "1 4 5 2 3"
+	"1 5 2 3 4" "1 5 2 4 3" "1 5 4 2 3" "1 5 4 3 2"
+	"2 1 3 4 5" "2 1 3 5 4" "2 1 4 3 5" "2 1 4 5 3" "2 1 5 4 3"
+	"2 3 4 1 5" "2 3 4 5 1" "2 3 5 1 4" "2 3 5 4 1" "2 4 5 1 3"
+	"2 5 4 3 1"
+	"3 1 2 4 5" "3 1 2 5 4" "3 1 4 2 5" "3 1 5 2 4" "3 1 5 4 2"
+	"3 2 1 4 5" "3 2 4 5 1" "3 2 5 4 1" "3 4 5 1 2" "3 4 5 2 1" "3 5 2 1 4" "3 5 4 2 1"
+	"4 1 2 3 5" "4 1 2 5 3" "4 1 3 2 5" "4 1 3 5 2" "4 1 5 2 3"
+	"4 1 5 3 2" "4 2 1 5 3" "4 2 3 5 1" "4 2 5 3 1" "4 3 2 1 5" "4 3 5 1 2" "4 3 5 2 1" "4 5 1 3 2" "4 5 2 3 1" "4 5 3 2 1"
+	"5 1 2 3 4" "5 1 2 4 3" "5 1 3 2 4" "5 1 3 4 2" "5 1 4 2 3"
+	"5 1 4 3 2" "5 2 3 1 4" "5 2 3 4 1" "5 3 1 2 4" "5 3 2 1 4" "5 3 4 2 1" "5 4 2 3 1" "5 4 3 1 2" "5 4 3 2 1"
 	)
 
-sixDig=(
-	"1 2 3 4 6 5" "1 2 3 5 6 4"
-	"2 1 3 4 5 6" "2 1 3 5 4 6"
-	"3 2 1 4 5 6" "3 2 1 5 4 6"
+six=(
+	"1 2 3 4 6 5" "1 2 3 5 6 4" "1 2 4 5 6 3"
+	"2 1 3 4 5 6" "2 1 3 5 4 6" "2 1 3 6 5 8"
+	"3 2 1 4 5 6" "3 2 1 5 4 6" "3 2 4 5 6 1"
 	)
 
-twentyDig=(
+twenty=(
 	"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 17 16 18 20 19"
 )
 
@@ -101,6 +108,10 @@ function printMoves ()
 	echo -ne "\n"
 }
 
+# Variables to get the total score
+SCORE=0
+TOTAL=0
+
 # Main testing function
 function tester ()
 {
@@ -110,6 +121,7 @@ function tester ()
 	# Testing loop
 	for i in "$@"
 	do
+		TOTAL=$[$TOTAL + 1]
 		# Feed log file
 		echo -en "[$i]" >> log
 		printMoves "$i" >> log
@@ -121,13 +133,16 @@ function tester ()
 		RES=$(./a.out $i 2> /dev/null | ./$CHECKER $i)
 		if [[ $RES == "OK" ]]
 		then # Print 'OK'
+			((SCORE++))
 			echo -en "${GREEN}[$i]${NC} "
 		elif [[ $RES == "KO" ]] # Print 'KO'
 		then
-			echo -en "\n${RED}[$i]${NC} "
 			if [[ $ERR ]]
 			then
+				echo -en "\n${RED}[$i]${NC} "
 				printMoves "$i"
+			else
+				echo -en "${RED}[$i]${NC} "
 			fi
 		else
 			if [[ $OUT ]]
@@ -150,22 +165,23 @@ echo -en "\n"
 echo -e "START...\n"
 
 # Two digits
-tester "=== TWO DIGITS ===" "${twoDig[@]}"
+tester "=== 2 DIGITS ===" "${two[@]}"
 
 # Three digits
-tester "=== THREE DIGITS ===" "${threeDig[@]}"
+tester "=== 3 DIGITS ===" "${three[@]}"
 
 # Four digits
-tester "=== FOUR DIGITS ===" "${fourDig[@]}"
+tester "=== 4 DIGITS ===" "${four[@]}"
 
 # Five digits
-tester "=== FIVE DIGITS ===" "${fiveDig[@]}"
+tester "=== 5 DIGITS ===" "${five[@]}"
 
 # Six digits
-tester "=== SIX DIGITS ===" "${sixDig[@]}"
+tester "=== 6 DIGITS ===" "${six[@]}"
 
 # Twenty digits
-tester "=== TWENTY DIGITS ===" "${twentyDig[@]}"
+tester "=== 20 DIGITS ===" "${twenty[@]}"
 
-echo -en "...END\n"
-echo -en "\n"
+echo -en "...END\n\n"
+echo -en "Your score: $SCORE/$TOTAL"
+echo -en "\n\n"
