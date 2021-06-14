@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/12 13:03:03 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/14 13:37:28 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_stack	*ft_xnode(t_stack *node, int x);
 /*
 ** nbr_utils
 */
-bool	ft_isasc(t_param *p, t_stack *node, int start, int end);
-bool	ft_isdesc(t_param *p, t_stack *node, int start, int end);
+bool	ft_isasc(t_stack *node, int start, int end);
+bool	ft_isdesc(t_stack *node, int start, int end);
 bool	ft_ishighest(t_stack *node, int n);
 bool	ft_ishighest_inrange(t_param *p, int start, int end);
 bool	ft_islowest(t_stack *node, int n);

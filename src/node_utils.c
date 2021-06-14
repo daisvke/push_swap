@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/11 13:59:02 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/14 13:37:28 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ t_stack	*ft_xbef_lastnode(t_param *p, int size, t_stack *node, int x)
 
 void	ft_add_front(t_stack *head, t_stack *new)
 {
-	t_stack	*node;
-
 	if (new)
 	{
 		new->next = head;

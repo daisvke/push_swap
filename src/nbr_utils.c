@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/11 06:04:03 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/14 13:37:28 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_disordered(t_param *p, t_stack *node, int start, int end)
 	return (0);
 }
 
-bool	ft_isasc(t_param *p, t_stack *node, int start, int end)
+bool	ft_isasc(t_stack *node, int start, int end)
 {
 	int	size;
 	int	st_tmp;
@@ -52,7 +52,7 @@ bool	ft_isasc(t_param *p, t_stack *node, int start, int end)
 	return (true);
 }
 
-bool	ft_isdesc(t_param *p, t_stack *node, int start, int end)
+bool	ft_isdesc(t_stack *node, int start, int end)
 {
 	int	size;
 	int	st_tmp;

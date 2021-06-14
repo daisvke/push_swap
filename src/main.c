@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/13 11:55:19 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/14 13:53:14 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 		&& ft_islowest(p->a_head, ft_lastnode(p->a_head)->data))))
 	{
 		if (p->a_head->data < ft_lastnode(p->a_head)->data \
-			|| (ft_isasc(p, p->a_head, 1, ft_stacksize(p->a_head) - 1) \
+			|| (ft_isasc(p->a_head, 1, ft_stacksize(p->a_head) - 1) \
 			&& (p->a_head->data > ft_lastnode(p->a_head)->data \
 			&& ft_ishighest_inrange(p, 1, ft_stacksize(p->a_head) - 1))))
 			ft_sa(p, p->a_head, p->a_head->next, true);
@@ -122,9 +122,9 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 
 	}
-	else if ((ft_isasc(p, p->a_head, 0, ft_stacksize( p->a_head) - 1)
+	else if ((ft_isasc(p->a_head, 0, ft_stacksize( p->a_head) - 1)
 		&& ft_islowest(p->a_head, ft_lastnode(p->a_head)->data)) \
-		|| ((!ft_isasc(p, p->a_head, 0, \
+		|| ((!ft_isasc(p->a_head, 0, \
 		ft_stacksize(p->a_head) - 1) \
 		&& ft_lastnode(p->a_head)->data < p->a_head->data)) \
 		|| (!ft_isasc_between(p) && ft_ishighest(p->a_head, p->a_head->data) \
@@ -148,17 +148,16 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 		ft_pb(p, p->a_head, p->b_head, true);
 }
 
-void	ft_redirect(t_param *p, int size)
+void	ft_redirect(t_param *p)
 {
 	int	pos;
 	int	tmp;
 	int	*low;
-	// For tests
-	int sizes= 70;
 
 	pos = 1;
+	tmp = 0;
 	low = ft_lowest_nodes(p);
-	while ((pos || p->b_head) &&  sizes--)
+	while (pos || p->b_head)
 	{
 		pos = ft_disordered(p, p->a_head, 0, p->size);
 //		printf("pos: %d\n", pos);
@@ -188,7 +187,7 @@ int	main(int argc, char *argv[])
 	if (p->size < 2)
 		ft_exit_clearstack(p);
 //	ft_printnode(p);
-	ft_redirect(p, p->size);
-//	ft_printnode(p);
+	ft_redirect(p);
+	ft_printnode(p);
 	return (EXIT_SUCCESS);
 }

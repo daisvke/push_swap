@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/13 03:07:26 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/14 13:37:28 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 bool	ft_isasc_between(t_param *p)
 {
-	return (ft_isasc(p, p->a_head, 1, ft_stacksize(p->a_head) - 1));
+	return (ft_isasc(p->a_head, 1, ft_stacksize(p->a_head) - 1));
 }
 
 bool	ft_isdesc_between(t_param *p)
 {
-	return (ft_isdesc(p, p->a_head, 1, ft_stacksize(p->a_head) - 1));
+	return (ft_isdesc(p->a_head, 1, ft_stacksize(p->a_head) - 1));
 }
 
 bool	ft_islowest_xbef_lastnode(t_param *p, int i)
@@ -30,7 +30,7 @@ bool	ft_islowest_xbef_lastnode(t_param *p, int i)
 
 void	ft_reverse(t_param *p)
 {
-	while (ft_isdesc(p, p->a_head, 0, ft_stacksize(p->a_head)) && p->size--)
+	while (ft_isdesc(p->a_head, 0, ft_stacksize(p->a_head)) && p->size--)
 		ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 }
 
@@ -38,7 +38,7 @@ void	ft_five_dig_middle_highlow(t_param *p, int pos)
 {
 	int	tmp;
 
-	if (ft_isdesc(p, p->a_head, 0, 1) && ft_isasc(p, p->a_head, 3, 4))
+	if (ft_isdesc(p->a_head, 0, 1) && ft_isasc(p->a_head, 3, 4))
 	{
 		if (ft_ishighest(p->a_head, ft_xnode(p->a_head, 2)->data))
 		{
@@ -53,8 +53,6 @@ void	ft_five_dig_middle_highlow(t_param *p, int pos)
 				tmp = 0;
 			while (tmp--)
 				ft_pb(p, p->a_head, p->b_head, true);
-//			ft_rr(p, p->a_head, ft_lastnode(p->a_head), \
-				p->b_head, ft_lastnode(p->b_head));
 			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 			while (p->b_head)
 				ft_pa(p, p->a_head, p->b_head, true);
@@ -79,14 +77,14 @@ void	ft_sort_short_list(t_param *p, int pos, int tmp)
 		if (p->a_head->data < ft_lastnode(p->a_head)->data \
 		|| !(p->a_head->next->next))
 		ft_sa(p, p->a_head, p->a_head->next, true);
-		else if (!ft_isasc(p, p->a_head, 1, ft_stacksize(p->a_head)) \
+		else if (!ft_isasc(p->a_head, 1, ft_stacksize(p->a_head)) \
 		|| (ft_ishighest(p->a_head, p->a_head->data) \
-		&& ft_isasc(p, p->a_head, 1, ft_stacksize(p->a_head) - 1)) \
+		&& ft_isasc(p->a_head, 1, ft_stacksize(p->a_head) - 1)) \
 		|| (ft_ishighest(p->a_head, p->a_head->data)
 		&& ft_isdesc_between(p)))
 		ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 	}
-	else if (((!ft_isasc(p, p->a_head, 0, \
+	else if (((!ft_isasc(p->a_head, 0, \
 		ft_stacksize(p->a_head) - 1) \
 		&& ft_lastnode(p->a_head)->data < p->a_head->data)) \
 		|| (ft_islowest_xbef_lastnode(p, 0)) \
