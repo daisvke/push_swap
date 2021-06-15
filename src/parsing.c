@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 19:00:33 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 00:25:16 by root             ###   ########.fr       */
+/*   Updated: 2021/06/15 01:12:17 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_split_iter(char **split, char *s, char c)
 		head = s;
 		while (*s != c && *s)
 		{
-			if (!ft_isdigit(*s))
+			if (!ft_isdigit(*s) && *s != '-' && *s != '+')
 				ft_exit_tabfree(split, i);
 			s++;
 		}
