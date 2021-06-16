@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/16 14:58:58 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:16:43 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,13 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 	{
 		if (p->lastmove != 1
 			&& (p->a_head->data < ft_lastnode(p->a_head)->data \
-			|| (ft_isasc(p->a_head, 1, ft_stacksize(p->a_head) - 1) \
-			)))
+			|| (ft_isasc(p->a_head, 1, ft_stacksize(p->a_head) - 1))))
 			ft_sa(p, p->a_head, p->a_head->next, true);
 		else if (p->lastmove != 9)
 			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 	}
 	else if (p->lastmove != 6
-		&& ((ft_islowest(p->a_head, ft_lastnode(p->a_head)->data)) \
-		|| ((!ft_isasc(p->a_head, 0, ft_stacksize(p->a_head) - 1) \
+		&& (((!ft_isasc(p->a_head, 0, ft_stacksize(p->a_head) - 1) \
 		&& ft_lastnode(p->a_head)->data < p->a_head->data))))
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
 	else if (pos > p->size / 2 || (ft_islowest(p->a_head, p->a_head->data)

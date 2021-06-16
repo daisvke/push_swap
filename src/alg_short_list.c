@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/16 15:08:45 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:19:10 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ void	ft_sort_three(t_param *p)
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
 		ft_sa(p, p->a_head, p->a_head->next, true);
 	}
+	else if (p->size == 3 \
+		&& ft_islowest(p->a_head, ft_lastnode(p->a_head)->data)
+		&& ft_ishighest(p->a_head, p->a_head->next->data))
+		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
 }
 
 void	ft_sort_five(t_param *p)
