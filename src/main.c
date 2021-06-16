@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/15 04:45:45 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/16 14:58:58 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ t_param	*ft_init_stack(char **args, int size)
 	}
 	free(split);
 	split = NULL;
+	p->lastmove = 0;
 	p->b_head = NULL;
 	return (p);
 }
@@ -113,29 +114,21 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 		&& (p->size != 5 || !(ft_ishighest(p->a_head, p->a_head->data)
 		&& ft_islowest(p->a_head, ft_lastnode(p->a_head)->data))))
 	{
-		if ((!ft_islowest(p->a_head, p->a_head->next->data)
-			&& p->a_head->data < ft_lastnode(p->a_head)->data) \
+		if (p->lastmove != 1
+			&& (p->a_head->data < ft_lastnode(p->a_head)->data \
 			|| (ft_isasc(p->a_head, 1, ft_stacksize(p->a_head) - 1) \
-			&& (p->a_head->data > ft_lastnode(p->a_head)->data \
-			&& ft_ishighest_inrange(p, 1, ft_stacksize(p->a_head) - 1))))
+			)))
 			ft_sa(p, p->a_head, p->a_head->next, true);
-		else
+		else if (p->lastmove != 9)
 			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
-
 	}
-	else if ((ft_isasc(p->a_head, 0, ft_stacksize( p->a_head) - 1)
-		&& ft_islowest(p->a_head, ft_lastnode(p->a_head)->data)) \
-		|| ((!ft_isasc(p->a_head, 0, \
-		ft_stacksize(p->a_head) - 1) \
-		&& ft_lastnode(p->a_head)->data < p->a_head->data)) \
-		|| (!ft_isasc_between(p) && ft_ishighest(p->a_head, p->a_head->data) \
-		&& ft_islowest_xbef_lastnode(p, 1)))
+	else if (p->lastmove != 6
+		&& ((ft_islowest(p->a_head, ft_lastnode(p->a_head)->data)) \
+		|| ((!ft_isasc(p->a_head, 0, ft_stacksize(p->a_head) - 1) \
+		&& ft_lastnode(p->a_head)->data < p->a_head->data))))
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-	else if (pos > p->size / 2
-		|| (ft_islowest(p->a_head, p->a_head->data)
-		&& ft_ishighest(p->a_head, ft_lastnode(p->a_head)->data))
-		|| ft_isdesc_between(p)
-		)
+	else if (pos > p->size / 2 || (ft_islowest(p->a_head, p->a_head->data)
+		&& ft_ishighest(p->a_head, ft_lastnode(p->a_head)->data)))
 	{
 		tmp = pos - 1;
 		if (tmp < 0)
@@ -143,9 +136,9 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 		while (tmp--)
 			ft_pb(p, p->a_head, p->b_head, true);
 	}
-	else if (p->b_head)
+	else if (p->b_head && p->lastmove != 5)
 		ft_pa(p, p->a_head, p->b_head, true);
-	else
+	else if (p->lastmove != 4)
 		ft_pb(p, p->a_head, p->b_head, true);
 }
 
@@ -164,12 +157,16 @@ void	ft_redirect(t_param *p)
 //		printf("pos: %d\n", pos);
 		if (!pos && !p->b_head)
 			break ;
+		if (ft_stacksize(p->a_head) == 3)
+			ft_sort_three(p);
+		pos = ft_disordered(p, p->a_head, 0, p->size);
+		if ((pos || p->b_head))
 		ft_sort_default_alg(p, pos, tmp);
 		pos = ft_disordered(p, p->a_head, 0, p->size);
 		if ((pos || p->b_head) && ft_stacksize(p->a_head) == 5)
 			ft_sort_five(p);
 		pos = ft_disordered(p, p->a_head, 0, p->size);
-		if (pos || p->b_head)
+		if ((pos || p->b_head) && ft_stacksize(p->a_head) != 5)
 			ft_sort_short_list(p, pos, tmp);
 		pos = ft_disordered(p, p->a_head, 0, p->size);
 		if ((pos || p->b_head) && p->size >= 6)

@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:27:15 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/09 01:48:56 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/15 14:25:21 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_pa(t_param *p, t_stack *a, t_stack *b, bool w)
 	}
 	if (w)
 		write(1, "pa\n", 3);
+	p->lastmove = 4;
 }
 
 void	ft_pb(t_param *p, t_stack *a, t_stack *b, bool w)
@@ -41,4 +42,5 @@ void	ft_pb(t_param *p, t_stack *a, t_stack *b, bool w)
 	}
 	if (w)
 		write(1, "pb\n", 3);
+	p->lastmove = 5;
 }

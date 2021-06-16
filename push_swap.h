@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/14 13:37:28 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/16 14:59:35 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,17 @@ typedef struct s_stack
 	int				data;
 }					t_stack;
 
+/*
+** 1: sa	6: ra	9:	rra
+** 2: sb	7: rb	10:	rrb
+** 3: ss	8: rr	11:	rrr
+** 4: pa	
+** 5: pb
+*/
 typedef struct s_param
 {
 	int		size;
+	int		lastmove;
 	t_stack	*a_head;
 	t_stack	*b_head;
 }			t_param;
@@ -72,7 +80,6 @@ int		ft_stoi(t_param *p, char **split, char *str, int j);
 ** algorithms
 */
 int		ft_disordered(t_param *p, t_stack *node, int start, int end);
-void	ft_five_dig_middle_highlow(t_param *p, int pos);
 bool	ft_isasc_between(t_param *p);
 bool	ft_isdesc_between(t_param *p);
 bool	ft_islowest_xbef_lastnode(t_param *p, int x);
@@ -80,6 +87,7 @@ int		*ft_lowest_nodes(t_param *p);
 void	ft_sort_five(t_param *p);
 void	ft_sort_long_list(t_param *p, int *t);
 void	ft_sort_short_list(t_param *p, int pos, int tmp);
+void	ft_sort_three(t_param *p);
 
 /*
 ** exit
