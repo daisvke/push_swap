@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:28:18 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/15 14:23:47 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/16 20:49:32 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_rrb(t_param *p, t_stack *head, t_stack *tail, bool w)
 	if (head && tail)
 	{
 		tmp = ft_xbef_lastnode(p, p->size, p->b_head, 1);
-		printf("tmp:%d\n\n", tmp->data);
 		tail->next = head;
 		tmp->next = NULL;
 		p->b_head = tail;

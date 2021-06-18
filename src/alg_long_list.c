@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 21:52:57 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/11 01:12:44 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/18 02:25:55 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,20 @@ int	*ft_lowest_nodes(t_param *p)
 	return (t);
 }
 
-bool	ft_isthere(int n, int *t)
+bool	ft_isthere(int nbr_to_find, int *array_of_nbrs, int array_size)
 {
-	while (*t)
+	int	i;
+
+	i = 0;
+	while (i < array_size)
 	{
-		if (n == *t)
+		if (array_of_nbrs[i] == nbr_to_find)
 			return (true);
-		t++;
+		i++;
 	}
 	return (false);
 }
-
+/*
 void	ft_sort_long_list(t_param *p, int *t)
 {
 	t_stack	*node;
@@ -63,3 +66,4 @@ void	ft_sort_long_list(t_param *p, int *t)
 		node = node->next;
 	}
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/16 14:59:35 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/18 14:26:43 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,14 @@ bool	ft_ishighest(t_stack *node, int n);
 bool	ft_ishighest_inrange(t_param *p, int start, int end);
 bool	ft_islowest(t_stack *node, int n);
 bool	ft_islowest_expt(t_stack *node, int n, int *t);
+t_stack	*ft_nth_node(t_param *p, int n);
 int		ft_stoi(t_param *p, char **split, char *str, int j);
 
 /*
 ** algorithms
 */
 int		ft_disordered(t_param *p, t_stack *node, int start, int end);
+t_stack	ft_find_node_with_highest_num(t_param *p);
 bool	ft_isasc_between(t_param *p);
 bool	ft_isdesc_between(t_param *p);
 bool	ft_islowest_xbef_lastnode(t_param *p, int x);
@@ -97,6 +99,7 @@ void	ft_exit_failure(void);
 void	ft_exit_lst_tabfree(t_param *p, char **split, int size);
 void	ft_exit_tabfree(char **str, int i);
 
+bool	ft_isthere(int nbr_to_find, int *array_of_nbrs, int array_size);
 char	**ft_split_errchk(char const *s, char c);
 void	ft_reverse(t_param *p);
 

@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/14 13:37:28 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/18 04:00:11 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,16 @@ int	ft_stacksize(t_stack *node)
 		i++;
 	}
 	return (i);
+}
+
+t_stack	*ft_nth_node(t_param *p, int n)
+{
+	t_stack *node;
+
+	node = p->a_head;
+	while (node && n--)
+	{
+		node = node->next;
+	}
+	return (node);
 }

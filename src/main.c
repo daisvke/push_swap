@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/16 16:16:43 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/18 14:50:39 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,59 @@ bool	ft_twice(t_stack *node, int n)
 	return (false);
 }
 
+void	ft_find_in_stack_and_replace(t_param *p, int *nbrs_to_replace_with)
+{
+	t_stack	*node;
+	int		i;
+
+	node = p->a_head;
+	while (node)
+	{
+		i = 0;
+		while (nbrs_to_replace_with[i])
+		{
+			if (nbrs_to_replace_with[i] == node->data)
+			{
+				node->data = i + 1;
+				break ;
+			}
+			i++;
+		}
+		node = node->next;
+	}
+}
+
+void	ft_simplify_stack_nbr_values(t_param *p, int size)
+{
+	t_stack	*node;
+	int		i;
+	int		min;
+	int		*checked_nbrs;
+
+	i = 0;
+	checked_nbrs = malloc(size * sizeof(*checked_nbrs));
+	while (i < size)
+	{
+		node = p->a_head;
+		while (ft_isthere(node->data, checked_nbrs, i))
+			node = node->next;
+		min = node->data;
+		while (node)
+		{
+			if (!ft_isthere(node->data, checked_nbrs, i) && node->data < min)
+				min = node->data;
+			node = node->next;
+		}
+		checked_nbrs[i] = min;
+		i++;
+	}
+	ft_find_in_stack_and_replace(p, checked_nbrs);
+}
+
 t_param	*ft_extract_split(t_param *p, t_stack *node, char **split, int i)
 {
 	int	n;
-
+	
 	while (split[i])
 	{
 		n = ft_stoi(p, split, split[i], i);
@@ -103,6 +152,8 @@ t_param	*ft_init_stack(char **args, int size)
 	}
 	free(split);
 	split = NULL;
+	p->size = ft_stacksize(p->a_head);
+	ft_simplify_stack_nbr_values(p, p->size);
 	p->lastmove = 0;
 	p->b_head = NULL;
 	return (p);
@@ -140,35 +191,44 @@ void	ft_sort_default_alg(t_param *p, int pos, int tmp)
 		ft_pb(p, p->a_head, p->b_head, true);
 }
 
-void	ft_redirect(t_param *p)
+void	ft_apply_algorithm(t_param *p, int disordered_position)
 {
-	int	pos;
-	int	tmp;
-	int	*low;
+	const int	stacksize;
 
-	pos = 1;
-	tmp = 0;
-	low = ft_lowest_nodes(p);
-	while (pos || p->b_head)
-	{
-		pos = ft_disordered(p, p->a_head, 0, p->size);
-//		printf("pos: %d\n", pos);
-		if (!pos && !p->b_head)
-			break ;
-		if (ft_stacksize(p->a_head) == 3)
-			ft_sort_three(p);
-		pos = ft_disordered(p, p->a_head, 0, p->size);
-		if ((pos || p->b_head))
-		ft_sort_default_alg(p, pos, tmp);
-		pos = ft_disordered(p, p->a_head, 0, p->size);
-		if ((pos || p->b_head) && ft_stacksize(p->a_head) == 5)
-			ft_sort_five(p);
-		pos = ft_disordered(p, p->a_head, 0, p->size);
-		if ((pos || p->b_head) && ft_stacksize(p->a_head) != 5)
-			ft_sort_short_list(p, pos, tmp);
-		pos = ft_disordered(p, p->a_head, 0, p->size);
-		if ((pos || p->b_head) && p->size >= 6)
+	stacksize = ft_stacksize(p->a_head);
+//	int	*low;
+
+//	low = ft_lowest_nodes(p);
+//		printf("disordered_position: %d\n", disordered_position);
+		if (stacksize == 3)
+			ft_sort_three_elements(p);
+		else if (stacksize == 5)
+			ft_sort_five_elements(p);
+		else if (stacksize)
+		ft_sort_default_alg(p, disordered_position, tmp);
+		else if ((disordered_position || p->b_head) && ft_stacksize(p->a_head) != 5)
+			ft_sort_short_list(p, disordered_position, tmp);
+/*		if ((pos || p->b_head) && p->size >= 60)
 			ft_sort_long_list(p, low);
+			*/
+	}
+}
+
+void	ft_redirect_to_algorithm(t_param *p)
+{
+	int	disordered_position;
+
+	disordered_position = 1;
+	while (disordered_position || p->b_head)
+	{
+		disordered_position = ft_disordered(p, p->a_head, 0, p->size);
+//		printf("disordered_position: %d\n", disordered_position);
+		if (!disordered_position && !p->b_head)
+			break ;
+		ft_apply_algorithm(p, disordered_position);
+/*		if ((pos || p->b_head) && p->size >= 60)
+			ft_sort_long_list(p, low);
+			*/
 	}
 }
 
@@ -179,11 +239,10 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		ft_exit_failure();
 	p = ft_init_stack(argv, argc - 1);
-	p->size = ft_stacksize(p->a_head);
 	if (p->size < 2)
 		ft_exit_clearstack(p);
 //	ft_printnode(p);
-	ft_redirect(p);
+	ft_redirect_to_algorithm(p);
 //	ft_printnode(p);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/16 16:19:10 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/18 14:50:39 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,39 @@ void	ft_reverse(t_param *p)
 		ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 }
 
-void	ft_sort_three(t_param *p)
+void	ft_move_to_bottom_when_three_elements(t_stack *node, int element)
 {
-	if (ft_ishighest(p->a_head, p->a_head->data)
-		&& ft_islowest(p->a_head, p->a_head->next->data))
-		ft_ra(p, p->a_head, p->a_head->next, true);
-	else if (ft_islowest(p->a_head, p->a_head->data)
-		&& ft_ishighest(p->a_head, p->a_head->next->data))
-	{
-		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-		ft_sa(p, p->a_head, p->a_head->next, true);
-	}
-	else if (p->size == 3 \
-		&& ft_islowest(p->a_head, ft_lastnode(p->a_head)->data)
-		&& ft_ishighest(p->a_head, p->a_head->next->data))
-		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+	const int	top;
+	const int	middle;
+
+	top = node->data;
+	middle = node->next->data;
+
+	if (element == top)
+		ft_ra(p, node, ft_lastnode(p->a_head)o, true);
 }
 
-void	ft_sort_five(t_param *p)
+void	ft_sort_three_elements(t_param *p)
 {
-	if (p->lastmove != 1
+	t_stack	*node;
+	t_stack	*max;
+
+	node = p->a_head;
+	max = ft_find_node_with_highest_num(node); 
+	ft_move_to_bottom_when_three_elements(node, max->data);
+	swap_top_if_needed(node);
+}
+
+void	ft_sort_five_elements(t_param *p)
+{
+	t_stack	*fourth_node_num;
+
+	fourth_node_num = ft_nth_node(p, 4)->data;
+	if (fourth_node_num != 5)
+	{
+		
+	}
+	else (p->lastmove != 1
 		&& (p->a_head->data < p->a_head->next->data
 		&& ft_ishighest(p->a_head, p->a_head->next->data)
 		&& !ft_ishighest(p->a_head->next->next, p->a_head->next->next->data)))
