@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/19 05:06:40 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/19 15:16:42 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ bool	ft_isasc(t_stack *node, int start, int end);
 bool	ft_isdesc(t_stack *node, int start, int end);
 bool	ft_ishighest(t_stack *node, int stacksize);
 bool	ft_ishighest_inrange(t_param *p, int start, int end);
-bool	ft_islowest(t_param *p, t_stack *node);
+bool	ft_islowest_in_stack(t_param *p, t_stack *node_to_check);
 bool	ft_islowest_expt(t_stack *node, int n, int *t);
 t_stack	*ft_nth_node(t_param *p, int n);
 int		ft_stoi(t_param *p, char **split, char *str, int j);

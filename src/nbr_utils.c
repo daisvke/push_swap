@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/19 05:24:40 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/19 15:16:42 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,20 @@ bool	ft_isdesc(t_stack *node, int start, int end)
 	return (true);
 }
 
-bool	ft_islowest_in_stack(t_param *p, t_stack *node)
+bool	ft_islowest_in_stack(t_param *p, t_stack *node_to_check)
 {
 	t_stack	*node;
-	int		num_to_check;
+	int		value_to_check;
 
 	node = p->a_head;
-	num_to_check = node->data;
+	value_to_check = node_to_check->data;
 	while (node)
-	if (num_to_check == 1)
-		return (true);
-	return (false);
+	{
+		if (node->data < value_to_check)
+			return (false);
+		node = node->next;
+	}
+	return (true);
 }
 
 bool	ft_islowest_expt(t_stack *node, int n, int *t)
