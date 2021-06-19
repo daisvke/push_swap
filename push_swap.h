@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/18 14:26:43 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/19 01:40:30 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,15 @@ int		ft_stoi(t_param *p, char **split, char *str, int j);
 ** algorithms
 */
 int		ft_disordered(t_param *p, t_stack *node, int start, int end);
-t_stack	ft_find_node_with_highest_num(t_param *p);
+t_stack	*ft_find_node_with_highest_num(t_param *p);
 bool	ft_isasc_between(t_param *p);
 bool	ft_isdesc_between(t_param *p);
 bool	ft_islowest_xbef_lastnode(t_param *p, int x);
 int		*ft_lowest_nodes(t_param *p);
-void	ft_sort_five(t_param *p);
+void	ft_sort_five_elements(t_param *p, int *disordered_position);
 void	ft_sort_long_list(t_param *p, int *t);
-void	ft_sort_short_list(t_param *p, int pos, int tmp);
-void	ft_sort_three(t_param *p);
+void	ft_sort_short_list(t_param *p, int *disordered_position);
+void	ft_sort_three_elements(t_param *p, int *disordered_position);
 
 /*
 ** exit

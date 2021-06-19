@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/18 14:26:43 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/19 01:18:58 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,17 +142,22 @@ bool	ft_ishighest_inrange(t_param *p, int start, int end)
 	return (false);
 }
 
-t_stack	ft_find_node_with_highest_num(t_param *p)
+t_stack	*ft_find_node_with_highest_num(t_param *p)
 {
 	t_stack	*node;
+	t_stack	*node_with_highest_num;
 
 	node = p->a_head;
 	while (node)
 	{
 		if (ft_ishighest(node, node->data))
-			return (node);
+		{
+			node_with_highest_num = node;
+			break ;
+		}
 		node = node->next;
 	}
+	return (node_with_highest_num);
 }
 
 int	ft_stoi(t_param *p, char **split, char *str, int j)
