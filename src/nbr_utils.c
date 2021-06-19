@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/19 01:18:58 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/19 05:24:40 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,14 @@ bool	ft_isdesc(t_stack *node, int start, int end)
 	return (true);
 }
 
-bool	ft_islowest(t_stack *node, int n)
+bool	ft_islowest(t_stack *node)
 {
-	while (node)
-	{
-		if (node->data < n)
-			return (false);
-		node = node->next;
-	}
-	return (true);
+	int	num_to_check;
+
+	num_to_check = node->data;
+	if (num_to_check == 1)
+		return (true);
+	return (false);
 }
 
 bool	ft_islowest_expt(t_stack *node, int n, int *t)
@@ -111,15 +110,14 @@ bool	ft_islowest_expt(t_stack *node, int n, int *t)
 	return (true);
 }
 
-bool	ft_ishighest(t_stack *node, int n)
+bool	ft_ishighest(t_stack *node, int stacksize)
 {
-	while (node)
-	{
-		if (node->data > n)
-			return (false);
-		node = node->next;
-	}
-	return (true);
+	int	num_to_check;
+
+	num_to_check = node->data;
+	if (num_to_check == stacksize)
+		return (true);
+	return (false);
 }
 
 bool	ft_ishighest_inrange(t_param *p, int start, int end)
@@ -146,11 +144,13 @@ t_stack	*ft_find_node_with_highest_num(t_param *p)
 {
 	t_stack	*node;
 	t_stack	*node_with_highest_num;
+	int		highest_num;
 
 	node = p->a_head;
+	highest_num = ft_stacksize(node);
 	while (node)
 	{
-		if (ft_ishighest(node, node->data))
+		if (node->data == highest_num)
 		{
 			node_with_highest_num = node;
 			break ;
@@ -158,6 +158,24 @@ t_stack	*ft_find_node_with_highest_num(t_param *p)
 		node = node->next;
 	}
 	return (node_with_highest_num);
+}
+
+t_stack	*ft_find_node_with_lowest_num(t_param *p)
+{
+	t_stack	*node;
+	t_stack	*node_with_lowest_num;
+
+	node = p->a_head;
+	while (node)
+	{
+		if (node->data == 1)
+		{
+			node_with_lowest_num = node;
+			break ;
+		}
+		node = node->next;
+	}
+	return (node_with_lowest_num);
 }
 
 int	ft_stoi(t_param *p, char **split, char *str, int j)

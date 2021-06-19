@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/19 03:17:48 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/19 05:25:58 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void	ft_sort_default_alg(t_param *p, int *disordered_position)
 	{
 		if (p->a_head->data > p->a_head->next->data \
 			&& (p->size != 5 || !(ft_ishighest(p->a_head, p->a_head->data)
-			&& ft_islowest(p->a_head, ft_lastnode(p->a_head)->data))))
+			&& ft_islowest(ft_lastnode(p->a_head)))))
 		{
 			if (p->lastmove != 1
 				&& (p->a_head->data < ft_lastnode(p->a_head)->data \
@@ -181,7 +181,7 @@ void	ft_sort_default_alg(t_param *p, int *disordered_position)
 			&& ft_lastnode(p->a_head)->data < p->a_head->data))))
 			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
 		else if (*disordered_position > p->size / 2 \
-			|| (ft_islowest(p->a_head, p->a_head->data)
+			|| (ft_islowest(p->a_head)
 			&& ft_ishighest(p->a_head, ft_lastnode(p->a_head)->data)))
 		{
 			tmp = *disordered_position - 1;
@@ -205,6 +205,8 @@ void	ft_apply_algorithm(t_param *p, int *disordered_position)
 //		printf("disordered_position: %d\n", disordered_position);
 	if (ft_stacksize(p->a_head) == 3)
 		ft_sort_three_elements(p, disordered_position);
+	if (ft_stacksize(p->a_head) == 4)
+		ft_sort_four_elements(p, disordered_position);
 	if (ft_stacksize(p->a_head) == 5)
 		ft_sort_five_elements(p, disordered_position);
 	ft_sort_default_alg(p, disordered_position);

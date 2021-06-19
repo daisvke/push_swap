@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/19 01:40:30 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/19 05:06:40 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <stdbool.h>
 
 # include "libft/libft.h"
+
+# define FIRST_POSITION 1
+# define RA 			1
+# define RRA			2
 
 typedef struct s_stack
 {
@@ -68,11 +72,13 @@ t_stack	*ft_xnode(t_stack *node, int x);
 /*
 ** nbr_utils
 */
+t_stack	*ft_find_node_with_highest_num(t_param *p);
+t_stack	*ft_find_node_with_lowest_num(t_param *p);
 bool	ft_isasc(t_stack *node, int start, int end);
 bool	ft_isdesc(t_stack *node, int start, int end);
-bool	ft_ishighest(t_stack *node, int n);
+bool	ft_ishighest(t_stack *node, int stacksize);
 bool	ft_ishighest_inrange(t_param *p, int start, int end);
-bool	ft_islowest(t_stack *node, int n);
+bool	ft_islowest(t_stack *node);
 bool	ft_islowest_expt(t_stack *node, int n, int *t);
 t_stack	*ft_nth_node(t_param *p, int n);
 int		ft_stoi(t_param *p, char **split, char *str, int j);
@@ -87,6 +93,7 @@ bool	ft_isdesc_between(t_param *p);
 bool	ft_islowest_xbef_lastnode(t_param *p, int x);
 int		*ft_lowest_nodes(t_param *p);
 void	ft_sort_five_elements(t_param *p, int *disordered_position);
+void	ft_sort_four_elements(t_param *p, int *disordered_position);
 void	ft_sort_long_list(t_param *p, int *t);
 void	ft_sort_short_list(t_param *p, int *disordered_position);
 void	ft_sort_three_elements(t_param *p, int *disordered_position);
