@@ -72,18 +72,13 @@ bool	ft_isdesc(t_stack *node, int start, int end)
 	return (true);
 }
 
-bool	ft_islowest_in_stack(t_param *p, t_stack *node_to_check)
+bool	ft_islowest_in_stack(t_stack *head, int value_to_check)
 {
-	t_stack	*node;
-	int		value_to_check;
-
-	node = p->a_head;
-	value_to_check = node_to_check->data;
-	while (node)
+	while (head)
 	{
-		if (node->data < value_to_check)
+		if (head->data < value_to_check)
 			return (false);
-		node = node->next;
+		head = head->next;
 	}
 	return (true);
 }
@@ -116,14 +111,15 @@ bool	ft_islowest_expt(t_stack *node, int n, int *t)
 	return (true);
 }
 
-bool	ft_ishighest(t_stack *node, int stacksize)
+bool	ft_ishighest_in_stack(t_stack *head, int value_to_check)
 {
-	int	num_to_check;
-
-	num_to_check = node->data;
-	if (num_to_check == stacksize)
-		return (true);
-	return (false);
+	while (head)
+	{
+		if (head->data > value_to_check)
+			return (false);
+		head = head->next;
+	}
+	return (true);
 }
 
 bool	ft_ishighest_inrange(t_param *p, int start, int end)
@@ -139,7 +135,7 @@ bool	ft_ishighest_inrange(t_param *p, int start, int end)
 		node = node->next;
 	while (node && size--)
 	{
-		if (ft_ishighest(p->a_head, node->data))
+		if (ft_ishighest_in_stack(p->a_head, node->data))
 			return (true);
 		node = node->next;
 	}
@@ -153,7 +149,7 @@ t_stack	*ft_find_node_with_highest_num(t_param *p)
 	int		highest_num;
 
 	node = p->a_head;
-	highest_num = ft_stacksize(node);
+	highest_num = p->size;
 	while (node)
 	{
 		if (node->data == highest_num)

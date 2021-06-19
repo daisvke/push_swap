@@ -149,7 +149,7 @@ t_param	*ft_init_stack(char **args, int size)
 		split = ft_split_errchk(args[i], ' ');
 		p = ft_extract_split(p, node, split, 0);
 		i++;
-	}
+}
 	free(split);
 	split = NULL;
 	p->size = ft_stacksize(p->a_head);
@@ -166,8 +166,8 @@ void	ft_sort_default_alg(t_param *p, int *disordered_position)
 	if (*disordered_position || p->b_head)
 	{
 		if (p->a_head->data > p->a_head->next->data \
-			&& (p->size != 5 || !(ft_ishighest(p->a_head, p->a_head->data)
-			&& ft_islowest(ft_lastnode(p->a_head)))))
+			&& (p->size != 5 || !(ft_ishighest_in_stack(p->a_head, p->a_head->data)
+			&& ft_islowest_in_stack(p->a_head, ft_lastnode(p->a_head)->data))))
 		{
 			if (p->lastmove != 1
 				&& (p->a_head->data < ft_lastnode(p->a_head)->data \
@@ -181,8 +181,8 @@ void	ft_sort_default_alg(t_param *p, int *disordered_position)
 			&& ft_lastnode(p->a_head)->data < p->a_head->data))))
 			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
 		else if (*disordered_position > p->size / 2 \
-			|| (ft_islowest(p->a_head)
-			&& ft_ishighest(p->a_head, ft_lastnode(p->a_head)->data)))
+			|| (ft_islowest_in_stack(p->a_head, p->a_head->data)
+			&& ft_ishighest_in_stack(p->a_head, ft_lastnode(p->a_head)->data)))
 		{
 			tmp = *disordered_position - 1;
 			if (tmp < 0)

@@ -24,7 +24,7 @@ bool	ft_isdesc_between(t_param *p)
 
 bool	ft_islowest_xbef_lastnode(t_param *p, int i)
 {
-	return (ft_islowest(ft_nth_node(p, ft_stacksize(p->a_head) - 1)));
+	return (ft_islowest_in_stack(p->a_head, ft_nth_node(p, ft_stacksize(p->a_head) - 1)->data));
 }
 
 void	ft_reverse(t_param *p)
@@ -59,7 +59,7 @@ void	ft_swap_top_if_needed(t_param *p)
 	top = head->data;
 	middle = body->data;
 	bottom = body->next->data;
-	if (top > middle && !ft_islowest(head) && !ft_ishighest(body, 3))
+	if (top > middle && !ft_islowest_in_stack(head, topi) && !ft_ishighest_in_stack(head, middle))
 		ft_sa(p, head, body, true);
 }
 
@@ -191,8 +191,8 @@ void	ft_sort_five_elements(t_param *p, int *disordered_position)
 		else*/
 		if	(p->lastmove != 1
 			&& (p->a_head->data < p->a_head->next->data
-			&& ft_ishighest(p->a_head, p->a_head->next->data)
-			&& !ft_ishighest(p->a_head->next->next, p->a_head->next->next->data)))
+			&& ft_ishighest_in_stack(p->a_head, p->a_head->next->data)
+			&& !ft_ishighest_in_stack(p->a_head->next->next, p->a_head->next->next->data)))
 			ft_sa(p, p->a_head, p->a_head->next, true);
 		*disordered_position = ft_disordered(p, p->a_head, 0, p->size);
 	}
@@ -212,9 +212,9 @@ void	ft_sort_short_list(t_param *p, int *disordered_position)
 				ft_sa(p, p->a_head, p->a_head->next, true);
 			else if (p->lastmove != 9
 				&& (!ft_isasc(p->a_head, 1, ft_stacksize(p->a_head)) \
-				|| (ft_ishighest(p->a_head, p->a_head->data) \
+				|| (ft_ishighest_in_stack(p->a_head, p->a_head->data) \
 				&& ft_isasc(p->a_head, 1, ft_stacksize(p->a_head) - 1)) \
-				|| (ft_ishighest(p->a_head, p->a_head->data)
+				|| (ft_ishighest_in_stack(p->a_head, p->a_head->data)
 				&& ft_isdesc_between(p))))
 				ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
 		}
@@ -223,13 +223,13 @@ void	ft_sort_short_list(t_param *p, int *disordered_position)
 			ft_stacksize(p->a_head) - 1) \
 			&& ft_lastnode(p->a_head)->data < p->a_head->data)) \
 			|| (ft_islowest_xbef_lastnode(p, 0)) \
-			|| (!ft_isasc_between(p) && ft_ishighest(p->a_head, p->a_head->data) \
+			|| (!ft_isasc_between(p) && ft_ishighest_in_stack(p->a_head, p->a_head->data) \
 			&& ft_islowest_xbef_lastnode(p, 1))))
 			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
 		else if (((p->b_head && p->b_head->next) || !p->b_head) \
 			&& (*disordered_position > p->size / 2 \
-			|| (ft_islowest(p->a_head) \
-			&& ft_ishighest(p->a_head, ft_lastnode(p->a_head)->data) \
+			|| (ft_islowest_in_stack(p->a_head, p->a_head->data) \
+			&& ft_ishighest_in_stack(p->a_head, ft_lastnode(p->a_head)->data) \
 			&& ft_stacksize(p->a_head) > 3)))
 		{
 			tmp = *disordered_position - 1;
