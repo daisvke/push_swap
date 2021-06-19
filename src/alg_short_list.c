@@ -49,27 +49,32 @@ void	ft_move_to_bottom_when_three_elements(t_param *p, int element)
 void	ft_swap_top_if_needed(t_param *p)
 {
 	t_stack	*head;
+	t_stack	*body;
 	int		top;
 	int		middle;
+	int		bottom;
 
 	head = p->a_head;
+	body = head->next;
 	top = head->data;
-	middle = head->next->data;
-
-	if (top > middle && top != 1 && middle != 3)
-		ft_sa(p, head, head->next, true);
+	middle = body->data;
+	bottom = body->next->data;
+	if (top > middle && !ft_islowest(head) && !ft_ishighest(body, 3))
+		ft_sa(p, head, body, true);
 }
 
 void	ft_reverse_rotate_when_three_elements(t_param *p)
 {
 	t_stack	*head;
 	int		top;
+	int		middle;
 	int		bottom;
 
 	head = p->a_head;
 	top = head->data;
+	middle = head->next->data;
 	bottom = head->next->next->data;
-	if ((top == 1 && bottom == 2) || (top == 2 && bottom == 1))
+	if (top < middle && (middle > bottom))
 		ft_rra(p, head, ft_lastnode(head), true);
 }
 
@@ -89,7 +94,7 @@ void	ft_sort_three_elements(t_param *p, int *disordered_position)
 	}
 }
 
-int	ft_find_min_position(t_param *p, t_stack *min)
+int	ft_find_min_position(t_param *p)
 {
 	t_stack	*node;
 	int		i;
@@ -98,9 +103,10 @@ int	ft_find_min_position(t_param *p, t_stack *min)
 	i = FIRST_POSITION;
 	while (node)
 	{
-		if (node->data == min->data)
+		if (node->data == 1)
 			break ;
 		i++;
+		node = node->next;
 	}
 	return (i);
 }
@@ -115,7 +121,7 @@ int	ft_evaluate_fastest_op(t_param *p, int min_position)
 	head = p->a_head;
 	stacksize = ft_stacksize(head);
 	middle = stacksize / 2;
-	if (stacksize % 2 == 0)
+	if (stacksize % 2 != 0)
 		middle++;
 	if (min_position <= middle)
 		fastest_op = RA;
@@ -145,7 +151,7 @@ void	ft_rra_until_reach_min(t_param *p, int min_position)
 
 	last_position = ft_stacksize(p->a_head);
 	i = last_position;
-	while (i != min_position)
+		while (i != min_position - 1)
 	{
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
 		i--;
@@ -154,13 +160,11 @@ void	ft_rra_until_reach_min(t_param *p, int min_position)
 
 void	ft_sort_four_elements(t_param *p, int *disordered_position)
 {
-	t_stack	*min;
 	int		min_position;
 
 	if (*disordered_position)
 	{
-		min = ft_find_node_with_lowest_num(p);
-		min_position = ft_find_min_position(p, min);
+		min_position = ft_find_min_position(p);
 		if (ft_evaluate_fastest_op(p, min_position) == RA)
 			ft_ra_until_reach_min(p, min_position);
 		else if (ft_evaluate_fastest_op(p, min_position) == RRA)

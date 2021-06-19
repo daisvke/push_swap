@@ -72,11 +72,14 @@ bool	ft_isdesc(t_stack *node, int start, int end)
 	return (true);
 }
 
-bool	ft_islowest(t_stack *node)
+bool	ft_islowest_in_stack(t_param *p, t_stack *node)
 {
-	int	num_to_check;
+	t_stack	*node;
+	int		num_to_check;
 
+	node = p->a_head;
 	num_to_check = node->data;
+	while (node)
 	if (num_to_check == 1)
 		return (true);
 	return (false);
@@ -165,6 +168,7 @@ t_stack	*ft_find_node_with_lowest_num(t_param *p)
 	t_stack	*node;
 	t_stack	*node_with_lowest_num;
 
+	node_with_lowest_num = NULL;
 	node = p->a_head;
 	while (node)
 	{
