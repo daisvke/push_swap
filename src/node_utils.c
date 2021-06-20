@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/18 04:00:11 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/20 03:58:58 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_add_back(t_stack *head, t_stack *new)
 
 int	ft_stacksize(t_stack *node)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (node)

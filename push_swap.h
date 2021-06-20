@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/19 15:16:42 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/20 05:00:47 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@
 # include "libft/libft.h"
 
 # define FIRST_POSITION 1
-# define RA 			1
-# define RRA			2
+# define A				1
+# define B				2
+# define SA				1
+# define SB				2
+# define RA 			6
+# define RRA			9
 
 typedef struct s_stack
 {
@@ -40,9 +44,15 @@ typedef struct s_param
 {
 	int		size;
 	int		lastmove;
+	int		disordered_position;
 	t_stack	*a_head;
 	t_stack	*b_head;
 }			t_param;
+
+/*
+** for testing purpose
+*/
+void	ft_printnode(t_param *p);
 
 /*
 ** movesets
@@ -92,11 +102,10 @@ bool	ft_isasc_between(t_param *p);
 bool	ft_isdesc_between(t_param *p);
 bool	ft_islowest_xbef_lastnode(t_param *p, int x);
 int		*ft_lowest_nodes(t_param *p);
-void	ft_sort_five_elements(t_param *p, int *disordered_position);
-void	ft_sort_four_elements(t_param *p, int *disordered_position);
 void	ft_sort_long_list(t_param *p, int *t);
-void	ft_sort_short_list(t_param *p, int *disordered_position);
-void	ft_sort_three_elements(t_param *p, int *disordered_position);
+void	ft_sort_short_list(t_param *p);
+void	ft_sort_three_elements(t_param *p, int which_stack);
+void	ft_sort_two_elements(t_param *p, int which_stack);
 
 /*
 ** exit

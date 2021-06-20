@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/19 15:16:42 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/20 13:33:43 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ bool	ft_isasc(t_stack *node, int start, int end)
 		return (true);
 	st_tmp = start;
 	size = end - start - 1;
-	while (node->next && start--)
+	while (node && start--)
 		node = node->next;
-	while (node->next && size--)
+	while (node && size--)
 	{
 		if (node->data > node->next->data)
 			return (false);

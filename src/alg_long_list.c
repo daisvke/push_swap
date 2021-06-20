@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 21:52:57 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/18 02:25:55 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/20 12:45:22 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,3 +67,35 @@ void	ft_sort_long_list(t_param *p, int *t)
 	}
 }
 */
+/*
+void	ft_find_lowest_nodes_in_long_list_and_push_to_b(t_param *p)
+{
+	int	min_position;
+	int	num_of_lowest_nodes_to_push;
+	int	nth_lowest;
+//until 3
+	num_of_lowest_nodes_to_push = ft_stacksize(p->a_head) - 3;
+	nth_lowest = 1;
+	while (num_of_lowest_nodes_to_push--)
+	{
+		min_position = ft_find_nth_lowest_node_position(p, nth_lowest);
+		if (ft_evaluate_fastest_op(p, min_position) == RA)
+			ft_ra_until_reach_min(p, min_position);
+		else if (ft_evaluate_fastest_op(p, min_position) == RRA)
+			ft_rra_until_reach_min(p, min_position);
+		ft_pb(p, p->a_head, p->b_head, true);
+		nth_lowest++;
+	}
+}
+
+void	ft_sort_long_list(t_param *p)
+{
+	if (p->disordered_position)
+	{
+		ft_find_lowest_nodes_in_long_list_and_push_to_b(p);
+		ft_sort_three_elements(p, A);
+		ft_sort_stack_b_with_short_list(p);
+		ft_push_back_from_b_to_a(p);
+		p->disordered_position = ft_disordered(p, p->a_head, 0, p->size);
+	}
+}*/
