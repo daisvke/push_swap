@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/20 12:36:29 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/21 00:19:16 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,25 +172,37 @@ void	ft_ra_until_reach_min(t_param *p, int min_position)
 	}
 }
 
-void	ft_rra_until_reach_min(t_param *p, int min_position)
+bool	ft_rra_until_reach_min(t_param *p, int min_position, int *nth_lowest, \
+	int *num_of_lowest_nodes_to_push)
 {
-	int		i;
+	bool	pushed_next_lowest;
 	int		last_position;
+	int		next_lowest;
 
+	pushed_next_lowest = false;
 	last_position = ft_stacksize(p->a_head);
-	i = last_position;
-	while (i != min_position - 1)
+	next_lowest = *nth_lowest + 1;
+	while (last_position != min_position - 1)
 	{
+		if (p->a_head->data == next_lowest && *num_of_lowest_nodes_to_push)
+		{/*
+			pushed_next_lowest = true;
+			ft_pb(p, p->a_head, p->b_head, true);
+			*num_of_lowest_nodes_to_push -= 1;
+			*nth_lowest += 1;*/
+		}
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-		i--;
+		last_position--;
 	}
+	return (pushed_next_lowest);
 }
 
 void	ft_find_lowest_nodes_in_short_list_and_push_to_b(t_param *p)
 {
-	int	min_position;
-	int	num_of_lowest_nodes_to_push;
-	int	nth_lowest;
+	bool	pushed_next_lowest;
+	int		min_position;
+	int		num_of_lowest_nodes_to_push;
+	int		nth_lowest;
 
 	num_of_lowest_nodes_to_push = ft_stacksize(p->a_head) - 3;
 	nth_lowest = 1;
@@ -200,8 +212,11 @@ void	ft_find_lowest_nodes_in_short_list_and_push_to_b(t_param *p)
 		if (ft_evaluate_fastest_op(p, min_position) == RA)
 			ft_ra_until_reach_min(p, min_position);
 		else if (ft_evaluate_fastest_op(p, min_position) == RRA)
-			ft_rra_until_reach_min(p, min_position);
+			pushed_next_lowest = ft_rra_until_reach_min(p, min_position, \
+				&nth_lowest, &num_of_lowest_nodes_to_push);
 		ft_pb(p, p->a_head, p->b_head, true);
+		if (pushed_next_lowest)
+			ft_sb(p, p->b_head, p->b_head->next, true);
 		nth_lowest++;
 	}
 }
