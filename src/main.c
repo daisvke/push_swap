@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/20 13:37:43 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/21 12:35:16 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,19 @@ bool	ft_twice(t_stack *node, int n)
 	return (false);
 }
 
-void	ft_find_in_stack_and_replace(t_param *p, int *nbrs_to_replace_with)
+void	ft_find_in_stack_and_replace(t_param *p, int *nbrs_to_replace_with, \
+	int array_size)
 {
 	t_stack	*node;
 	int		i;
+	int		j;
 
 	node = p->a_head;
 	while (node)
 	{
 		i = 0;
-		while (nbrs_to_replace_with[i])
+		j = array_size;
+		while (j--)
 		{
 			if (nbrs_to_replace_with[i] == node->data)
 			{
@@ -103,14 +106,15 @@ void	ft_simplify_stack_nbr_values(t_param *p, int size)
 		min = node->data;
 		while (node)
 		{
-			if (!ft_isthere(node->data, checked_nbrs, i) && node->data < min)
+			if (node->data < min && !ft_isthere(node->data, checked_nbrs, i))
 				min = node->data;
 			node = node->next;
 		}
 		checked_nbrs[i] = min;
 		i++;
 	}
-	ft_find_in_stack_and_replace(p, checked_nbrs);
+	ft_find_in_stack_and_replace(p, checked_nbrs, size);
+	free(checked_nbrs);
 }
 
 t_param	*ft_extract_split(t_param *p, t_stack *node, char **split, int i)
@@ -149,55 +153,14 @@ t_param	*ft_init_stack(char **args, int size)
 		split = ft_split_errchk(args[i], ' ');
 		p = ft_extract_split(p, node, split, 0);
 		i++;
-}
-	free(split);
-	split = NULL;
+	}
+	ft_tabfree(split);
 	p->size = ft_stacksize(p->a_head);
 	ft_simplify_stack_nbr_values(p, p->size);
 	p->lastmove = 0;
 	p->b_head = NULL;
 	return (p);
 }
-/*
-void	ft_sort_default_alg(t_param *p)
-{
-	int	tmp;
-
-	if (p->disordered_position || p->b_head)
-	{
-		if (p->a_head->data > p->a_head->next->data \
-			&& (p->size != 5 || !(ft_ishighest_in_stack(p->a_head, p->a_head->data)
-			&& ft_islowest_in_stack(p->a_head, ft_lastnode(p->a_head)->data))))
-		{
-			if (p->lastmove != 1
-				&& (p->a_head->data < ft_lastnode(p->a_head)->data \
-				|| (ft_isasc(p->a_head, 1, ft_stacksize(p->a_head) - 1))))
-				ft_sa(p, p->a_head, p->a_head->next, true);
-			else if (p->lastmove != 9)
-				ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
-		}
-		else if (p->lastmove != 6
-			&& (((!ft_isasc(p->a_head, 0, ft_stacksize(p->a_head) - 1) \
-			&& ft_lastnode(p->a_head)->data < p->a_head->data))))
-			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-		else if (p->disordered_position > p->size / 2 \
-			|| (ft_islowest_in_stack(p->a_head, p->a_head->data)
-			&& ft_ishighest_in_stack(p->a_head, ft_lastnode(p->a_head)->data)))
-		{
-			tmp = p->disordered_position - 1;
-			if (tmp < 0)
-				tmp = 0;
-			while (tmp--)
-				ft_pb(p, p->a_head, p->b_head, true);
-		}
-		else if (p->b_head && p->lastmove != 5)
-			ft_pa(p, p->a_head, p->b_head, true);
-		else if (p->lastmove != 4)
-			ft_pb(p, p->a_head, p->b_head, true);
-		p->disordered_position = ft_disordered(p, p->a_head, 0, p->size);
-	}
-}
-*/
 
 void	ft_sa_if_everything_else_is_ordered(t_param *p)
 {
@@ -270,12 +233,8 @@ void	ft_default_sort_algorithm(t_param *p)
 	}
 }
 
-
 void	ft_apply_algorithm(t_param *p)
 {
-//	int	*low;
-//	low = ft_lowest_nodes(p);
-//		printf("disordered_position: %d\n", disordered_position);
 	ft_default_sort_algorithm(p);
 	if (ft_stacksize(p->a_head) == 2)
 		ft_sort_two_elements(p, A);
@@ -283,9 +242,8 @@ void	ft_apply_algorithm(t_param *p)
 		ft_sort_three_elements(p, A);
 	if (ft_stacksize(p->a_head) > 3 && ft_stacksize(p->a_head) < 7)
 		ft_sort_short_list(p);
-/*		if ((pos || p->b_head) && p->size >= 60)
-			ft_sort_long_list(p, low);
-			*/
+	if (ft_stacksize(p->a_head) > 6)
+		ft_sort_long_list(p);
 }
 
 void	ft_redirect_to_algorithm(t_param *p)
@@ -294,13 +252,9 @@ void	ft_redirect_to_algorithm(t_param *p)
 	while (p->disordered_position || p->b_head)
 	{
 		p->disordered_position = ft_disordered(p, p->a_head, 0, p->size);
-//		printf("disordered_position: %d\n", disordered_position);
 		if (!(p->disordered_position) && !p->b_head)
 			break ;
 		ft_apply_algorithm(p);
-/*		if ((pos || p->b_head) && p->size >= 60)
-			ft_sort_long_list(p, low);
-			*/
 	}
 }
 

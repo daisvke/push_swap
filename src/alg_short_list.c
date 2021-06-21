@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/21 00:19:16 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/21 00:26:31 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,37 +172,26 @@ void	ft_ra_until_reach_min(t_param *p, int min_position)
 	}
 }
 
-bool	ft_rra_until_reach_min(t_param *p, int min_position, int *nth_lowest, \
-	int *num_of_lowest_nodes_to_push)
+void	ft_rra_until_reach_min(t_param *p, int min_position)
 {
-	bool	pushed_next_lowest;
+	t_stack	*node;
+	int		i;
 	int		last_position;
-	int		next_lowest;
 
-	pushed_next_lowest = false;
 	last_position = ft_stacksize(p->a_head);
-	next_lowest = *nth_lowest + 1;
-	while (last_position != min_position - 1)
+	i = last_position;
+	while (i != min_position - 1)
 	{
-		if (p->a_head->data == next_lowest && *num_of_lowest_nodes_to_push)
-		{/*
-			pushed_next_lowest = true;
-			ft_pb(p, p->a_head, p->b_head, true);
-			*num_of_lowest_nodes_to_push -= 1;
-			*nth_lowest += 1;*/
-		}
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-		last_position--;
+		i--;
 	}
-	return (pushed_next_lowest);
 }
 
-void	ft_find_lowest_nodes_in_short_list_and_push_to_b(t_param *p)
+void	ft_find_lowest_nodes_and_push_to_b(t_param *p)
 {
-	bool	pushed_next_lowest;
-	int		min_position;
-	int		num_of_lowest_nodes_to_push;
-	int		nth_lowest;
+	int	min_position;
+	int	num_of_lowest_nodes_to_push;
+	int	nth_lowest;
 
 	num_of_lowest_nodes_to_push = ft_stacksize(p->a_head) - 3;
 	nth_lowest = 1;
@@ -212,11 +201,8 @@ void	ft_find_lowest_nodes_in_short_list_and_push_to_b(t_param *p)
 		if (ft_evaluate_fastest_op(p, min_position) == RA)
 			ft_ra_until_reach_min(p, min_position);
 		else if (ft_evaluate_fastest_op(p, min_position) == RRA)
-			pushed_next_lowest = ft_rra_until_reach_min(p, min_position, \
-				&nth_lowest, &num_of_lowest_nodes_to_push);
+			ft_rra_until_reach_min(p, min_position);
 		ft_pb(p, p->a_head, p->b_head, true);
-		if (pushed_next_lowest)
-			ft_sb(p, p->b_head, p->b_head->next, true);
 		nth_lowest++;
 	}
 }
@@ -238,9 +224,9 @@ void	ft_sort_two_elements(t_param *p, int which_stack)
 		if (top < bottom)
 		{
 			if (which_stack == A)
-				ft_sa(p, head, head->next, true);
+				ft_sa(p, head, p->a_head->next, true);
 			else if (which_stack == B)
-				ft_sb(p, head, head->next, true);
+				ft_sb(p, head, p->a_head->next, true);
 		}
 		p->disordered_position = ft_disordered(p, head, 0, p->size);
 	}
@@ -267,81 +253,10 @@ void	ft_sort_short_list(t_param *p)
 {
 	if (p->disordered_position)
 	{
-		ft_find_lowest_nodes_in_short_list_and_push_to_b(p);
+		ft_find_lowest_nodes_and_push_to_b(p);
 		ft_sort_three_elements(p, A);
 		ft_sort_stack_b_with_short_list(p);
 		ft_push_back_from_b_to_a(p);
 		p->disordered_position = ft_disordered(p, p->a_head, 0, p->size);
 	}
 }
-
-void	ft_sort_five_elements(t_param *p)
-{
-	if (p->disordered_position)
-	{
-		
-
-	/*	int	fourth_node_num;
-
-		fourth_node_num = ft_nth_node(p, 4)->data;
-		if (fourth_node_num == 5)
-		{
-			ft_pb(p, p->a_head, p->b_head, true);
-				
-		}
-		else
-		if	(p->lastmove != 1
-			&& (p->a_head->data < p->a_head->next->data
-			&& ft_ishighest_in_stack(p->a_head, p->a_head->next->data)
-			&& !ft_ishighest_in_stack(p->a_head->next->next, p->a_head->next->next->data)))
-			ft_sa(p, p->a_head, p->a_head->next, true);*/
-		p->disordered_position = ft_disordered(p, p->a_head, 0, p->size);
-	}
-}
-/*
-void	ft_sort_short_list(t_param *p, int *disordered_position)
-{
-	int	tmp;
-	
-	if (*disordered_position || p->b_head)
-	{
-		if (p->a_head->data > p->a_head->next->data)
-		{
-			if (p->lastmove != 1
-				&& (p->a_head->data < ft_lastnode(p->a_head)->data \
-				|| !(p->a_head->next->next)))
-				ft_sa(p, p->a_head, p->a_head->next, true);
-			else if (p->lastmove != 9
-				&& (!ft_isasc(p->a_head, 1, ft_stacksize(p->a_head)) \
-				|| (ft_ishighest_in_stack(p->a_head, p->a_head->data) \
-				&& ft_isasc(p->a_head, 1, ft_stacksize(p->a_head) - 1)) \
-				|| (ft_ishighest_in_stack(p->a_head, p->a_head->data)
-				&& ft_isdesc_between(p))))
-				ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
-		}
-		else if (p->lastmove != 6
-			&& (((!ft_isasc(p->a_head, 0, \
-			ft_stacksize(p->a_head) - 1) \
-			&& ft_lastnode(p->a_head)->data < p->a_head->data)) \
-			|| (ft_islowest_xbef_lastnode(p, 0)) \
-			|| (!ft_isasc_between(p) && ft_ishighest_in_stack(p->a_head, p->a_head->data) \
-			&& ft_islowest_xbef_lastnode(p, 1))))
-			ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-		else if (((p->b_head && p->b_head->next) || !p->b_head) \
-			&& (*disordered_position > p->size / 2 \
-			|| (ft_islowest_in_stack(p->a_head, p->a_head->data) \
-			&& ft_ishighest_in_stack(p->a_head, ft_lastnode(p->a_head)->data) \
-			&& ft_stacksize(p->a_head) > 3)))
-		{
-			tmp = *disordered_position - 1;
-			if (tmp < 0)
-				tmp = 0;
-			while (tmp--)
-				ft_pb(p, p->a_head, p->b_head, true);
-		}
-		else if (p->b_head && p->lastmove != 5)
-			ft_pa(p, p->a_head, p->b_head, true);
-		*disordered_position = ft_disordered(p, p->a_head, 0, p->size);
-	}
-}*/
-

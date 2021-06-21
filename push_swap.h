@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/20 05:00:47 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/21 00:35:13 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,19 @@ int		ft_stoi(t_param *p, char **split, char *str, int j);
 ** algorithms
 */
 int		ft_disordered(t_param *p, t_stack *node, int start, int end);
+int		ft_evaluate_fastest_op(t_param *p, int min_position);
 t_stack	*ft_find_node_with_highest_num(t_param *p);
+int		ft_find_nth_lowest_node_position(t_param *p, int nth_lowest);
 bool	ft_isasc_between(t_param *p);
 bool	ft_isdesc_between(t_param *p);
 bool	ft_islowest_xbef_lastnode(t_param *p, int x);
 int		*ft_lowest_nodes(t_param *p);
-void	ft_sort_long_list(t_param *p, int *t);
+void	ft_push_back_from_b_to_a(t_param *p);
+void	ft_ra_until_reach_min(t_param *p, int min_position);
+void	ft_rra_until_reach_min(t_param *p, int min_position);
+void	ft_sort_long_list(t_param *p);
 void	ft_sort_short_list(t_param *p);
+void	ft_sort_stack_b_with_short_list(t_param *p);
 void	ft_sort_three_elements(t_param *p, int which_stack);
 void	ft_sort_two_elements(t_param *p, int which_stack);
 
