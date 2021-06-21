@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/21 00:26:31 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:35:09 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ int	ft_evaluate_fastest_op(t_param *p, int min_position)
 
 void	ft_ra_until_reach_min(t_param *p, int min_position)
 {
-	t_stack	*node;
 	int		i;
 
 	i = FIRST_POSITION;
@@ -174,16 +173,14 @@ void	ft_ra_until_reach_min(t_param *p, int min_position)
 
 void	ft_rra_until_reach_min(t_param *p, int min_position)
 {
-	t_stack	*node;
 	int		i;
 	int		last_position;
 
 	last_position = ft_stacksize(p->a_head);
-	i = last_position;
-	while (i != min_position - 1)
+	while (last_position != min_position - 1)
 	{
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
-		i--;
+		last_position--;
 	}
 }
 

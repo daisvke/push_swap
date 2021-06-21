@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/21 12:35:16 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/21 14:18:31 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,10 @@ t_param	*ft_init_stack(char **args, int size)
 	t_stack	*node;
 	char	**split;
 	int		i;
+	int		size_cpy;
 
 	node = NULL;
+	size_cpy = size;
 	split = ft_split_errchk(args[1], ' ');
 	p = ft_init(ft_atoi(split[0]));
 	node = p->a_head;
@@ -154,7 +156,7 @@ t_param	*ft_init_stack(char **args, int size)
 		p = ft_extract_split(p, node, split, 0);
 		i++;
 	}
-	ft_tabfree(split);
+//	ft_tabfree(split, size_cpy);
 	p->size = ft_stacksize(p->a_head);
 	ft_simplify_stack_nbr_values(p, p->size);
 	p->lastmove = 0;
@@ -240,9 +242,9 @@ void	ft_apply_algorithm(t_param *p)
 		ft_sort_two_elements(p, A);
 	if (ft_stacksize(p->a_head) == 3)
 		ft_sort_three_elements(p, A);
-	if (ft_stacksize(p->a_head) > 3 && ft_stacksize(p->a_head) < 7)
+	if (ft_stacksize(p->a_head) > 3 && ft_stacksize(p->a_head) < 6)//7
 		ft_sort_short_list(p);
-	if (ft_stacksize(p->a_head) > 6)
+	if (ft_stacksize(p->a_head) > 5)//6
 		ft_sort_long_list(p);
 }
 
