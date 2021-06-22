@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/21 14:18:31 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/22 22:43:22 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,14 +238,12 @@ void	ft_default_sort_algorithm(t_param *p)
 void	ft_apply_algorithm(t_param *p)
 {
 	ft_default_sort_algorithm(p);
-	if (ft_stacksize(p->a_head) == 2)
+/*	if (ft_stacksize(p->a_head) == 2)
 		ft_sort_two_elements(p, A);
 	if (ft_stacksize(p->a_head) == 3)
-		ft_sort_three_elements(p, A);
-	if (ft_stacksize(p->a_head) > 3 && ft_stacksize(p->a_head) < 6)//7
-		ft_sort_short_list(p);
-	if (ft_stacksize(p->a_head) > 5)//6
-		ft_sort_long_list(p);
+		ft_sort_three_elements(p, A);*/
+	ft_execute_median_sort(p);
+//	ft_sort_long_list(p);
 }
 
 void	ft_redirect_to_algorithm(t_param *p)
