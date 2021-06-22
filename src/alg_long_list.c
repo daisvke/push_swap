@@ -56,7 +56,7 @@ bool    ft_ra_until_reach_min_for_long_list(t_param *p, int min_position, \
 	int		next_lowest;
 	int		next_lowest_limit;
 	int		i;
-
+pushed_next_lowest
 	pushed_next_lowest = false;
 	next_lowest = *nth_lowest + 1;
 	next_lowest_limit = ft_stacksize(p->a_head) - 3;
@@ -136,6 +136,52 @@ void	ft_sort_long_list(t_param *p)
 		ft_push_back_from_b_to_a(p);
 		p->disordered_position = ft_disordered(p, p->a_head, 0, p->size);
 	}
+}
+
+void    ft_execute_ra_until_reach_elem(t_param *p, int min_position, int element)
+{
+	int		next_top;
+	int		next_bottom;
+	int		i;
+
+	next_top = element + 1:
+	next_bottom = element - 1;
+	i = FIRST_POSITION;
+	while (i != min_position)
+	{
+		if (p->a_head->data == next_lowest && next_lowest < next_lowest_limit)
+		{
+				ft_pb(p, p->a_head, p->b_head, true);
+		}
+		else
+			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
+		i++;
+	}
+}
+
+bool    ft_execute_rra_until_reach__elem(t_param *p, int min_position, \
+	int *nth_lowest)
+{
+	bool    pushed_next_lowest;
+	int		last_position;
+	int		next_lowest;
+	int		next_lowest_limit;
+
+	pushed_next_lowest = false;
+	last_position = ft_stacksize(p->a_head);
+	next_lowest = *nth_lowest + 1;
+	next_lowest_limit = last_position - 3;
+	while (last_position != min_position - 1)
+	{
+		if (p->a_head->data == next_lowest && next_lowest < next_lowest_limit)
+		{
+			pushed_next_lowest = true;
+			ft_pb(p, p->a_head, p->b_head, true);
+		}
+		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+		last_position--;
+	}
+	return (pushed_next_lowest);
 }
 
 t_stack	*ft_find_median_node(t_param *p)
