@@ -40,6 +40,7 @@ void	ft_move_to_bottom_when_three_elements(t_param *p, int element, \
 	int		top;
 	int		middle;
 
+	head = NULL;
 	if (which_stack == A)
 		head = p->a_head;
 	else if (which_stack == B)
@@ -63,6 +64,7 @@ void	ft_swap_top_if_needed(t_param *p, int which_stack)
 	int		middle;
 	int		bottom;
 
+	head = NULL;
 	if (which_stack == A)
 		head = p->a_head;
 	else if (which_stack == B)
@@ -88,6 +90,7 @@ void	ft_reverse_rotate_when_three_elements(t_param *p, int which_stack)
 	int		middle;
 	int		bottom;
 	
+	head = NULL;
 	if (which_stack == A)
 		head = p->a_head;
 	else if (which_stack == B)
@@ -109,6 +112,7 @@ void	ft_sort_three_elements(t_param *p, int which_stack)
 	t_stack	*head;
 	t_stack	*max;
 
+	head = NULL;
 	if (p->disordered_position)
 	{
 		if (which_stack == A)
@@ -210,6 +214,7 @@ void	ft_sort_two_elements(t_param *p, int which_stack)
 	int		top;
 	int		bottom;
 
+	head = NULL;
 	if (p->disordered_position)
 	{
 		if (which_stack == A)

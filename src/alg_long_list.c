@@ -177,7 +177,6 @@ void    ft_execute_rra_until_reach_elem(t_param *p, int elem_pos, int elem)
 
 	next_top = elem + 1;
 	next_bottom = elem - 1;
-		printf("next_bottom: %d, next_top: %d\n", next_bottom, next_top);
 	i = ft_stacksize(p->a_head);
 	middle = p->size / 2;
 	pushed_next_already = false;

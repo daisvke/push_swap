@@ -149,6 +149,7 @@ t_stack	*ft_find_node_with_highest_num(t_param *p)
 	int		highest_num;
 
 	node = p->a_head;
+	node_with_highest_num = NULL;
 	highest_num = p->size;
 	while (node)
 	{

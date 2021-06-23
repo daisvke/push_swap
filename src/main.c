@@ -270,6 +270,6 @@ int	main(int argc, char *argv[])
 		ft_exit_clearstack(p);
 //	ft_printnode(p);
 	ft_redirect_to_algorithm(p);
-	ft_printnode(p);
+//	ft_printnode(p);
 	return (EXIT_SUCCESS);
 }
