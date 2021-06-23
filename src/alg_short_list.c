@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/21 13:35:09 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/23 17:50:34 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_swap_top_if_needed(t_param *p, int which_stack)
 	top = head->data;
 	middle = body->data;
 	bottom = body->next->data;
-	if (top > middle && !ft_islowest_in_stack(head, top)
+	if (top > middle && !ft_islowest_in_stack(head, top) // remove ?
 		&& !ft_ishighest_in_stack(head, middle))
 	{
 		if (which_stack == A)
@@ -140,7 +140,7 @@ int	ft_find_nth_lowest_node_position(t_param *p, int nth_lowest)
 	return (i);
 }
 
-int	ft_evaluate_fastest_op(t_param *p, int min_position)
+int	ft_evaluate_fastest_op(t_param *p, int elem_pos)
 {
 	t_stack	*head;
 	int		stacksize;
@@ -152,7 +152,7 @@ int	ft_evaluate_fastest_op(t_param *p, int min_position)
 	middle = stacksize / 2;
 	if (stacksize % 2 != 0)
 		middle++;
-	if (min_position <= middle)
+	if (elem_pos <= middle)
 		fastest_op = RA;
 	else
 		fastest_op = RRA;

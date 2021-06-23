@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:28:18 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/20 04:06:56 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/23 02:55:45 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	ft_rra(t_param *p, t_stack *head, t_stack *tail, bool w)
 		tail->next = head;
 		tmp->next = NULL;
 		p->a_head = tail;
+		if (w)
+			write(1, "rra\n", 4);
+		p->lastmove = 9;
 	}
-	if (w)
-		write(1, "rra\n", 4);
-	p->lastmove = 9;
 }
 
 void	ft_rrb(t_param *p, t_stack *head, t_stack *tail, bool w)
@@ -38,16 +38,19 @@ void	ft_rrb(t_param *p, t_stack *head, t_stack *tail, bool w)
 		tail->next = head;
 		tmp->next = NULL;
 		p->b_head = tail;
+		if (w)
+			write(1, "rrb\n", 4);
+		p->lastmove = 10;
 	}
-	if (w)
-		write(1, "rrb\n", 4);
-	p->lastmove = 10;
 }
 
 void	ft_rrr(t_param *p, t_stack *ah, t_stack *at, t_stack *bh, t_stack *bt)
 {
-	ft_rra(p, ah, at, false);
-	ft_rrb(p, bh, bt, false);
-	write(1, "rrr\n", 4);
-	p->lastmove = 11;
+	if ((ah && at) || (bh && bt))
+	{
+		ft_rra(p, ah, at, false);
+		ft_rrb(p, bh, bt, false);
+		write(1, "rrr\n", 4);
+		p->lastmove = 11;
+	}
 }

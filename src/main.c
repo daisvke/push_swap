@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/22 22:43:22 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/23 14:32:46 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,8 +242,9 @@ void	ft_apply_algorithm(t_param *p)
 		ft_sort_two_elements(p, A);
 	if (ft_stacksize(p->a_head) == 3)
 		ft_sort_three_elements(p, A);*/
+	if (ft_stacksize(p->a_head) < 6)
+		ft_sort_long_list(p);
 	ft_execute_median_sort(p);
-//	ft_sort_long_list(p);
 }
 
 void	ft_redirect_to_algorithm(t_param *p)
@@ -269,6 +270,6 @@ int	main(int argc, char *argv[])
 		ft_exit_clearstack(p);
 //	ft_printnode(p);
 	ft_redirect_to_algorithm(p);
-//	ft_printnode(p);
+	ft_printnode(p);
 	return (EXIT_SUCCESS);
 }

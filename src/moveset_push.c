@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:27:15 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/20 04:04:26 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/23 02:55:45 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	ft_pa(t_param *p, t_stack *a, t_stack *b, bool w)
 		ft_add_front(a, b);
 		p->b_head = tmp;
 		p->a_head = b;
+		if (w)
+			write(1, "pa\n", 3);
+		p->lastmove = 4;
 	}
-	if (w)
-		write(1, "pa\n", 3);
-	p->lastmove = 4;
 }
 
 void	ft_pb(t_param *p, t_stack *a, t_stack *b, bool w)
@@ -38,10 +38,10 @@ void	ft_pb(t_param *p, t_stack *a, t_stack *b, bool w)
 		ft_add_front(b, a);
 		p->a_head = tmp;
 		p->b_head = a;
+		if (w)
+			write(1, "pb\n", 3);
+		p->lastmove = 5;
 	}
-	if (w)
-		write(1, "pb\n", 3);
-	p->lastmove = 5;
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/20 03:58:58 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/23 05:36:58 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,7 @@ t_stack	*ft_nth_node(t_param *p, int n)
 	t_stack *node;
 
 	node = p->a_head;
-	while (node && n--)
-	{
+	while (node && --n)
 		node = node->next;
-	}
 	return (node);
 }
