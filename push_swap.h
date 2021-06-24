@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/23 04:13:54 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/23 22:50:40 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 # include "libft/libft.h"
 
-# define FIRST_POSITION 1
-# define A				1
-# define B				2
-# define SA				1
-# define SB				2
-# define RA 			6
-# define RRA			9
+# define FIRST_POS	1
+# define A			1
+# define B			2
+# define SA			1
+# define SB			2
+# define RA			6
+# define RRA		9
 
 typedef struct s_stack
 {

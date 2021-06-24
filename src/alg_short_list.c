@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/23 17:50:34 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/23 23:21:56 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	ft_find_nth_lowest_node_position(t_param *p, int nth_lowest)
 	int		i;
 
 	node = p->a_head;
-	i = FIRST_POSITION;
+	i = FIRST_POS;
 	while (node)
 	{
 		if (node->data == nth_lowest)
@@ -167,7 +167,7 @@ void	ft_ra_until_reach_min(t_param *p, int min_position)
 {
 	int		i;
 
-	i = FIRST_POSITION;
+	i = FIRST_POS;
 	while (i != min_position)
 	{
 		ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);

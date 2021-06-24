@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/23 14:32:46 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/24 03:18:46 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ void	ft_apply_algorithm(t_param *p)
 		ft_sort_two_elements(p, A);
 	if (ft_stacksize(p->a_head) == 3)
 		ft_sort_three_elements(p, A);*/
-	if (ft_stacksize(p->a_head) < 6)
+	if (ft_stacksize(p->a_head) < 50)
 		ft_sort_long_list(p);
 	ft_execute_median_sort(p);
 }

@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 21:52:57 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/23 17:50:34 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/24 03:37:57 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool    ft_ra_until_reach_min_for_long_list(t_param *p, int min_position, \
 	pushed_next_lowest = false;
 	next_lowest = *nth_lowest + 1;
 	next_lowest_limit = ft_stacksize(p->a_head) - 3;
-	i = FIRST_POSITION;
+	i = FIRST_POS;
 	while (i != min_position)
 	{
 		if (p->a_head->data == next_lowest && next_lowest < next_lowest_limit)
@@ -144,22 +144,18 @@ void    ft_execute_ra_until_reach_elem(t_param *p, int elem_pos, int elem)
 	int	next_bottom;
 	int	i;
 	int	middle;
-	int	pushed_next_already;
 
 	next_top = elem + 1;
 	next_bottom = elem - 1;
-	i = FIRST_POSITION;
+	i = FIRST_POS;
 	middle = p->size / 2;
-	pushed_next_already = false;
 	while (i < elem_pos)
 	{
-		if (!pushed_next_already
-			&& ((elem >= middle && p->a_head->data == next_top) \
-			|| (elem <= middle && p->a_head->data == next_bottom \
+		if (((p->a_head->data == next_top) \
+			|| (p->a_head->data == next_bottom \
 			&& next_bottom)))
 		{
 			ft_pb(p, p->a_head, p->b_head, true);
-			pushed_next_already = true;
 		}
 		else
 			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
@@ -173,24 +169,22 @@ void    ft_execute_rra_until_reach_elem(t_param *p, int elem_pos, int elem)
 	int	next_bottom;
 	int	i;
 	int	middle;
-	int	pushed_next_already;
 
 	next_top = elem + 1;
 	next_bottom = elem - 1;
 	i = ft_stacksize(p->a_head);
 	middle = p->size / 2;
-	pushed_next_already = false;
 	while (i > elem_pos - 1)
 	{
-		if (!pushed_next_already
-			&& ((elem >= middle && p->a_head->data == next_top) \
-			|| (elem <= middle && p->a_head->data == next_bottom \
+		if (((p->a_head->data == next_top) \
+			|| (p->a_head->data == next_bottom \
 			&& next_bottom)))
 		{
 			ft_pb(p, p->a_head, p->b_head, true);
-			pushed_next_already = true;
 		}
+//	ft_printnode(p);
 		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+//	ft_printnode(p);
 		--i;
 	}
 }
@@ -199,19 +193,20 @@ void	ft_execute_sb_or_rb_if_needed(t_param *p)
 {
 	t_stack	*head;
 	t_stack	*second;
-	t_stack	*tail;
 	int		top;
 	int		next;
 
-	head = p->b_head;
-	second = head->next;
-	tail = ft_lastnode(head);
-	top = head->data;
-	next = second->data;
-	if (top == next - 1)
-		ft_sb(p, head, second, true);
-	else if (top == tail->data - 1)
-		ft_rb(p, head, tail, true);
+	if (ft_stacksize(p->b_head) > 1)
+	{
+		head = p->b_head;
+		second = head->next;
+		top = head->data;
+		next = second->data;
+		if (top == next - 1)
+			ft_sb(p, head, second, true);
+		while (p->b_head->data < ft_lastnode(p->b_head)->data)
+			ft_rb(p, p->b_head, ft_lastnode(p->b_head), true);
+	}
 }
 
 int	ft_find_node_position_by_its_value(t_param *p, int value)
@@ -220,7 +215,7 @@ int	ft_find_node_position_by_its_value(t_param *p, int value)
 	int		i;
 
 	node = p->a_head;
-	i = FIRST_POSITION;
+	i = FIRST_POS;
 	while (node)
 	{
 		if (node->data == value)
@@ -275,15 +270,46 @@ int	ft_find_nearest_next_node_position(t_param *p)
 	int	next_top_pos;
 	int	next_bottom;
 	int	next_bottom_pos;
-	int	stacksize;
+	int	only_solution;
 
-	next_top = p->b_head->data + 1;
-	next_top_pos = ft_find_node_position_by_its_value(p, next_top);
-	next_bottom = ft_lastnode(p->b_head)->data - 1;
-	next_bottom_pos = ft_find_node_position_by_its_value(p, next_bottom);
-	stacksize = ft_stacksize(p->a_head);
-	return (ft_compute_closest_to_top(stacksize, next_top_pos, \
-		next_bottom_pos));
+	next_top = 0;
+	next_top_pos = 0;
+	next_bottom = 0;
+	next_bottom_pos = 0;
+	only_solution = 0;
+	if (p->b_head->data != p->size)
+	{
+		next_top = p->b_head->data + 1;
+		next_top_pos = ft_find_node_position_by_its_value(p, next_top);
+		only_solution = next_top_pos;
+	}
+	if (ft_lastnode(p->b_head)->data != 1)
+	{
+		next_bottom = ft_lastnode(p->b_head)->data - 1;
+		
+		next_bottom_pos = ft_find_node_position_by_its_value(p, next_bottom);
+		only_solution = next_bottom_pos;
+	}
+	//printf("nt: %d, ntp: %d, nb: %d, nbp: %d\n", next_top, next_top_pos, next_bottom, next_bottom_pos);
+	if (next_top && next_bottom)
+		return (ft_compute_closest_to_top(ft_stacksize(p->a_head), next_top_pos, \
+			next_bottom_pos));
+	else
+		return (only_solution);
+}
+
+void	ft_take_care_of_last_node_in_a(t_param *p)
+{
+	int	lastnode;
+	int	middle;
+
+	middle = ft_stacksize(p->a_head) / 2;
+	lastnode = p->a_head->data;
+	if (lastnode < middle)
+	{
+		ft_pb(p, p->a_head, p->b_head, true);
+		ft_rb(p, p->b_head, ft_lastnode(p->b_head), true);
+	}
 }
 
 void	ft_find_and_push_next_top_and_bottom(t_param *p)
@@ -293,6 +319,11 @@ void	ft_find_and_push_next_top_and_bottom(t_param *p)
 
 	while (p->a_head)
 	{
+		if (ft_stacksize(p->a_head) == 1)
+		{
+			ft_take_care_of_last_node_in_a(p);	
+			break ;
+		}
 		next_pos = ft_find_nearest_next_node_position(p);
 		next_value = ft_nth_node(p, next_pos)->data;
 		if (ft_evaluate_fastest_op(p, next_pos) == RA)
