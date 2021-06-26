@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 21:52:57 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/24 03:37:57 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/25 14:53:34 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,7 @@ void    ft_execute_ra_until_reach_elem(t_param *p, int elem_pos, int elem)
 	middle = p->size / 2;
 	while (i < elem_pos)
 	{
-		if (((p->a_head->data == next_top) \
-			|| (p->a_head->data == next_bottom \
+		if (((p->a_head->data == next_top) || (p->a_head->data == next_bottom \
 			&& next_bottom)))
 		{
 			ft_pb(p, p->a_head, p->b_head, true);
@@ -176,8 +175,7 @@ void    ft_execute_rra_until_reach_elem(t_param *p, int elem_pos, int elem)
 	middle = p->size / 2;
 	while (i > elem_pos - 1)
 	{
-		if (((p->a_head->data == next_top) \
-			|| (p->a_head->data == next_bottom \
+		if (((p->a_head->data == next_top) || (p->a_head->data == next_bottom \
 			&& next_bottom)))
 		{
 			ft_pb(p, p->a_head, p->b_head, true);
@@ -285,8 +283,7 @@ int	ft_find_nearest_next_node_position(t_param *p)
 	}
 	if (ft_lastnode(p->b_head)->data != 1)
 	{
-		next_bottom = ft_lastnode(p->b_head)->data - 1;
-		
+		next_bottom = ft_lastnode(p->b_head)->data - 1;	
 		next_bottom_pos = ft_find_node_position_by_its_value(p, next_bottom);
 		only_solution = next_bottom_pos;
 	}

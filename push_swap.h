@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/23 22:50:40 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/26 02:04:39 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ bool	ft_islowest_xbef_lastnode(t_param *p, int x);
 int		*ft_lowest_nodes(t_param *p);
 void	ft_push_back_from_b_to_a(t_param *p);
 void	ft_ra_until_reach_min(t_param *p, int min_position);
+void	ft_redirect_to_radix_sort(t_param *p);
 void	ft_rra_until_reach_min(t_param *p, int min_position);
 void	ft_sort_long_list(t_param *p);
 void	ft_sort_short_list(t_param *p);
