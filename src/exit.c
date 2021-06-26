@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 01:50:44 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/08 14:32:14 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/26 14:36:20 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	ft_exit_failure(void)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_exit_tabfree(char **str, int i)
+void	ft_exit_and_free_array(char **str, int i)
 {
-	ft_tabfree(str, i);
+	ft_free_array(str, i);
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
-void	ft_clear_stack(t_stack *node)
+void	ft_free_stack(t_stack *node)
 {
 	t_stack	*next;
 
@@ -34,23 +34,26 @@ void	ft_clear_stack(t_stack *node)
 	while (node)
 	{
 		next = node->next;
-		free(node);
+		if (node)
+			free(node);
 		node = next;
 	}
-	node = NULL;
+	if (node)
+		node = NULL;
 }
 
-void	ft_exit_lst_tabfree(t_param *p, char **split, int size)
+void	ft_exit_and_free_array_and_stack(t_param *p, char **split, int size)
 {
-	ft_tabfree(split, size);
-	ft_clear_stack(p->a_head);
+	ft_free_array(split, size);
+	if (p)
+		ft_free_stack(p->a_head);
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
-void	ft_exit_clearstack(t_param *p)
+void	ft_exit_and_free_stack(t_param *p)
 {
-	ft_clear_stack(p->a_head);
+	ft_free_stack(p->a_head);
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }

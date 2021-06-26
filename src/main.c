@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/26 03:26:57 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/26 14:35:39 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,13 @@ t_param	*ft_extract_split(t_param *p, t_stack *node, char **split, int i)
 	
 	while (split[i])
 	{
-		n = ft_stoi(p, split, split[i], i);
+		n = ft_convert_str_to_num(p, split, split[i], i);
 		if (ft_twice(p->a_head, n))
-			ft_exit_lst_tabfree(p, split, i);
+			ft_exit_and_free_array_and_stack(p, split, i);
 		node = ft_add_nbr(n);
 		ft_add_back(p->a_head, node);
 		if (!node)
-			ft_exit_lst_tabfree(p, split, i);	
+			ft_exit_and_free_array_and_stack(p, split, i);	
 		i++;
 	}
 	return (p);
@@ -146,7 +146,7 @@ t_param	*ft_init_stack(char **args, int size)
 	node = NULL;
 	size_cpy = size;
 	split = ft_split_errchk(args[1], ' ');
-	p = ft_init(ft_atoi(split[0]));
+	p = ft_init(ft_convert_str_to_num(NULL, split, split[0], 1));
 	node = p->a_head;
 	p = ft_extract_split(p, node, split, 1);
 	i = 2;
@@ -156,7 +156,7 @@ t_param	*ft_init_stack(char **args, int size)
 		p = ft_extract_split(p, node, split, 0);
 		i++;
 	}
-//	ft_tabfree(split, size_cpy);
+//	ft_free_array(split, size_cpy);
 	p->size = ft_stacksize(p->a_head);
 	ft_simplify_stack_nbr_values(p, p->size);
 	p->lastmove = 0;
@@ -241,10 +241,6 @@ void	ft_apply_algorithm(t_param *p)
 
 	stacksize = ft_stacksize(p->a_head);
 	ft_default_sort_algorithm(p);
-/*	if (ft_stacksize(p->a_head) == 2)
-		ft_sort_two_elements(p, A);
-	if (ft_stacksize(p->a_head) == 3)
-		ft_sort_three_elements(p, A);*/
 	if (stacksize < 80)
 		ft_sort_long_list(p);
 //	if (stacksize >= 50 && stacksize <= 300)
@@ -273,9 +269,10 @@ int	main(int argc, char *argv[])
 		ft_exit_failure();
 	p = ft_init_stack(argv, argc - 1);
 	if (p->size < 2)
-		ft_exit_clearstack(p);
+		ft_exit_and_free_stack(p);
 //	ft_printnode(p);
 	ft_redirect_to_algorithm(p);
+	ft_free_stack(p->a_head);
 //	ft_printnode(p);
 	return (EXIT_SUCCESS);
 }

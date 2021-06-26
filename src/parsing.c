@@ -29,12 +29,12 @@ void	ft_split_iter(char **split, char *s, char c)
 		while (*s != c && *s)
 		{
 			if (!ft_isdigit(*s) && *s != '-' && *s != '+')
-				ft_exit_tabfree(split, i);
+				ft_exit_and_free_array(split, i);
 			s++;
 		}
 		split[i] = ft_strsdup(head, s - head);
 		if (!split[i])
-			ft_exit_tabfree(split, i);
+			ft_exit_and_free_array(split, i);
 		i++;
 	}
 	split[i] = 0;

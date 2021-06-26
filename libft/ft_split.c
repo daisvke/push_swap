@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 17:41:27 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/05/22 18:35:29 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/26 13:18:25 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_split_iter(char **split, char *s, char c)
 		split[i] = ft_strsdup(start, s - start);
 		if (!split[i])
 		{
-			ft_tabfree(split, i);
+			ft_free_array(split, i);
 			return (-1);
 		}
 		i++;

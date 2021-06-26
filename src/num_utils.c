@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nbr_utils.c                                        :+:      :+:    :+:   */
+/*   num_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/20 13:33:43 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/26 14:35:22 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,11 +182,11 @@ t_stack	*ft_find_node_with_lowest_num(t_param *p)
 	return (node_with_lowest_num);
 }
 
-int	ft_stoi(t_param *p, char **split, char *str, int j)
+int	ft_convert_str_to_num(t_param *p, char **split, char *str, int j)
 {
-	int					sign;
-	int					s_count;
-	unsigned long long	res;
+	int			sign;
+	int			s_count;
+	long long	res;
 
 	while (ft_isws(*str))
 		str++;
@@ -202,8 +202,9 @@ int	ft_stoi(t_param *p, char **split, char *str, int j)
 		return (0);
 	res = 0;
 	while (ft_isdigit(*str))
-		res = res * 10 + *str++ - 48;
-	if (res > 2147483647)
-		ft_exit_lst_tabfree(p, split, j);
-	return (res * sign);
+		res = res * 10 + *str++ - '0';
+	res *= sign;
+	if (res > 2147483647 || res < -2147483648)
+		ft_exit_and_free_array_and_stack(p, split, j);
+	return (res);
 }
