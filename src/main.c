@@ -6,12 +6,12 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/26 14:35:39 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/26 15:01:41 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
+/*
 void	ft_printnode(t_param *p)
 {
 	t_stack	*node;
@@ -37,27 +37,34 @@ void	ft_printnode(t_param *p)
 	printf("NULL\n");
 	printf("=========\n\n");
 }
+*/
 
-t_param	*ft_init(int n)
+t_param	*ft_init_param(int num)
 {
 	t_param	*p;
 	t_stack	*node;
 
 	p = malloc(sizeof(*p));
-	node = malloc(sizeof(*node));
-	if (!p || !node)
+	if (!p)
 		ft_exit_failure();
-	node->data = n;
+	node = malloc(sizeof(*node));
+	if (!node)
+	{
+		free(p);
+		p = NULL;
+		ft_exit_failure();
+	}
+	node->data = num;
 	p->a_head = node;
 	p->b_head = NULL;
 	return (p);
 }
 
-bool	ft_twice(t_stack *node, int n)
+bool	ft_twice(t_stack *node, int num)
 {
 	while (node)
 	{
-		if (node->data == n)
+		if (node->data == num)
 			return (true);
 		node = node->next;
 	}
