@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 01:50:44 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/26 14:36:20 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/27 02:05:06 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_exit_failure(void)
 
 void	ft_exit_and_free_array(char **str, int i)
 {
-	ft_free_array(str, i);
+	ft_free_array_of_pointers(str, i);
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
@@ -44,7 +44,7 @@ void	ft_free_stack(t_stack *node)
 
 void	ft_exit_and_free_array_and_stack(t_param *p, char **split, int size)
 {
-	ft_free_array(split, size);
+	ft_free_array_of_pointers(split, size);
 	if (p)
 		ft_free_stack(p->a_head);
 	write(1, "Error\n", 6);

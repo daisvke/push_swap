@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 01:44:35 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/26 02:10:42 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/27 11:29:45 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_execute_radix_sort(t_param *p, int size, int max_num, int max_bits)
 
 void	ft_redirect_to_radix_sort(t_param *p)
 {
-	if (p->disordered_position)
+	if (!ft_is_in_the_right_order(p->a_head, 0, p->size))
 	{
 		int	stacksize;
 		int	max_num;

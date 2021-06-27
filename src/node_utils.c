@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/23 05:36:58 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/27 02:55:09 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ t_stack	*ft_add_nbr(int data)
 	new->data = data;
 	new->next = NULL;
 	return (new);
-}
-
-t_stack	*ft_xnode(t_stack *node, int x)
-{
-	if (x)
-		while (node && x--)
-			node = node->next;
-	return (node);
 }
 
 t_stack	*ft_lastnode(t_stack *node)
@@ -86,14 +78,4 @@ int	ft_stacksize(t_stack *node)
 		i++;
 	}
 	return (i);
-}
-
-t_stack	*ft_nth_node(t_param *p, int n)
-{
-	t_stack *node;
-
-	node = p->a_head;
-	while (node && --n)
-		node = node->next;
-	return (node);
 }

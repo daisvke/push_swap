@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/26 03:54:39 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/27 11:11:51 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_param
 {
 	int		size;
 	int		lastmove;
-	int		disordered_position;
 	t_stack	*a_head;
 	t_stack	*b_head;
 }			t_param;
@@ -84,14 +83,14 @@ t_stack	*ft_xnode(t_stack *node, int x);
 */
 t_stack	*ft_find_node_with_highest_num(t_param *p);
 t_stack	*ft_find_node_with_lowest_num(t_param *p);
-bool	ft_isasc(t_stack *node, int start, int end);
-bool	ft_isdesc(t_stack *node, int start, int end);
+bool	ft_is_in_the_right_order(t_stack *node, int start, int end);
+bool	ft_is_in_the_inverse_order(t_stack *node, int start, int end);
 bool	ft_ishighest_in_stack(t_stack *head, int value_to_check);
 bool	ft_ishighest_inrange(t_param *p, int start, int end);
 bool	ft_islowest_in_stack(t_stack *head, int value_to_check);
 bool	ft_islowest_expt(t_stack *node, int n, int *t);
 t_stack	*ft_nth_node(t_param *p, int n);
-int		ft_convert_str_to_num(t_param *p, char **split, char *str, int j);
+int		ft_convert_str_to_num(t_param *p, char **split, char *str, int i);
 
 /*
 ** algorithms
@@ -101,8 +100,8 @@ int		ft_evaluate_fastest_op(t_param *p, int min_position);
 void	ft_execute_median_sort(t_param *p);
 t_stack	*ft_find_node_with_highest_num(t_param *p);
 int		ft_find_nth_lowest_node_position(t_param *p, int nth_lowest);
-bool	ft_isasc_between(t_param *p);
-bool	ft_isdesc_between(t_param *p);
+bool	ft_is_in_the_right_order_between(t_param *p);
+bool	ft_is_in_the_inverse_order_between(t_param *p);
 bool	ft_islowest_xbef_lastnode(t_param *p, int x);
 int		*ft_lowest_nodes(t_param *p);
 void	ft_push_back_from_b_to_a(t_param *p);
@@ -126,7 +125,7 @@ void	ft_exit_and_free_array_and_stack(t_param *p, char **split, int size);
 void	ft_exit_and_free_array(char **str, int i);
 
 bool	ft_isthere(int nbr_to_find, int *array_of_nbrs, int array_size);
-char	**ft_split_errchk(char const *s, char c);
+char	**ft_split_elem_from_argv(char const *s, char c);
 void	ft_reverse(t_param *p);
 
 t_stack	*ft_add_nbr(int data);
