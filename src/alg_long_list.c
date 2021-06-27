@@ -71,7 +71,7 @@ bool    ft_rra_until_reach_min_for_long_list(t_param *p, int min_position, \
 			pushed_next_lowest = true;
 			ft_pb(p, p->a_head, p->b_head, true);
 		}
-		ft_rra(p, p->a_head, ft_lastnode(p->a_head), true);
+		ft_execute_command(p, RRA);
 		last_position--;
 	}
 	return (pushed_next_lowest);
@@ -104,7 +104,7 @@ void	ft_find_lowest_nodes_in_long_list_and_push_to_b(t_param *p)
 	}
 }
 
-void	ft_sort_long_list(t_param *p)
+void	ft_execute_lowests_sort(t_param *p)
 {
 	if (!ft_is_in_the_right_order(p->a_head, 0, p->size))
 	{

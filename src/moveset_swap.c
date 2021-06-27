@@ -24,7 +24,6 @@ void	ft_sa(t_param *p, t_stack *node1, t_stack *node2, bool w)
 		p->a_head = node2;
 		if (w)
 			write(1, "sa\n", 3);
-		p->lastmove = 1;
 	}
 }
 
@@ -40,7 +39,6 @@ void	ft_sb(t_param *p, t_stack *node1, t_stack *node2, bool w)
 		p->b_head = node2;
 		if (w)
 			write(1, "sb\n", 3);
-		p->lastmove = 2;
 	}
 }
 
@@ -51,6 +49,5 @@ void	ft_ss(t_param *p, t_stack *a1, t_stack *a2, t_stack *b1, t_stack *b2)
 		ft_sa(p, a1, a2, false);
 		ft_sb(p, b1, b2, false);
 		write(1, "ss\n", 3);
-		p->lastmove = 3;
 	}
 }

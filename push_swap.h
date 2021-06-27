@@ -19,13 +19,29 @@
 
 # include "libft/libft.h"
 
+/*
+** start position
+*/
 # define FIRST_POS	1
+
+/*
+** stacks
+*/
 # define A			1
 # define B			2
+
+/*
+** moves
+*/
 # define SA			1
 # define SB			2
-# define RA			6
-# define RRA		9
+# define PA			3
+# define PB			4
+
+# define RA			5
+# define RB		6
+# define RRA			7
+# define RRB			8
 
 typedef struct s_stack
 {
@@ -33,17 +49,9 @@ typedef struct s_stack
 	int				data;
 }					t_stack;
 
-/*
-** 1: sa	6: ra	9:	rra
-** 2: sb	7: rb	10:	rrb
-** 3: ss	8: rr	11:	rrr
-** 4: pa	
-** 5: pb
-*/
 typedef struct s_param
 {
 	int		size;
-	int		lastmove;
 	t_stack	*a_head;
 	t_stack	*b_head;
 }			t_param;
@@ -60,13 +68,10 @@ void	ft_pa(t_param *p, t_stack *a, t_stack *b, bool w);
 void	ft_pb(t_param *p, t_stack *a, t_stack *b, bool w);
 void	ft_ra(t_param *p, t_stack *head, t_stack *tail, bool w);
 void	ft_rb(t_param *p, t_stack *head, t_stack *tail, bool w);
-void	ft_rr(t_param *p, t_stack *ah, t_stack *at, t_stack *bh, t_stack *bt);
 void	ft_rra(t_param *p, t_stack *head, t_stack *tail, bool w);
 void	ft_rrb(t_param *p, t_stack *head, t_stack *tail, bool w);
-void	ft_rrr(t_param *p, t_stack *ah, t_stack *at, t_stack *bh, t_stack *bt);
 void	ft_sa(t_param *p, t_stack *node1, t_stack *node2, bool w);
 void	ft_sb(t_param *p, t_stack *node1, t_stack *node2, bool w);
-void	ft_ss(t_param *p, t_stack *a1, t_stack *a2, t_stack *b1, t_stack *b2);
 
 /*
 ** node_utils
@@ -106,10 +111,9 @@ bool	ft_islowest_xbef_lastnode(t_param *p, int x);
 int		*ft_lowest_nodes(t_param *p);
 void	ft_push_back_from_b_to_a(t_param *p);
 void	ft_ra_until_reach_min(t_param *p, int min_position);
-void	ft_redirect_to_radix_sort(t_param *p);
+void	ft_execute_lowests_sort(t_param *p);
+void	ft_execute_radix_sort(t_param *p);
 void	ft_rra_until_reach_min(t_param *p, int min_position);
-void	ft_sort_long_list(t_param *p);
-void	ft_sort_short_list(t_param *p);
 void	ft_sort_stack_b_with_short_list(t_param *p);
 void	ft_sort_three_elements(t_param *p, int which_stack);
 void	ft_sort_two_elements(t_param *p, int which_stack);

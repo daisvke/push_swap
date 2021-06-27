@@ -24,7 +24,6 @@ void	ft_rra(t_param *p, t_stack *head, t_stack *tail, bool w)
 		p->a_head = tail;
 		if (w)
 			write(1, "rra\n", 4);
-		p->lastmove = 9;
 	}
 }
 
@@ -40,7 +39,6 @@ void	ft_rrb(t_param *p, t_stack *head, t_stack *tail, bool w)
 		p->b_head = tail;
 		if (w)
 			write(1, "rrb\n", 4);
-		p->lastmove = 10;
 	}
 }
 
@@ -51,6 +49,5 @@ void	ft_rrr(t_param *p, t_stack *ah, t_stack *at, t_stack *bh, t_stack *bt)
 		ft_rra(p, ah, at, false);
 		ft_rrb(p, bh, bt, false);
 		write(1, "rrr\n", 4);
-		p->lastmove = 11;
 	}
 }

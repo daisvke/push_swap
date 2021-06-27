@@ -147,7 +147,7 @@ t_param	*ft_extract_split(t_param *p, char **split, int start_point)
 	return (p);
 }
 
-t_param	*ft_init_stack(char **args, int size)
+t_param	*ft_init_param_with_stack(char **args, int size)
 {
 	t_param	*p;
 	char	**split;
@@ -170,7 +170,6 @@ t_param	*ft_init_stack(char **args, int size)
 //	ft_free_array_of_pointers(split, size_cpy - 1);
 	p->size = ft_stacksize(p->a_head);
 	ft_simplify_stack_nbr_values(p, p->size);
-	p->lastmove = 0;
 	p->b_head = NULL;
 	return (p);
 }
@@ -229,19 +228,21 @@ void	ft_rra_if_everything_else_is_ordered(t_param *p)
 	last = last_node->data;
 	end = ft_stacksize(top_node);
 	if (last < top && ft_is_in_the_right_order(top_node, 0, end - 1))
-		ft_rra(p, top_node, last_node, true);
+		ft_execute_command_if_everything_else_is_ordered(p, RRA);
 }
 
-void	ft_default_sort_algorithm(t_param *p)
+void	ft_execute_command_if_everything_else_is_ordered(t_param *p)
 {
-	if (!ft_is_in_the_right_order(p->a_head, 0, p->size))
+	
+}
+
+void	ft_execute_default_sort(t_param *p)
+{
+	if (ft_stacksize(p->a_head) != 3)
 	{
-		if (ft_stacksize(p->a_head) != 3)
-		{
-			ft_sa_if_everything_else_is_ordered(p);
-			ft_ra_if_everything_else_is_ordered(p);
-			ft_rra_if_everything_else_is_ordered(p);
-		}
+		ft_execute_sa_if_everything_else_is_ordered(p);
+		ft_ra_if_everything_else_is_ordered(p);
+		ft_rra_if_everything_else_is_ordered(p);
 	}
 }
 
@@ -250,16 +251,14 @@ void	ft_apply_algorithm(t_param *p)
 	int	stacksize;
 
 	stacksize = ft_stacksize(p->a_head);
-	ft_default_sort_algorithm(p);
+	ft_execute_default_sort(p);
 	if (stacksize < 80)
-		ft_sort_long_list(p);
-//	if (stacksize >= 50 && stacksize <= 300)
-//		ft_execute_median_sort(p);
+		ft_execute_lowests_sort(p);
 	if (stacksize >= 80)
-		ft_redirect_to_radix_sort(p);
+		ft_execute_radix_sort(p);
 }
 
-void	ft_redirect_to_algorithm(t_param *p)
+void	ft_redirect_to_algorithm_while_disordered(t_param *p)
 {
 	while (!ft_is_in_the_right_order(p->a_head, 0, p->size) || p->b_head)
 		ft_apply_algorithm(p);
@@ -271,11 +270,10 @@ int	main(int argc, char *argv[])
 
 	if (argc < 2)
 		ft_exit_failure();
-	p = ft_init_stack(argv, argc - 1);
+	p = ft_init_param_with_stack(argv, argc - 1);
 	if (p->size < 2)
 		ft_exit_and_free_stack(p);
-//	ft_printnode(p);
-	ft_redirect_to_algorithm(p);
+	ft_redirect_to_algorithm_while_disordered(p);
 	ft_free_stack(p->a_head);
 //	ft_printnode(p);
 	return (EXIT_SUCCESS);

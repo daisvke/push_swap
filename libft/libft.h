@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 15:23:44 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/26 13:16:33 by root             ###   ########.fr       */
+/*   Updated: 2021/06/27 01:21:31 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_atoi(const char *str);
 long	ft_abs(long n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
-void	ft_free_array(char **array, size_t arr_size);
+void	ft_free_array_of_pointers(char **array_of_pointers, size_t arr_size);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
