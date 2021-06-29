@@ -2,7 +2,7 @@
 
 ## Installation
 ```
-git clone git@github.com:daisvke/push_swap.git --recursive
+git clone --recurse-submodules git@github.com:daisvke/push_swap.git
 make
 ```
 
