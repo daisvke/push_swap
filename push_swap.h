@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 02:17:08 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/29 04:22:00 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_printnode(t_param *p);
 */
 void	ft_find_in_stack_and_replace(t_param *p, int *nbrs_to_replace_with, \
 	int array_size);
-char	*ft_get_arg_with_num(char **args, int pos, int num_of_args);
+char	*ft_get_arg_with_num(char **args, int pos, int *i);
 t_param	*ft_init_param_with_first_node(int num);
 t_param	*ft_init_param_with_stack(char **args, int size);
 void	ft_simplify_stack_num_values(t_param *p, int size);

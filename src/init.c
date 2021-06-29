@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 00:33:45 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 02:21:29 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 04:21:44 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	ft_simplify_stack_num_values(t_param *p, int size)
 	checked_nums = NULL;
 }
 
-char	*ft_get_arg_with_num(char **args, int pos, int num_of_args)
+char	*ft_get_arg_with_num(char **args, int pos, int *i)
 {
 	int	j;
 
-	while (--num_of_args)
+	while (args[pos])
 	{
 		j = 0;
 		while (args[pos][j])
@@ -102,6 +102,7 @@ char	*ft_get_arg_with_num(char **args, int pos, int num_of_args)
 			++j;
 		}
 		++pos;
+		++*i;
 	}
 	return (NULL);
 }
@@ -111,21 +112,19 @@ t_param	*ft_init_param_with_stack(char **args, int size)
 	t_param	*p;
 	char	**split;
 	int		i;
-	int		size_cpy;
 
 	p = NULL;
-	size_cpy = size;
 	i = FIRST_POS;
 	split = ft_split_elem_from_argv(p, ft_get_arg_with_num(\
-		args, 1, size_cpy), ' ');
+		args, 1, &i), ' ');
 	p = ft_init_param_with_first_node(ft_convert_str_to_num(\
 		NULL, split, split[0]));
 	ft_extract_split(p, split, 1);
-	i = FIRST_POS + 1;
+	i += 1;
 	while (--size)
 	{
 		split = ft_split_elem_from_argv(p, ft_get_arg_with_num(\
-			args, i, size_cpy), ' ');
+			args, i, &i), ' ');
 		ft_extract_split(p, split, 0);
 		++i;
 	}
