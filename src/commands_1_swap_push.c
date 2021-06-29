@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moveset_swap.c                                     :+:      :+:    :+:   */
+/*   commands_1_swap_push.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/08 16:26:58 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/23 02:55:45 by dtanigaw         ###   ########.fr       */
+/*   Created: 2021/06/08 16:27:15 by dtanigaw          #+#    #+#             */
+/*   Updated: 2021/06/29 01:32:18 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_sa(t_param *p, t_stack *node1, t_stack *node2, bool w)
+void	ft_execute_sa(t_param *p, t_stack *node1, t_stack *node2, bool print_command)
 {
 	t_stack	*tmp;
 
@@ -22,12 +22,12 @@ void	ft_sa(t_param *p, t_stack *node1, t_stack *node2, bool w)
 		node1->next = node2->next;
 		node2->next = tmp;
 		p->a_head = node2;
-		if (w)
+		if (print_command)
 			write(1, "sa\n", 3);
 	}
 }
 
-void	ft_sb(t_param *p, t_stack *node1, t_stack *node2, bool w)
+void	ft_execute_sb(t_param *p, t_stack *node1, t_stack *node2, bool print_command)
 {
 	t_stack	*tmp;
 
@@ -37,17 +37,37 @@ void	ft_sb(t_param *p, t_stack *node1, t_stack *node2, bool w)
 		node1->next = node2->next;
 		node2->next = tmp;
 		p->b_head = node2;
-		if (w)
+		if (print_command)
 			write(1, "sb\n", 3);
 	}
 }
 
-void	ft_ss(t_param *p, t_stack *a1, t_stack *a2, t_stack *b1, t_stack *b2)
+void	ft_execute_pa(t_param *p, t_stack *a, t_stack *b, bool print_command)
 {
-	if ((a1 && a2) || (b1 && b2))
+	t_stack	*tmp;
+	
+	if (b)
 	{
-		ft_sa(p, a1, a2, false);
-		ft_sb(p, b1, b2, false);
-		write(1, "ss\n", 3);
+		tmp = b->next;
+		ft_add_front(a, b);
+		p->b_head = tmp;
+		p->a_head = b;
+		if (print_command)
+			write(1, "pa\n", 3);
+	}
+}
+
+void	ft_execute_pb(t_param *p, t_stack *a, t_stack *b, bool print_command)
+{
+	t_stack	*tmp;
+
+	if (a)
+	{
+		tmp = a->next;
+		ft_add_front(b, a);
+		p->a_head = tmp;
+		p->b_head = a;
+		if (print_command)
+			write(1, "pb\n", 3);
 	}
 }

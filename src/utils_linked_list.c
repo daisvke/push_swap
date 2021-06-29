@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   node_utils.c                                       :+:      :+:    :+:   */
+/*   utils_linked_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:42:41 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/27 02:55:09 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/29 01:38:46 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-t_stack	*ft_add_nbr(int data)
-{
-	t_stack	*new;
-
-	new = malloc(sizeof(*new));
-	if (!new)
-		return (NULL);
-	new->data = data;
-	new->next = NULL;
-	return (new);
-}
 
 t_stack	*ft_lastnode(t_stack *node)
 {
@@ -32,12 +20,17 @@ t_stack	*ft_lastnode(t_stack *node)
 	return (node);
 }
 
-t_stack	*ft_xbef_lastnode(t_param *p, int size, t_stack *node, int x)
+t_stack	*ft_second_to_lastnode(t_param *p, int which_stack)
 {
-	size = size - x - 1;
-	if (size == 0 || x == 0)
-		return (ft_lastnode(p->a_head));
-	if (node && x)
+	t_stack	*node;
+	int		size;
+
+	if (which_stack == A)
+		node = p->a_head;
+	else
+		node = p->b_head;
+	size = ft_stacksize(node) - 2;
+	if (node)
 		while (node->next && size--)
 			node = node->next;
 	return (node);
@@ -75,7 +68,7 @@ int	ft_stacksize(t_stack *node)
 	while (node)
 	{
 		node = node->next;
-		i++;
+		++i;
 	}
 	return (i);
 }

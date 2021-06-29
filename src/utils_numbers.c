@@ -1,56 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   num_utils.c                                        :+:      :+:    :+:   */
+/*   utils_numbers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/27 11:27:30 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/29 01:38:46 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-bool	ft_is_in_the_right_order(t_stack *node, int start, int end)
-{
-	int	size;
-	int	st_tmp;
-	
-	if (!node)
-		return (true);
-	st_tmp = start;
-	size = end - start - 1;
-	while (node->next && start--)
-		node = node->next;
-	while (node->next && size--)
-	{
-		if (node->data > node->next->data)
-			return (false);
-		node = node->next;
-	}
-	return (true);
-}
-
-bool	ft_is_in_the_inverse_order(t_stack *node, int start, int end)
-{
-	int	size;
-	int	st_tmp;
-	
-	if (!node)
-		return (true);
-	st_tmp = start;
-	size = end - start - 1;
-	while (node->next && start--)
-		node = node->next;
-	while (node->next && size--)
-	{
-		if (node->data < node->next->data)
-			return (false);
-		node = node->next;
-	}
-	return (true);
-}
 
 bool	ft_islowest_in_stack(t_stack *head, int value_to_check)
 {
@@ -74,6 +34,18 @@ bool	ft_ishighest_in_stack(t_stack *head, int value_to_check)
 	return (true);
 }
 
+t_stack	*ft_add_nbr(int data)
+{
+	t_stack	*new;
+
+	new = malloc(sizeof(*new));
+	if (!new)
+		return (NULL);
+	new->data = data;
+	new->next = NULL;
+	return (new);
+}
+
 t_stack	*ft_find_node_with_highest_num(t_param *p)
 {
 	t_stack	*node;
@@ -95,7 +67,7 @@ t_stack	*ft_find_node_with_highest_num(t_param *p)
 	return (node_with_highest_num);
 }
 
-int	ft_convert_str_to_num(t_param *p, char **split, char *str, int i)
+int	ft_convert_str_to_num(t_param *p, char **split, char *str)
 {
 	int			sign;
 	int			s_count;
@@ -118,6 +90,6 @@ int	ft_convert_str_to_num(t_param *p, char **split, char *str, int i)
 		res = res * 10 + *str++ - '0';
 	res *= sign;
 	if (res > 2147483647 || res < -2147483648)
-		ft_exit_and_free_array_and_stack(p, split, i);
+		ft_exit_and_free_split_and_stack(p, split);
 	return (res);
 }

@@ -6,11 +6,25 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 01:50:44 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/27 02:05:06 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/28 13:36:47 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+void	ft_free_split(char **split)
+{
+	size_t	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		++i;
+	}
+	free(split);
+	split = NULL;
+}
 
 void	ft_exit_failure(void)
 {
@@ -18,9 +32,9 @@ void	ft_exit_failure(void)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_exit_and_free_array(char **str, int i)
+void	ft_exit_and_free_split(char **split)
 {
-	ft_free_array_of_pointers(str, i);
+	ft_free_split(split);
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
@@ -38,22 +52,28 @@ void	ft_free_stack(t_stack *node)
 			free(node);
 		node = next;
 	}
-	if (node)
-		node = NULL;
+	node = NULL;
 }
 
-void	ft_exit_and_free_array_and_stack(t_param *p, char **split, int size)
+void	ft_exit_and_free_split_and_stack(t_param *p, char **split)
 {
-	ft_free_array_of_pointers(split, size);
+	ft_free_split(split);
 	if (p)
+	{
 		ft_free_stack(p->a_head);
+		free(p);
+	}
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
 void	ft_exit_and_free_stack(t_param *p)
 {
-	ft_free_stack(p->a_head);
+	if (p)
+	{
+		ft_free_stack(p->a_head);
+		free(p);
+	}
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }

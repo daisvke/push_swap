@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alg_long_list.c                                    :+:      :+:    :+:   */
+/*   sort_lowests.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 21:52:57 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/27 11:32:32 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/29 00:56:48 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	ft_isthere(int nbr_to_find, int *array_of_nbrs, int array_size)
 	{
 		if (array_of_nbrs[i] == nbr_to_find)
 			return (true);
-		i++;
+		++i;
 	}
 	return (false);
 }
@@ -43,11 +43,11 @@ bool    ft_ra_until_reach_min_for_long_list(t_param *p, int min_position, \
 		if (p->a_head->data == next_lowest && next_lowest < next_lowest_limit)
 		{
 				pushed_next_lowest = true;
-				ft_pb(p, p->a_head, p->b_head, true);
+				ft_execute_command(p, PB); 
 		}
 		else
-			ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
-		i++;
+			ft_execute_command(p, RA);
+		++i;
 	}
 	return (pushed_next_lowest);
 }
@@ -69,10 +69,10 @@ bool    ft_rra_until_reach_min_for_long_list(t_param *p, int min_position, \
 		if (p->a_head->data == next_lowest && next_lowest < next_lowest_limit)
 		{
 			pushed_next_lowest = true;
-			ft_pb(p, p->a_head, p->b_head, true);
+			ft_execute_command(p, PB); 
 		}
 		ft_execute_command(p, RRA);
-		last_position--;
+		--last_position;
 	}
 	return (pushed_next_lowest);
 }
@@ -93,14 +93,14 @@ void	ft_find_lowest_nodes_in_long_list_and_push_to_b(t_param *p)
 		else if (ft_evaluate_fastest_op(p, min_position) == RRA)
 			pushed_next_lowest = ft_rra_until_reach_min_for_long_list(p, \
 				min_position, &nth_lowest);
-		ft_pb(p, p->a_head, p->b_head, true);
+		ft_execute_command(p, PB); 
 		if (pushed_next_lowest)
 		{
 			if (p->b_head->data < p->b_head->next->data)
-				ft_sb(p, p->b_head, p->b_head->next, true);
-			nth_lowest++;
+				ft_execute_command(p, SB); 
+			++nth_lowest;
 		}
-		nth_lowest++;
+		++nth_lowest;
 	}
 }
 
@@ -109,7 +109,7 @@ void	ft_execute_lowests_sort(t_param *p)
 	if (!ft_is_in_the_right_order(p->a_head, 0, p->size))
 	{
 		ft_find_lowest_nodes_in_long_list_and_push_to_b(p);
-		ft_sort_three_elements(p, A);
+		ft_sort_three_elements(p);
 		ft_push_back_from_b_to_a(p);
 	}
 }

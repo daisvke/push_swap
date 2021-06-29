@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*   sort_radix.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 01:44:35 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/27 11:29:45 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/29 00:50:49 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	ft_compute_max_bits(int max_num)
 void	ft_connect_back_elem_from_b_to_a(t_param *p)
 {
 	while (p->b_head)
-		ft_pa(p, p->a_head, p->b_head, true);
+		ft_execute_command(p, PA);
 }
 
-void	ft_push_according_to_binary_digit_value(t_param *p, int size, int max_num, int max_bits)
+void	ft_push_according_to_binary_digit_value(t_param *p, int size, int max_bits)
 {
 	t_stack	*node;
 	int		i;
@@ -42,9 +42,9 @@ void	ft_push_according_to_binary_digit_value(t_param *p, int size, int max_num, 
 		{
 			node = p->a_head;
 			if (((node->data >> i) & 1) == 1)
-				ft_ra(p, p->a_head, ft_lastnode(p->a_head), true);
+				ft_execute_command(p, RA);
 			else
-				ft_pb(p, p->a_head, p->b_head, true);
+				ft_execute_command(p, PB);
 			++j;
 		}
 		ft_connect_back_elem_from_b_to_a(p);
@@ -63,6 +63,6 @@ void	ft_execute_radix_sort(t_param *p)
 		stacksize = ft_stacksize(p->a_head);
 		max_num = ft_stacksize(p->a_head);
 		max_bits = ft_compute_max_bits(max_num);
-		ft_push_according_to_binary_digit_value(p, stacksize, max_num, max_bits);
+		ft_push_according_to_binary_digit_value(p, stacksize, max_bits);
 	}
 }
