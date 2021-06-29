@@ -8,6 +8,12 @@ make
 
 ## Performance
 
+| Elements | Average | Max |
+| 3 | 1 | 2 |
+| 5 | 7 | 10 |
+| 100 | 1081 | 1081 |
+| 500 | 6778 | 6778 |
+
 * 3 elements<br />
    average  : 1 move<br />
    max      : 2 moves
