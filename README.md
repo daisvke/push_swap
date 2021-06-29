@@ -8,7 +8,8 @@ make
 
 ## Performance
 
-| Elements | Average | Max | |------|------|------|
+| Elements | Average | Max |
+|------|------|------|
 | 3 | 1 | 2 |
 | 5 | 7 | 10 |
 | 100 | 1081 | 1081 |
