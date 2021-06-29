@@ -15,19 +15,6 @@ make
 | 100 | 1081 | 1081 |
 | 500 | 6778 | 6778 |
 
-* 3 elements<br />
-   average  : 1 move<br />
-   max      : 2 moves
-* 5 elements<br />
-   average  : 7 moves<br />
-   max      : 10 moves
-* 100 elements<br />
-   average  : 1081 moves<br />
-   max      : 1081 moves
-* 500 elements <br />
-   average  : 6778 moves<br />
-   max      : 6778 moves
-
 ## Game rules
 
 * The game is composed of 2 stacks named a and b.
