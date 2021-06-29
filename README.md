@@ -1,5 +1,10 @@
 # push_swap
 
+## Installation
+```
+git clone git@github.com:daisvke/push_swap.git --recursive
+```
+
 ## Performance
 
 * 3 elements<br />
