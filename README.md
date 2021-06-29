@@ -3,6 +3,7 @@
 ## Installation
 ```
 git clone git@github.com:daisvke/push_swap.git --recursive
+make
 ```
 
 ## Performance
