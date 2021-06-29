@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 04:22:00 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 04:32:04 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@
 /*
 ** stacks
 */
-# define A			1
-# define B			2
+# define A			0
+# define B			1
 
 /*
 ** moves
 */
-# define SA			1
-# define SB			2
-# define PA			3
-# define PB			4
-# define RA			5
-# define RB			6
-# define RRA		7
-# define RRB		8
+# define SA			0
+# define SB			1
+# define PA			2
+# define PB			3
+# define RA			4
+# define RB			5
+# define RRA		6
+# define RRB		7
 
 /*
 ** linked list for stacks
