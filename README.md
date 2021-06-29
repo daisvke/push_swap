@@ -1,19 +1,19 @@
 # push_swap
 
+## Installation
+```
+git clone git@github.com:daisvke/push_swap.git --recursive
+make
+```
+
 ## Performance
 
-* 3 elements<br />
-   average  : 1 move<br />
-   max      : 2 moves
-* 5 elements<br />
-   average  : 7 moves<br />
-   max      : 10 moves
-* 100 elements<br />
-   average  : 1081 moves<br />
-   max      : 1081 moves
-* 500 elements <br />
-   average  : 6778 moves<br />
-   max      : 6778 moves
+| Elements | Average | Max |
+|------|------|------|
+| 3 | 1 | 2 |
+| 5 | 7 | 10 |
+| 100 | 1081 | 1081 |
+| 500 | 6778 | 6778 |
 
 ## Game rules
 
