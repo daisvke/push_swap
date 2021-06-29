@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 21:52:57 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 02:14:17 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:23:51 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	ft_ra_until_reach_min_for_long_list(t_param *p, int min_position, \
 		if (p->a_head->data == next_lowest && next_lowest < next_lowest_limit)
 		{
 			pushed_next_lowest = true;
-			ft_execute_command(p, PB); 
+			ft_execute_command(p, PB);
 		}
 		else
 			ft_execute_command(p, RA);

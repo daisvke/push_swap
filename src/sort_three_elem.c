@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 02:14:17 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:23:51 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_reverse_rotate_when_three_elements(t_param *p)
 	int		top;
 	int		middle;
 	int		bottom;
-	
+
 	head = NULL;
 	head = p->a_head;
 	top = head->data;
