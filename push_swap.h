@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 02:04:02 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/06/29 02:17:08 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	ft_simplify_stack_num_values(t_param *p, int size);
 ** parsing
 */
 void	ft_extract_split(t_param *p, char **split, int start_point);
+void	ft_free_split(char **split);
 char	**ft_split_elem_from_argv(t_param *p, char const *s, char c);
 
 /*
@@ -146,6 +147,5 @@ void	ft_exit_and_free_stack(t_param *p);
 void	ft_exit_failure(void);
 void	ft_exit_and_free_split_and_stack(t_param *p, char **split);
 void	ft_exit_and_free_split(char **split);
-void	ft_free_split(char **split);
 
 #endif

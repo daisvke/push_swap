@@ -6,13 +6,14 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:28:18 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 01:32:18 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:14:17 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_execute_ra(t_param *p, t_stack *head, t_stack *tail, bool print_command)
+void	ft_execute_ra(t_param *p, t_stack *head, t_stack *tail, \
+	bool print_command)
 {
 	t_stack	*tmp;
 
@@ -27,7 +28,8 @@ void	ft_execute_ra(t_param *p, t_stack *head, t_stack *tail, bool print_command)
 	}
 }
 
-void	ft_execute_rb(t_param *p, t_stack *head, t_stack *tail, bool print_command)
+void	ft_execute_rb(t_param *p, t_stack *head, t_stack *tail, \
+	bool print_command)
 {
 	t_stack	*tmp;
 
@@ -42,7 +44,8 @@ void	ft_execute_rb(t_param *p, t_stack *head, t_stack *tail, bool print_command)
 	}
 }
 
-void	ft_execute_rra(t_param *p, t_stack *head, t_stack *tail, bool print_command)
+void	ft_execute_rra(t_param *p, t_stack *head, t_stack *tail, \
+	bool print_command)
 {
 	t_stack	*tmp;
 
@@ -57,7 +60,8 @@ void	ft_execute_rra(t_param *p, t_stack *head, t_stack *tail, bool print_command
 	}
 }
 
-void	ft_execute_rrb(t_param *p, t_stack *head, t_stack *tail, bool print_command)
+void	ft_execute_rrb(t_param *p, t_stack *head, t_stack *tail, \
+	bool print_command)
 {
 	t_stack	*tmp;
 

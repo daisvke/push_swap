@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 00:33:45 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 00:50:33 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:21:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,20 +116,19 @@ t_param	*ft_init_param_with_stack(char **args, int size)
 	p = NULL;
 	size_cpy = size;
 	i = FIRST_POS;
-	split = ft_split_elem_from_argv(p, ft_get_arg_with_num( \
+	split = ft_split_elem_from_argv(p, ft_get_arg_with_num(\
 		args, 1, size_cpy), ' ');
-	p = ft_init_param_with_first_node(ft_convert_str_to_num( \
+	p = ft_init_param_with_first_node(ft_convert_str_to_num(\
 		NULL, split, split[0]));
 	ft_extract_split(p, split, 1);
 	i = FIRST_POS + 1;
 	while (--size)
 	{
-		split = ft_split_elem_from_argv(p, ft_get_arg_with_num( \
+		split = ft_split_elem_from_argv(p, ft_get_arg_with_num(\
 			args, i, size_cpy), ' ');
 		ft_extract_split(p, split, 0);
 		++i;
 	}
-	split = NULL;
 	p->size = ft_stacksize(p->a_head);
 	ft_simplify_stack_num_values(p, p->size);
 	p->b_head = NULL;

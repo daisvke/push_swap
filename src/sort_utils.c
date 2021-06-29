@@ -6,11 +6,11 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 01:34:06 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 01:38:46 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:21:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../push_swap.h"
+#include "../push_swap.h"
 
 int	ft_find_nth_lowest_node_position(t_param *p, int nth_lowest)
 {
@@ -58,7 +58,7 @@ bool	ft_is_in_the_right_order(t_stack *node, int start, int end)
 {
 	int	size;
 	int	st_tmp;
-	
+
 	if (!node)
 		return (true);
 	st_tmp = start;
@@ -78,7 +78,7 @@ bool	ft_is_in_the_inverse_order(t_stack *node, int start, int end)
 {
 	int	size;
 	int	st_tmp;
-	
+
 	if (!node)
 		return (true);
 	st_tmp = start;
@@ -93,4 +93,3 @@ bool	ft_is_in_the_inverse_order(t_stack *node, int start, int end)
 	}
 	return (true);
 }
-

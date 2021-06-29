@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 21:52:57 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 00:56:48 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:14:17 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ bool	ft_isthere(int nbr_to_find, int *array_of_nbrs, int array_size)
 	return (false);
 }
 
-bool    ft_ra_until_reach_min_for_long_list(t_param *p, int min_position, \
+bool	ft_ra_until_reach_min_for_long_list(t_param *p, int min_position, \
 	int *nth_lowest)
 {
-	bool    pushed_next_lowest;
+	bool	pushed_next_lowest;
 	int		next_lowest;
 	int		next_lowest_limit;
 	int		i;
@@ -42,8 +42,8 @@ bool    ft_ra_until_reach_min_for_long_list(t_param *p, int min_position, \
 	{
 		if (p->a_head->data == next_lowest && next_lowest < next_lowest_limit)
 		{
-				pushed_next_lowest = true;
-				ft_execute_command(p, PB); 
+			pushed_next_lowest = true;
+			ft_execute_command(p, PB); 
 		}
 		else
 			ft_execute_command(p, RA);
@@ -52,10 +52,10 @@ bool    ft_ra_until_reach_min_for_long_list(t_param *p, int min_position, \
 	return (pushed_next_lowest);
 }
 
-bool    ft_rra_until_reach_min_for_long_list(t_param *p, int min_position, \
+bool	ft_rra_until_reach_min_for_long_list(t_param *p, int min_position, \
 	int *nth_lowest)
 {
-	bool    pushed_next_lowest;
+	bool	pushed_next_lowest;
 	int		last_position;
 	int		next_lowest;
 	int		next_lowest_limit;
@@ -69,7 +69,7 @@ bool    ft_rra_until_reach_min_for_long_list(t_param *p, int min_position, \
 		if (p->a_head->data == next_lowest && next_lowest < next_lowest_limit)
 		{
 			pushed_next_lowest = true;
-			ft_execute_command(p, PB); 
+			ft_execute_command(p, PB);
 		}
 		ft_execute_command(p, RRA);
 		--last_position;
@@ -79,7 +79,7 @@ bool    ft_rra_until_reach_min_for_long_list(t_param *p, int min_position, \
 
 void	ft_find_lowest_nodes_in_long_list_and_push_to_b(t_param *p)
 {
-	bool    pushed_next_lowest;
+	bool	pushed_next_lowest;
 	int		min_position;
 	int		nth_lowest;
 
@@ -93,11 +93,11 @@ void	ft_find_lowest_nodes_in_long_list_and_push_to_b(t_param *p)
 		else if (ft_evaluate_fastest_op(p, min_position) == RRA)
 			pushed_next_lowest = ft_rra_until_reach_min_for_long_list(p, \
 				min_position, &nth_lowest);
-		ft_execute_command(p, PB); 
+		ft_execute_command(p, PB);
 		if (pushed_next_lowest)
 		{
 			if (p->b_head->data < p->b_head->next->data)
-				ft_execute_command(p, SB); 
+				ft_execute_command(p, SB);
 			++nth_lowest;
 		}
 		++nth_lowest;

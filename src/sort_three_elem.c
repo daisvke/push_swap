@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:33:19 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 01:38:46 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:14:17 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_move_to_bottom_when_three_elements(t_param *p, int element)
 	top = head->data;
 	middle = head->next->data;
 	if (element == top)
-		ft_execute_command(p, RA); 
+		ft_execute_command(p, RA);
 }
 
 void	ft_swap_top_if_needed(t_param *p)
@@ -41,7 +41,7 @@ void	ft_swap_top_if_needed(t_param *p)
 	middle = body->data;
 	bottom = body->next->data;
 	if (top > middle && !ft_ishighest_in_stack(head, middle))
-		ft_execute_command(p, SA); 
+		ft_execute_command(p, SA);
 }
 
 void	ft_reverse_rotate_when_three_elements(t_param *p)

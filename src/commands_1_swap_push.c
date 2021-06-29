@@ -6,13 +6,14 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:27:15 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 01:32:18 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:21:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_execute_sa(t_param *p, t_stack *node1, t_stack *node2, bool print_command)
+void	ft_execute_sa(t_param *p, t_stack *node1, t_stack *node2, \
+	bool print_command)
 {
 	t_stack	*tmp;
 
@@ -27,7 +28,8 @@ void	ft_execute_sa(t_param *p, t_stack *node1, t_stack *node2, bool print_comman
 	}
 }
 
-void	ft_execute_sb(t_param *p, t_stack *node1, t_stack *node2, bool print_command)
+void	ft_execute_sb(t_param *p, t_stack *node1, t_stack *node2, \
+	bool print_command)
 {
 	t_stack	*tmp;
 
@@ -45,7 +47,7 @@ void	ft_execute_sb(t_param *p, t_stack *node1, t_stack *node2, bool print_comman
 void	ft_execute_pa(t_param *p, t_stack *a, t_stack *b, bool print_command)
 {
 	t_stack	*tmp;
-	
+
 	if (b)
 	{
 		tmp = b->next;

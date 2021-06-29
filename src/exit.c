@@ -6,25 +6,11 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 01:50:44 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/28 13:36:47 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:21:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-void	ft_free_split(char **split)
-{
-	size_t	i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		++i;
-	}
-	free(split);
-	split = NULL;
-}
 
 void	ft_exit_failure(void)
 {

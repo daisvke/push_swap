@@ -6,11 +6,25 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 19:00:33 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 00:53:52 by root             ###   ########.fr       */
+/*   Updated: 2021/06/29 02:21:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+void	ft_free_split(char **split)
+{
+	size_t	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		++i;
+	}
+	free(split);
+	split = NULL;
+}
 
 void	ft_split_iter(t_param *p, char **split, char *s, char c)
 {
@@ -49,7 +63,7 @@ char	**ft_split_elem_from_argv(t_param *p, char const *str, char c)
 	split = NULL;
 	total_elem_in_str = ft_wordcount((char *)str, c);
 	split = malloc(sizeof(*split) * (total_elem_in_str + 1));
-	ft_bzero(split, total_elem_in_str); 
+	ft_bzero(split, total_elem_in_str);
 	if (!split)
 		ft_exit_failure();
 	ft_split_iter(p, split, (char *)str, c);
@@ -72,7 +86,7 @@ void	ft_extract_split(t_param *p, char **split, int start_point)
 	t_stack	*node;
 	int		num;
 	int		i;
-	
+
 	i = start_point;
 	node = p->a_head;
 	while (split[i])
