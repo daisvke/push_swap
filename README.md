@@ -38,3 +38,9 @@ make
   rra: reverse rotate a - shift down all elements of stack a by 1. The last element becomes the first one.<br />
   rrb: reverse rotate b - shift down all elements of stack b by 1. The last element becomes the first one.<br />
   rrr :rra and rrb at the same time.
+
+## Checker
+* checker will get as an argument the stack a formatted as a list of integers. The first argument should be at the top of the stack. If no argument is given checker stops and displays nothing.
+* checker will then wait and read instructions on the standard input, each instruction will be followed by '\n'. Once all the instructions have been read, checker will execute them on the stack received as an argument.
+* If after executing those instructions, stack a is actually sorted and bis empty, then checker displays "OK" followed by a '\n' on the standard output. In every other case, checker displays "KO" followed by a '\n' on the standard output.
+* In case of error, checker displays "Error" followed by a '\n' on the standard error. Errors include for example: some arguments are not integers, some arguments are bigger than an integer, there are duplicates, an instruction doesn't exist and/or is incorrectly formatted.
