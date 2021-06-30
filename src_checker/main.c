@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 03:14:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/01 00:00:52 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/01 00:19:23 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_read_moves_from_output(t_param *p)
 void	ft_check_order(t_param *p)
 {
 	bool	is_ordered;
-	
+
 	is_ordered = ft_is_in_the_right_order(p->a_head, 0, p->size);
 	if (is_ordered && p->b_head == NULL)
 		write(1, "\e[32;40mOK\e[32;0m\n", 19);
