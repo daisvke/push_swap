@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/30 04:24:58 by root             ###   ########.fr       */
+/*   Created: 2021/06/30 03:14:17 by dtanigaw          #+#    #+#             */
+/*   Updated: 2021/07/01 00:00:52 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,50 @@ void	ft_execute_command(t_param *p, int command)
 		ft_execute_rrb(p, p->b_head, ft_lastnode(p->b_head), true);
 }
 
-void	ft_execute_command_if_everything_else_is_ordered(t_param *p)
+void	ft_apply_moves_read_from_output_to_stack(t_param *p, char **move)
 {
-	t_stack	*second_node;
-	int		top;
-	int		next;
-	int		last;
-	int		end;
-
-	second_node = p->a_head->next;
-	top = p->a_head->data;
-	next = second_node->data;
-	last = ft_lastnode(p->a_head)->data;
-	end = ft_stacksize(p->a_head);
-	if (top > next && top < last && ft_is_in_the_right_order(p->a_head, 2, end))
+	if (ft_strncmp("sa", *move, 2) == 0)
 		ft_execute_command(p, SA);
-	else if (top > last && ft_is_in_the_right_order(p->a_head, 1, end))
+	if (ft_strncmp("sb", *move, 2) == 0)
+		ft_execute_command(p, SB);
+	if (ft_strncmp("pa", *move, 2) == 0)
+		ft_execute_command(p, PA);
+	if (ft_strncmp("pb", *move, 2) == 0)
+		ft_execute_command(p, PB);
+	if (ft_strncmp("ra", *move, 2) == 0)
 		ft_execute_command(p, RA);
-	else if (last < top && ft_is_in_the_right_order(p->a_head, 0, end - 1))
+	if (ft_strncmp("rb", *move, 2) == 0)
+		ft_execute_command(p, RB);
+	if (ft_strncmp("rra", *move, 3) == 0)
 		ft_execute_command(p, RRA);
+	if (ft_strncmp("rrb", *move, 3) == 0)
+		ft_execute_command(p, RRB);
 }
 
-void	ft_redirect_to_algorithm_while_disordered(t_param *p)
+void	ft_read_moves_from_output(t_param *p)
 {
-	int	stacksize;
+	char	*move;
 
-	stacksize = ft_stacksize(p->a_head);
-	while (!ft_is_in_the_right_order(p->a_head, 0, p->size) || p->b_head)
+	move = NULL;
+	while (get_next_line(0, &move))
 	{
-		if (stacksize != 3)
-			ft_execute_command_if_everything_else_is_ordered(p);
-		if (stacksize < 80)
-			ft_execute_lowests_sort(p);
-		if (stacksize >= 80)
-			ft_execute_radix_sort(p);
+		if (ft_strlen(move) > 1)
+			ft_apply_moves_read_from_output_to_stack(p, &move);
+		free(move);
 	}
+	free(move);
+	move = NULL;
+}
+
+void	ft_check_order(t_param *p)
+{
+	bool	is_ordered;
+	
+	is_ordered = ft_is_in_the_right_order(p->a_head, 0, p->size);
+	if (is_ordered && p->b_head == NULL)
+		write(1, "\e[32;40mOK\e[32;0m\n", 19);
+	else
+		write(1, "\e[31;40mKO\e[32;0m\n", 19);
 }
 
 int	main(int argc, char *argv[])
@@ -78,7 +87,8 @@ int	main(int argc, char *argv[])
 	p = ft_init_param_with_stack(argv, argc - 1);
 	if (p->size < 2)
 		ft_exit_and_free_stack(p);
-	ft_redirect_to_algorithm_while_disordered(p);
+	ft_read_moves_from_output(p);
+	ft_check_order(p);
 	ft_free_stack(p->a_head);
 	free(p);
 	return (EXIT_SUCCESS);
