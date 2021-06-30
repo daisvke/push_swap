@@ -39,6 +39,13 @@ make
   rrb: reverse rotate b - shift down all elements of stack b by 1. The last element becomes the first one.<br />
   rrr :rra and rrb at the same time.
 
+## ft_printnode
+
+The ft_printnode function allows to check the state of the stacks.
+<p align=center>
+   <img src="screenshot/push-swap-output.png" width="50%" />
+</p>
+
 ## Checker
 * checker will get as an argument the stack a formatted as a list of integers. The first argument should be at the top of the stack. If no argument is given checker stops and displays nothing.
 * checker will then wait and read instructions on the standard input, each instruction will be followed by '\n'. Once all the instructions have been read, checker will execute them on the stack received as an argument.
