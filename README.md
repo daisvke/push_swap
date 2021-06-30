@@ -43,7 +43,7 @@ make
 
 The ft_printnode function allows to check the state of the stacks.
 <p align=center>
-   <img src="/screenshots/push-swap-output.png" width="50%" />
+   <img src="/screenshots/push-swap-output.png" width="30%" />
 </p>
 
 ## Checker
