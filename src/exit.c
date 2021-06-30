@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 01:50:44 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 02:21:29 by root             ###   ########.fr       */
+/*   Updated: 2021/06/30 03:25:52 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_exit_failure(void)
 {
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
 void	ft_exit_and_free_split(char **split)
 {
 	ft_free_split(split);
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
@@ -49,7 +49,7 @@ void	ft_exit_and_free_split_and_stack(t_param *p, char **split)
 		ft_free_stack(p->a_head);
 		free(p);
 	}
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
@@ -60,6 +60,6 @@ void	ft_exit_and_free_stack(t_param *p)
 		ft_free_stack(p->a_head);
 		free(p);
 	}
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
