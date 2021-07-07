@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 01:50:44 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/08 01:31:04 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/08 01:46:36 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	ft_exit_and_free_stack(t_param *p, bool print_error)
 	if (p)
 	{
 		ft_free_stack(p->a_head);
+		if (p->b_head)
+			ft_free_stack(p->b_head);
 		free(p);
 	}
 	if (print_error == true)
