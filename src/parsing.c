@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 19:00:33 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/07 14:56:43 by root             ###   ########.fr       */
+/*   Updated: 2021/07/07 19:10:07 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_free_split(char **split, size_t i_max)
 	size_t	i;
 
 	i = 0;
-	while (i < i_max)
+	while (i <= i_max)
 	{
 		free(split[i]);
 		++i;
