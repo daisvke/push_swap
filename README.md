@@ -27,14 +27,27 @@ make
    ◦ b is empty
 * The goal is to sort in ascending order numbers into stack a.
 * To do this you have the following operations at your disposal:<br />
-  sa: swap a - swap the first 2 elements at the top of stack a. Do nothing if there is only one or no elements.<br />
-  sb: swap b - swap the first 2 elements at the top of stack b. Do nothing if there is only one or no elements.<br />
-  ss: sa and sb at the same time.<br />
-  pa: push a - take the first element at the top of b and put it at the top of a. Do nothing if b is empty.<br />
-  pb: push b - take the first element at the top of a and put it at the top of b. Do nothing if a is empty.<br />
-  ra: rotate a - shift up all elements of stack a by 1. The first element becomes the last one.<br />
-  rb: rotate b - shift up all elements of stackbby 1. The first element becomes the last one.<br />
-  rr: ra and rb at the same time.<br />
-  rra: reverse rotate a - shift down all elements of stack a by 1. The last element becomes the first one.<br />
-  rrb: reverse rotate b - shift down all elements of stack b by 1. The last element becomes the first one.<br />
-  rrr :rra and rrb at the same time.
+  **sa: swap a** - swap the first 2 elements at the top of stack a. Do nothing if there is only one or no elements.<br />
+  **sb: swap b** - swap the first 2 elements at the top of stack b. Do nothing if there is only one or no elements.<br />
+  **ss:** sa and sb at the same time.<br />
+  **pa: push a** - take the first element at the top of b and put it at the top of a. Do nothing if b is empty.<br />
+  **pb: push b** - take the first element at the top of a and put it at the top of b. Do nothing if a is empty.<br />
+  **ra: rotate a** - shift up all elements of stack a by 1. The first element becomes the last one.<br />
+  **rb: rotate b** - shift up all elements of stackbby 1. The first element becomes the last one.<br />
+  **rr:** ra and rb at the same time.<br />
+  **rra: reverse rotate a** - shift down all elements of stack a by 1. The last element becomes the first one.<br />
+  **rrb: reverse rotate b** - shift down all elements of stack b by 1. The last element becomes the first one.<br />
+  **rrr:** rra and rrb at the same time.
+
+## ft_printnode
+
+The ft_printnode function allows to check the state of the stacks.
+<p align=center>
+   <img src="/screenshots/push-swap-output.png" width="40%" />
+</p>
+
+## Checker
+* checker will get as an argument the stack a formatted as a list of integers. The first argument should be at the top of the stack. If no argument is given checker stops and displays nothing.
+* checker will then wait and read instructions on the standard input, each instruction will be followed by '\n'. Once all the instructions have been read, checker will execute them on the stack received as an argument.
+* If after executing those instructions, stack a is actually sorted and bis empty, then checker displays "OK" followed by a '\n' on the standard output. In every other case, checker displays "KO" followed by a '\n' on the standard output.
+* In case of error, checker displays "Error" followed by a '\n' on the standard error. Errors include for example: some arguments are not integers, some arguments are bigger than an integer, there are duplicates, an instruction doesn't exist and/or is incorrectly formatted.
