@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_lowests.c                                     :+:      :+:    :+:   */
+/*   checker_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 21:52:57 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/01 00:08:47 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/07 15:00:31 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_stack	*ft_add_nbr(int data)
 	return (new);
 }
 
-int	ft_convert_str_to_num(t_param *p, char **split, char *str)
+int	ft_convert_str_to_num(char *str, bool *must_exit)
 {
 	int			sign;
 	int			s_count;
@@ -47,7 +47,7 @@ int	ft_convert_str_to_num(t_param *p, char **split, char *str)
 		res = res * 10 + *str++ - '0';
 	res *= sign;
 	if (res > 2147483647 || res < -2147483648)
-		ft_exit_and_free_split_and_stack(p, split);
+		*must_exit = true;
 	return (res);
 }
 

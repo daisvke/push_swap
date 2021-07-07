@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:59:01 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 01:38:46 by root             ###   ########.fr       */
+/*   Updated: 2021/07/07 14:56:12 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_stack	*ft_find_node_with_highest_num(t_param *p)
 	return (node_with_highest_num);
 }
 
-int	ft_convert_str_to_num(t_param *p, char **split, char *str)
+int	ft_convert_str_to_num(char *str, bool *must_exit)
 {
 	int			sign;
 	int			s_count;
@@ -90,6 +90,6 @@ int	ft_convert_str_to_num(t_param *p, char **split, char *str)
 		res = res * 10 + *str++ - '0';
 	res *= sign;
 	if (res > 2147483647 || res < -2147483648)
-		ft_exit_and_free_split_and_stack(p, split);
+		*must_exit = true;
 	return (res);
 }

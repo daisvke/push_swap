@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/30 18:05:43 by root             ###   ########.fr       */
+/*   Updated: 2021/07/07 14:56:12 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_printnode(t_param *p);
 void	ft_find_in_stack_and_replace(t_param *p, int *nbrs_to_replace_with, \
 	int array_size);
 char	*ft_get_arg_with_num(char **args, int pos, int *i);
-t_param	*ft_init_param_with_first_node(int num);
+t_param	*ft_init_param_with_first_node(char **split, int i);
 t_param	*ft_init_param_with_stack(char **args, int size);
 void	ft_simplify_stack_num_values(t_param *p, int size);
 
@@ -80,7 +80,7 @@ void	ft_simplify_stack_num_values(t_param *p, int size);
 ** parsing
 */
 void	ft_extract_split(t_param *p, char **split, int start_point);
-void	ft_free_split(char **split);
+void	ft_free_split(char **split, size_t i_max);
 char	**ft_split_elem_from_argv(t_param *p, char const *s, char c);
 
 /*
@@ -120,7 +120,7 @@ bool	ft_is_in_the_inverse_order(t_stack *node, int start, int end);
 bool	ft_ishighest_in_stack(t_stack *head, int value_to_check);
 bool	ft_ishighest_inrange(t_param *p, int start, int end);
 bool	ft_islowest_in_stack(t_stack *head, int value_to_check);
-int		ft_convert_str_to_num(t_param *p, char **split, char *str);
+int		ft_convert_str_to_num(char *str, bool *must_exit);
 
 /*
 ** algorithms
@@ -143,9 +143,9 @@ void	ft_swap_top_if_needed(t_param *p);
 ** exit
 */
 void	ft_free_stack(t_stack *node);
+void	ft_exit_and_free_split(char **split, int i);
 void	ft_exit_and_free_stack(t_param *p);
 void	ft_exit_failure(void);
-void	ft_exit_and_free_split_and_stack(t_param *p, char **split);
-void	ft_exit_and_free_split(char **split);
+void	ft_exit_and_free_split_and_stack(t_param *p, char **split, int i);
 
 #endif

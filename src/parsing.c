@@ -6,18 +6,18 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 19:00:33 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/06/29 02:21:29 by root             ###   ########.fr       */
+/*   Updated: 2021/07/07 14:56:43 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_free_split(char **split)
+void	ft_free_split(char **split, size_t i_max)
 {
 	size_t	i;
 
 	i = 0;
-	while (split[i])
+	while (i < i_max)
 	{
 		free(split[i]);
 		++i;
@@ -42,12 +42,12 @@ void	ft_split_iter(t_param *p, char **split, char *s, char c)
 		while (*s != c && *s)
 		{
 			if (!ft_isdigit(*s) && *s != '-' && *s != '+')
-				ft_exit_and_free_split_and_stack(p, split);
+				ft_exit_and_free_split_and_stack(p, split, i);
 			++s;
 		}
 		split[i] = ft_strsdup(head, s - head);
 		if (!split[i])
-			ft_exit_and_free_split_and_stack(p, split);
+			ft_exit_and_free_split_and_stack(p, split, i);
 		++i;
 	}
 	split[i] = NULL;
@@ -84,6 +84,7 @@ bool	ft_twice(t_stack *node, int num)
 void	ft_extract_split(t_param *p, char **split, int start_point)
 {
 	t_stack	*node;
+	bool	must_exit;
 	int		num;
 	int		i;
 
@@ -91,14 +92,17 @@ void	ft_extract_split(t_param *p, char **split, int start_point)
 	node = p->a_head;
 	while (split[i])
 	{
-		num = ft_convert_str_to_num(p, split, split[i]);
+		must_exit = false;
+		num = ft_convert_str_to_num(split[i], &must_exit);
+		if (must_exit == true)
+			ft_exit_and_free_split_and_stack(p, split, i);
 		if (ft_twice(p->a_head, num))
-			ft_exit_and_free_split_and_stack(p, split);
+			ft_exit_and_free_split_and_stack(p, split, i);
 		node = ft_add_nbr(num);
 		ft_add_back(p->a_head, node);
 		if (!node)
-			ft_exit_and_free_split_and_stack(p, split);
+			ft_exit_and_free_split_and_stack(p, split, i);
 		++i;
 	}
-	ft_free_split(split);
+	ft_free_split(split, i);
 }
