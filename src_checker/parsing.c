@@ -6,21 +6,25 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 19:00:33 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/07 14:56:43 by root             ###   ########.fr       */
+/*   Updated: 2021/07/08 00:39:14 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_free_split(char **split, size_t i_max)
+void	ft_free_split(char **split, int i_max)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < i_max)
+	if (i_max >= 0)
 	{
-		free(split[i]);
-		++i;
+		while (i <= i_max)
+		{
+			if (split[i])
+				free(split[i]);
+			++i;
+		}
 	}
 	free(split);
 	split = NULL;
@@ -42,7 +46,7 @@ void	ft_split_iter(t_param *p, char **split, char *s, char c)
 		while (*s != c && *s)
 		{
 			if (!ft_isdigit(*s) && *s != '-' && *s != '+')
-				ft_exit_and_free_split_and_stack(p, split, i);
+				ft_exit_and_free_split_and_stack(p, split, i - 1);
 			++s;
 		}
 		split[i] = ft_strsdup(head, s - head);
@@ -59,7 +63,7 @@ char	**ft_split_elem_from_argv(t_param *p, char const *str, char c)
 	int		total_elem_in_str;
 
 	if (str == NULL)
-		ft_exit_and_free_stack(p);
+		ft_exit_and_free_stack(p, PRINT_ERR);
 	split = NULL;
 	total_elem_in_str = ft_wordcount((char *)str, c);
 	split = malloc(sizeof(*split) * (total_elem_in_str + 1));
@@ -92,16 +96,20 @@ void	ft_extract_split(t_param *p, char **split, int start_point)
 	node = p->a_head;
 	while (split[i])
 	{
+		int j;
+		j = 0;
+			while (split[j])
+				j++;
 		must_exit = false;
 		num = ft_convert_str_to_num(split[i], &must_exit);
 		if (must_exit == true)
-			ft_exit_and_free_split_and_stack(p, split, i);
+			ft_exit_and_free_split_and_stack(p, split, j);
 		if (ft_twice(p->a_head, num))
-			ft_exit_and_free_split_and_stack(p, split, i);
+			ft_exit_and_free_split_and_stack(p, split, j);
 		node = ft_add_nbr(num);
 		ft_add_back(p->a_head, node);
 		if (!node)
-			ft_exit_and_free_split_and_stack(p, split, i);
+			ft_exit_and_free_split_and_stack(p, split, j);
 		++i;
 	}
 	ft_free_split(split, i);

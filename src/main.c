@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/01 00:29:52 by root             ###   ########.fr       */
+/*   Updated: 2021/07/07 22:24:54 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ int	main(int argc, char *argv[])
 {
 	t_param	*p;
 
-	if (argc < 2)
-		ft_exit_failure();
-	p = ft_init_param_with_stack(argv, argc - 1);
-	if (p->size < 2)
-		ft_exit_and_free_stack(p);
-	ft_redirect_to_algorithm_while_disordered(p);
-	ft_free_stack(p->a_head);
-	free(p);
+	if (argc > 1)
+	{
+		p = ft_init_param_with_stack(argv, argc - 1);
+		if (p->size < 2)
+			ft_exit_and_free_stack(p, false);
+		ft_redirect_to_algorithm_while_disordered(p);
+		ft_free_stack(p->a_head);
+		free(p);
+	}
 	return (EXIT_SUCCESS);
 }

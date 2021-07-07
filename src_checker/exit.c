@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 01:50:44 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/07 14:53:41 by root             ###   ########.fr       */
+/*   Updated: 2021/07/07 22:49:47 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ void	ft_exit_and_free_split_and_stack(t_param *p, char **split, int i)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_exit_and_free_stack(t_param *p)
+void	ft_exit_and_free_stack(t_param *p, bool print_error)
 {
 	if (p)
 	{
 		ft_free_stack(p->a_head);
 		free(p);
 	}
-	write(2, "Error\n", 6);
+	if (print_error == true)
+		write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/07 14:56:12 by root             ###   ########.fr       */
+/*   Updated: 2021/07/08 00:36:22 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define RB			5
 # define RRA		6
 # define RRB		7
+
+# define PRINT_ERR	true
 
 /*
 ** linked list for stacks
@@ -80,7 +82,7 @@ void	ft_simplify_stack_num_values(t_param *p, int size);
 ** parsing
 */
 void	ft_extract_split(t_param *p, char **split, int start_point);
-void	ft_free_split(char **split, size_t i_max);
+void	ft_free_split(char **split, int i_max);
 char	**ft_split_elem_from_argv(t_param *p, char const *s, char c);
 
 /*
@@ -144,7 +146,7 @@ void	ft_swap_top_if_needed(t_param *p);
 */
 void	ft_free_stack(t_stack *node);
 void	ft_exit_and_free_split(char **split, int i);
-void	ft_exit_and_free_stack(t_param *p);
+void	ft_exit_and_free_stack(t_param *p, bool print_error);
 void	ft_exit_failure(void);
 void	ft_exit_and_free_split_and_stack(t_param *p, char **split, int i);
 
