@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 03:14:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/07 22:49:47 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/08 01:43:21 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,23 @@ void	ft_execute_command(t_param *p, int command)
 
 void	ft_apply_moves_read_from_output_to_stack(t_param *p, char **move)
 {
-	if (ft_strncmp("sa", *move, 2) == 0)
-		ft_execute_command(p, SA);
-	if (ft_strncmp("sb", *move, 2) == 0)
-		ft_execute_command(p, SB);
-	if (ft_strncmp("pa", *move, 2) == 0)
-		ft_execute_command(p, PA);
-	if (ft_strncmp("pb", *move, 2) == 0)
-		ft_execute_command(p, PB);
-	if (ft_strncmp("ra", *move, 2) == 0)
-		ft_execute_command(p, RA);
-	if (ft_strncmp("rb", *move, 2) == 0)
-		ft_execute_command(p, RB);
-	if (ft_strncmp("rra", *move, 3) == 0)
-		ft_execute_command(p, RRA);
-	if (ft_strncmp("rrb", *move, 3) == 0)
-		ft_execute_command(p, RRB);
+	char	**array_of_cmds;
+	size_t	cmd_len;	
+	size_t	i;
+
+	cmd_len = ft_strlen(*move);
+	array_of_cmds = ft_init_array_of_commands();
+	i = 0;
+	while (array_of_cmds[i])
+	{
+		if (ft_strncmp(array_of_cmds[i], *move, cmd_len) == 0)
+		{
+			ft_execute_command(p, i);
+			return ;
+		}
+		++i;
+	}
+	ft_exit_and_free_stack(p, PRINT_ERR);
 }
 
 void	ft_read_moves_from_output(t_param *p)
@@ -59,8 +60,7 @@ void	ft_read_moves_from_output(t_param *p)
 	move = NULL;
 	while (get_next_line(0, &move))
 	{
-		if (ft_strlen(move) > 1)
-			ft_apply_moves_read_from_output_to_stack(p, &move);
+		ft_apply_moves_read_from_output_to_stack(p, &move);
 		free(move);
 	}
 	free(move);
@@ -90,6 +90,8 @@ int	main(int argc, char *argv[])
 		ft_read_moves_from_output(p);
 		ft_check_order(p);
 		ft_free_stack(p->a_head);
+		if (p->b_head)
+			ft_free_stack(p->b_head);
 		free(p);
 	}
 	return (EXIT_SUCCESS);

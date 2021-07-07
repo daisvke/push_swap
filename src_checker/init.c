@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 00:33:45 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/07 15:03:08 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/08 01:25:21 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,20 @@ t_param	*ft_init_param_with_stack(char **args, int size)
 	p->size = ft_stacksize(p->a_head);
 	p->b_head = NULL;
 	return (p);
+}
+
+char	**ft_init_array_of_commands(void)
+{
+	 static char	*array_of_cmds[9];
+
+	array_of_cmds[0] = "sa";
+	array_of_cmds[1] = "sb";
+	array_of_cmds[2] = "pa";
+	array_of_cmds[3] = "pb";
+	array_of_cmds[4] = "ra";
+	array_of_cmds[5] = "rb";
+	array_of_cmds[6] = "rra";
+	array_of_cmds[7] = "rrb";
+	array_of_cmds[8] = NULL;
+	return (array_of_cmds);	
 }

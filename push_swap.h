@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/08 00:36:22 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/08 01:07:06 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,15 @@
 # define RRA		6
 # define RRB		7
 
+/*
+** exit
+*/
 # define PRINT_ERR	true
+
+/*
+** checker
+*/
+# define SANE		true
 
 /*
 ** linked list for stacks
@@ -149,5 +157,10 @@ void	ft_exit_and_free_split(char **split, int i);
 void	ft_exit_and_free_stack(t_param *p, bool print_error);
 void	ft_exit_failure(void);
 void	ft_exit_and_free_split_and_stack(t_param *p, char **split, int i);
+
+/*
+** checker
+*/
+char	**ft_init_array_of_commands(void);
 
 #endif
