@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/08 03:16:21 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/08 03:27:53 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_count_split_len(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (split[i])
