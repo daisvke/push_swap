@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:22:00 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/08 01:07:06 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/08 03:17:19 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@
 /*
 ** exit
 */
-# define PRINT_ERR	true
+# define PRINT_ERR	1
 
 /*
 ** checker
 */
-# define SANE		true
+# define SANE		1
 
 /*
 ** linked list for stacks
@@ -89,6 +89,8 @@ void	ft_simplify_stack_num_values(t_param *p, int size);
 /*
 ** parsing
 */
+size_t	ft_count_split_len(char **split);
+bool	ft_elem_appears_multiple_times(t_stack *node, int num);
 void	ft_extract_split(t_param *p, char **split, int start_point);
 void	ft_free_split(char **split, int i_max);
 char	**ft_split_elem_from_argv(t_param *p, char const *s, char c);

@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 19:00:33 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/08 00:39:14 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/08 03:25:48 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	**ft_split_elem_from_argv(t_param *p, char const *str, char c)
 	return (split);
 }
 
-bool	ft_twice(t_stack *node, int num)
+bool	ft_elem_appears_multiple_times(t_stack *node, int num)
 {
 	while (node)
 	{
@@ -96,20 +96,19 @@ void	ft_extract_split(t_param *p, char **split, int start_point)
 	node = p->a_head;
 	while (split[i])
 	{
-		int j;
-		j = 0;
-			while (split[j])
-				j++;
 		must_exit = false;
 		num = ft_convert_str_to_num(split[i], &must_exit);
 		if (must_exit == true)
-			ft_exit_and_free_split_and_stack(p, split, j);
-		if (ft_twice(p->a_head, num))
-			ft_exit_and_free_split_and_stack(p, split, j);
+			ft_exit_and_free_split_and_stack(p, split, \
+				ft_count_split_len(split));
+		if (ft_elem_appears_multiple_times(p->a_head, num))
+			ft_exit_and_free_split_and_stack(p, split, \
+				ft_count_split_len(split));
 		node = ft_add_nbr(num);
 		ft_add_back(p->a_head, node);
 		if (!node)
-			ft_exit_and_free_split_and_stack(p, split, j);
+			ft_exit_and_free_split_and_stack(p, split, \
+				ft_count_split_len(split));
 		++i;
 	}
 	ft_free_split(split, i);

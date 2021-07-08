@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 00:33:45 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/08 01:25:21 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/08 03:24:47 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,14 @@ char	**ft_init_array_of_commands(void)
 	array_of_cmds[7] = "rrb";
 	array_of_cmds[8] = NULL;
 	return (array_of_cmds);	
+}
+
+size_t	ft_count_split_len(char **split)
+{
+	int i;
+
+	i = 0;
+	while (split[i])
+		++i;
+	return (i);
 }

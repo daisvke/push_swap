@@ -6,11 +6,21 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 22:21:17 by dtanigaw          #+#    #+#             */
-/*   Updated: 2021/07/07 22:24:54 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2021/07/08 03:16:21 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+size_t	ft_count_split_len(char **split)
+{
+	int i;
+
+	i = 0;
+	while (split[i])
+		++i;
+	return (i);
+}
 
 void	ft_execute_command(t_param *p, int command)
 {
