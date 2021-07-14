@@ -46,7 +46,7 @@ make
 
 ## ft_printnode
 
-The ft_printnode function allows to check the state of the stacks.
+The ft_printnode function allows to check the state of the stacks at any moment.
 <p align=center>
    <img src="/screenshots/push-swap-output.png" width="40%" />
 </p>
