@@ -5,8 +5,8 @@
 * This program sorts data on a stack, with a limited set of instructions, using the lowest possible number of actions.<br />
 It uses various types of algorithms such as the radix sort.
 * It uses the following algorithms:<br />
-   - for < 80 elements to sort:  insertion sort  (4/5)
-   - for >= 80 elements :        radix sort      (3/5)
+   - for < 80 elements to sort: **insertion sort** (4/5)
+   - for >= 80 elements : **radix sort** (3/5)
 
 ## Installation
 
