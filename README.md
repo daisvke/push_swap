@@ -1,10 +1,12 @@
 # push_swap
 
 ## Description
+
 This program sorts data on a stack, with a limited set of instructions, using the lowest possible number of actions.<br />
 It uses various types of algorithms such as the radix sort.
 
 ## Installation
+
 ```
 git clone --recurse-submodules git@github.com:daisvke/push_swap.git
 make
