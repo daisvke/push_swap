@@ -17,7 +17,7 @@ PS_SRC_FILES	=	commands_1_swap_push.c \
 					init.c \
 					main.c \
 					parsing.c \
-					sort_lowests.c \
+					sort_insertion.c \
 					sort_radix.c \
 					sort_three_elem.c \
 					sort_utils.c \
