@@ -56,3 +56,7 @@ The ft_printnode function allows to check the state of the stacks at any moment.
 * checker will then wait and read instructions on the standard input, each instruction will be followed by '\n'. Once all the instructions have been read, checker will execute them on the stack received as an argument.
 * If after executing those instructions, stack a is actually sorted and bis empty, then checker displays "OK" followed by a '\n' on the standard output. In every other case, checker displays "KO" followed by a '\n' on the standard output.
 * In case of error, checker displays "Error" followed by a '\n' on the standard error. Errors include for example: some arguments are not integers, some arguments are bigger than an integer, there are duplicates, an instruction doesn't exist and/or is incorrectly formatted.
+
+<p align=center>
+   <img src="/screenshots/push-swap-and-checker-output.png" width="40%" />
+</p>
