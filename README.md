@@ -6,7 +6,7 @@
 It uses various types of algorithms such as the radix sort.
 * It uses the following algorithms:<br />
    - for < 80 elements to sort: **insertion sort**
-   - for >= 80 elements : **radix sort**
+   - for >= 80 elements : **radix sort**<br />
    Which gets the grades below:
       - 4/5 pts for 100 elements to sort
       - 3/5 pts for 500 elements
