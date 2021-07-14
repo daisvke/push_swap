@@ -1,10 +1,18 @@
 # push_swap
 
 ## Description
-This program sorts data on a stack, with a limited set of instructions, using the lowest possible number of actions.<br />
+
+* This program sorts data on a stack, with a limited set of instructions, using the lowest possible number of actions.<br />
 It uses various types of algorithms such as the radix sort.
+* It uses the following algorithms:<br />
+   - for < 80 elements to sort: **insertion sort**
+   - for >= 80 elements : **radix sort**<br />
+   which corresponds to the grades below:
+      - 4/5 pts for 100 elements to sort
+      - 3/5 pts for 500 elements
 
 ## Installation
+
 ```
 git clone --recurse-submodules git@github.com:daisvke/push_swap.git
 make
@@ -23,8 +31,8 @@ make
 
 * The game is composed of 2 stacks named a and b.
 * To start with:<br />
-   ◦ a contains a random number of either positive or negative numbers without any duplicates.<br />
-   ◦ b is empty
+   - a contains a random number of either positive or negative numbers without any duplicates.<br />
+   - b is empty
 * The goal is to sort in ascending order numbers into stack a.
 * To do this you have the following operations at your disposal:<br />
   **sa: swap a** - swap the first 2 elements at the top of stack a. Do nothing if there is only one or no elements.<br />
@@ -41,7 +49,7 @@ make
 
 ## ft_printnode
 
-The ft_printnode function allows to check the state of the stacks.
+The ft_printnode function allows to check the state of the stacks at any moment.
 <p align=center>
    <img src="/screenshots/push-swap-output.png" width="40%" />
 </p>
@@ -51,3 +59,7 @@ The ft_printnode function allows to check the state of the stacks.
 * checker will then wait and read instructions on the standard input, each instruction will be followed by '\n'. Once all the instructions have been read, checker will execute them on the stack received as an argument.
 * If after executing those instructions, stack a is actually sorted and bis empty, then checker displays "OK" followed by a '\n' on the standard output. In every other case, checker displays "KO" followed by a '\n' on the standard output.
 * In case of error, checker displays "Error" followed by a '\n' on the standard error. Errors include for example: some arguments are not integers, some arguments are bigger than an integer, there are duplicates, an instruction doesn't exist and/or is incorrectly formatted.
+
+<p align=center>
+   <img src="/screenshots/push-swap-and-checker-output.png" width="40%" />
+</p>
