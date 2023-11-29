@@ -14,7 +14,7 @@ It uses various types of algorithms such as the radix sort.
 ## Installation
 
 ```
-git clone --recurse-submodules git@github.com:daisvke/push_swap.git
+git clone --recurse-submodules https://github.com/daisvke/push_swap.git
 make
 ```
 
